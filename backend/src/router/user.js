@@ -8,5 +8,5 @@ router.get('/users', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-
+  postUser(req.body)
 })
