@@ -7,10 +7,10 @@ yarn
 
 ### start front
 ````shell
-yarn start-front
+yarn start:front
 ````
 
 ### start back
 ````shell
-yarn start-front
+yarn start:back
 ````
