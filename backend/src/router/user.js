@@ -1,2 +1,12 @@
-const express = require('express')
+const express = require('express');
+const router = express.Router();
 
+const users = require('../models/users');
+
+router.get('/users', (req, res) => {
+  const users = await
+})
+
+router.post('/', (req, res) => {
+
+})
