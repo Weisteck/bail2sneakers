@@ -18,6 +18,8 @@ app.get('/', (req, res) => {
 	res.end('hello world!')
 })
 
+app.use('/basket', require('./router/basket'))
+
 app.listen(CONFIG.PORT, () => {
 	console.clear()
 	console.log(`Listening on ${CONFIG.PORT}`)
