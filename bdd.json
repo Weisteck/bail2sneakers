@@ -1,120 +1,124 @@
 {
-  "products": {
-	"id": 0,
-	"categories": [
-	  "montantes",
-	  "sans lacets",
-	  "basquette basse",
-	  "homme",
-	  "femme"
-	],
-	"brand": {
-	  "name": "Converse",
-	  "brandDescription": "une description de la marque",
-	  "logo": ""
-	},
-	"model": "All stars",
-	"details": {
-	  "description": "lorem ipsum...",
-	  "materials": [
-		"cuir",
-		"polyester"
-	  ],
-	  "origin": "Bengladesh"
-	},
-	"rating": 5,
-	"priceExclTax": 9999,
-	"images": [
-	  "img",
-	  "img"
-	],
-	"variants": [
-	  {
-		"color": "red",
-		"sizes": [
-		  {
-			"size": 42,
-			"stock": 2
-		  },
-		  {
-			"size": 43,
-			"stock": 5
-		  }
-		]
-	  },
-	  {
-		"color": "blue",
-		"sizes": [
-		  {
-			"size": 45,
-			"stock": 5
-		  },
-		  {
-			"size": 39,
-			"stock": 2
-		  }
-		]
-	  }
-	]
-  },
-  "users": {
-	"id": 0,
-	"interest": {
-
-	},
-	"lastname": "Millet",
-	"firstname": "Morgan",
-	"role": "Admin",
-	"mail": "millet.morgan5@gmail.com",
-	"phoneNumber": "+337623333333",
-	"deliveryAdresses": [
-	  {
-		"city": "Lyon",
-		"address": "dd",
-		"zipCode": "69000",
-		"country": "France"
-	  },
-	  {
-		"city": "Lyon",
-		"address": "dd",
-		"zipCode": "69000",
-		"country": "France"
-	  }
-	],
-	"birthday": "ISODate('1998-12-05')"
-  },
-  "baskets": [
-	{
-	  "id": 0,
-	  "selectedProducts": [
-		{
-		  "productId": 0,
-		  "brand": "Converse",
-		  "model": "All stars",
-		  "price": 1599,
-		  "image": "img",
-		  "color": "red",
-		  "size": 42
-		}
-	  ],
-	  "userId": 0,
-	  "order": {
-		"status": "delivering",
-		"priceExclTax": 1599,
-		"address": {
-		  "city": "Lyon",
-		  "address": "dd",
-		  "zipCode": "69000",
-		  "country": "France"
-		}
-	  }
-	}
+  "products": [
+    {
+      "id": 0,
+      "categories": [
+        "montantes",
+        "sans lacets",
+        "basquette basse",
+        "homme",
+        "femme"
+      ],
+      "brand": {
+        "name": "Converse",
+        "brandDescription": "une description de la marque",
+        "logo": ""
+      },
+      "model": "All stars",
+      "details": {
+        "description": "lorem ipsum...",
+        "materials": [
+          "cuir",
+          "polyester"
+        ],
+        "origin": "Bengladesh"
+      },
+      "rating": 5,
+      "priceExclTax": 9999,
+      "images": [
+        "img",
+        "img"
+      ],
+      "variants": [
+        {
+          "color": "red",
+          "sizes": [
+            {
+              "size": 42,
+              "stock": 2
+            },
+            {
+              "size": 43,
+              "stock": 5
+            }
+          ]
+        },
+        {
+          "color": "blue",
+          "sizes": [
+            {
+              "size": 45,
+              "stock": 5
+            },
+            {
+              "size": 39,
+              "stock": 2
+            }
+          ]
+        }
+      ]
+    }
   ],
-  "comments": {
-	"id": 0,
-	"productId": 0,
-	"userId": 0,
-	"comment": "lorem ipsum",
-	"rate": 5
-  }
+  "users": [
+    {
+      "id": 0,
+      "interest": {},
+      "lastname": "Millet",
+      "firstname": "Morgan",
+      "role": "Admin",
+      "mail": "millet.morgan5@gmail.com",
+      "phoneNumber": "+337623333333",
+      "deliveryAdresses": [
+        {
+          "city": "Lyon",
+          "address": "dd",
+          "zipCode": "69000",
+          "country": "France"
+        },
+        {
+          "city": "Lyon",
+          "address": "dd",
+          "zipCode": "69000",
+          "country": "France"
+        }
+      ],
+      "birthday": "ISODate('1998-12-05')"
+    }
+  ],
+  "baskets": [
+    {
+      "id": 0,
+      "selectedProducts": [
+        {
+          "productId": 0,
+          "brand": "Converse",
+          "model": "All stars",
+          "price": 1599,
+          "image": "img",
+          "color": "red",
+          "size": 42
+        }
+      ],
+      "userId": 0,
+      "order": {
+        "status": "delivering",
+        "priceExclTax": 1599,
+        "address": {
+          "city": "Lyon",
+          "address": "dd",
+          "zipCode": "69000",
+          "country": "France"
+        }
+      }
+    }
+  ],
+  "comments": [
+    {
+      "id": 0,
+      "productId": 0,
+      "userId": 0,
+      "comment": "lorem ipsum",
+      "rate": 5
+    }
+  ]
 }
