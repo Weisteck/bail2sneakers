@@ -3,7 +3,7 @@ const CONFIG = require('@yarn-monorepo/config')
 const cors=require('cors')
 const app = express();
 
-const connectDB=require('./config/connectDB')
+const connectDB=require('../config/connectDB')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
