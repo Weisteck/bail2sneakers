@@ -10,7 +10,8 @@
 	"packages/*"
   ],
   "scripts": {
-	"start": "yarn --cwd backend start",
+	"start-back": "yarn --cwd backend start",
+	"start-front": "yarn --cwd frontend dev",
 	"build": "yarn --cwd frontend build"
   }
 }
