@@ -1,13 +1,38 @@
-import Basket from '../models/Basket'
+const Basket = require('../models/Basket')
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const postBasketRepository = (basket) => {
-	const newBasket = new Basket(basket)
+	const { save } = new Basket(basket)
 
-	newBasket.save()
+	return save()
 		.then(() => true)
 		.catch(err => console.error(err))
 }
 
-export {
-	postBasketRepository
+const getAllBasketsRepository = async () => {
+	return Basket.find()
+}
+
+const getBasketByIdRepository = (id) => {
+	return Basket.findOne({ "_id": new ObjectId(id) })
+}
+
+const putBasketRepository = (id, basket) => {
+	return Basket.updateOne({
+			"_id": new ObjectId(id)
+		},
+		basket
+	)
+}
+
+const deleteBasketRepository = (id) => {
+	return Basket.deleteOne({ "_id": new ObjectId(id) })
+}
+
+module.exports = {
+	postBasketRepository: postBasketRepository,
+	getAllBasketsRepository: getAllBasketsRepository,
+	getBasketByIdRepository: getBasketByIdRepository,
+	putBasketRepository: putBasketRepository,
+	deleteBasketRepository: deleteBasketRepository
 }
