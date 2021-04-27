@@ -23,7 +23,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 	postBasketService(req.body)
-	res.send('post')
+		.then(result => res.send(result))
+		.catch(err => console.error(err))
 })
 
 router.put('/', (req, res) => {
