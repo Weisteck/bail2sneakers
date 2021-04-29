@@ -56,7 +56,7 @@
     <div class="form-card">
       <h1 class="form-sub-title">Produits sélectionnées</h1>
 
-      <div class="grid grid-cols-12 grid-flow-col mb-1">
+      <div class="grid grid-cols-12 grid-flow-col mb-1 font-bold">
         <div class="col-span-3">
 
         </div>
@@ -79,7 +79,7 @@
 
       <hr>
 
-      <div v-for="product in selectedProducts" :key="product.productId">
+      <div v-for="(product, index) in selectedProducts" :key="product.productId">
         <div class="grid grid-cols-12 grid-flow-col">
           <div class="col-span-3">
             <img :src="product.image" alt="image" class="w-40"/>
@@ -119,8 +119,8 @@
             {{ fixPriceTtc(product.priceHt) }}
           </div>
           <div class="col-span-1 self-center">
-            <button>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            <button @click="removeProduct(product, index)" class="">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-red-500" fill="none" viewBox="0 0 24 24"
                    stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -222,6 +222,11 @@ export default {
       this.selectedProducts.forEach(product => {
         this.order.priceExclTax = this.order.priceExclTax + product.priceHt
       })
+    },
+
+    removeProduct(product, index) {
+      this.selectedProducts.splice(index, 1)
+      this.editProduct(product)
     },
 
     fixPriceHt(priceHt) {
