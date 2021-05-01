@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 .form-input {
-    @apply appearance-none block w-full bg-gray-50 text-gray-600 border border-gray-200 rounded py-3 px-4
+    @apply appearance-none block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4
+}
+
+.form-input-radio {
+    @apply appearance-none block bg-gray-50 text-gray-600 border border-gray-200 rounded
 }
 
 .form-input-number {

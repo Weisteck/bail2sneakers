@@ -7,47 +7,113 @@
 
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="form-label" for="delivery-city">
+            Ville
+          </label>
+          <input v-model="order.address.city"
+                 class="form-input"
+                 id="delivery-city"
+                 type="text"
+                 placeholder="Lyon"
+          >
+        </div>
+        <div class="md:w-1/2 px-3">
+          <label class="form-label" for="delivery-address">
+            Adresse
+          </label>
+          <input v-model="order.address.address"
+                 class="form-input"
+                 id="delivery-address"
+                 type="text"
+                 placeholder="27 Rue Raoul Servant"
+          >
+        </div>
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="form-label" for="delivery-zip">
+            Code postal
+          </label>
+          <input v-model="order.address.zipCode"
+                 class="form-input"
+                 id="delivery-zip"
+                 type="text"
+                 placeholder="69007"
+          >
+        </div>
+        <div class="md:w-1/2 px-3">
+          <label class="form-label" for="delivery-country">
+            Pays
+          </label>
+          <input v-model="order.address.country"
+                 class="form-input"
+                 id="delivery-country"
+                 type="text"
+                 placeholder="France"
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="grid grid-cols-10 grid-flow-col mb-1">
+        <h1 class="form-sub-title col-span-4">Adresse de facturation</h1>
+
+        <div class="text-right col-span-5">
+          <label for="invoice" class="text-right">Utiliser la même adresse que pour la livraison</label>
+        </div>
+
+        <div class="text-right col-span-1">
+          <input v-model="invoiceSameAsDelivery" type="checkbox" id="invoice" class="text-gray-600">
+        </div>
+      </div>
+
+
+      <div class="-mx-3 md:flex mb-2">
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="form-label" for="city">
             Ville
           </label>
-          <input
-            class="form-input"
-            id="city"
-            type="text"
-            placeholder="Lyon"
+          <input v-model="invoiceAddress.city"
+                 :disabled="invoiceSameAsDelivery"
+                 class="form-input"
+                 id="city"
+                 type="text"
+                 placeholder="Lyon"
           >
         </div>
         <div class="md:w-1/2 px-3">
           <label class="form-label" for="address">
             Adresse
           </label>
-          <input
-            class="form-input"
-            id="address"
-            type="text"
-            placeholder="27 Rue Raoul Servant"
+          <input v-model="invoiceAddress.address"
+                 :disabled="invoiceSameAsDelivery"
+                 class="form-input"
+                 id="address"
+                 type="text"
+                 placeholder="27 Rue Raoul Servant"
           >
         </div>
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="form-label" for="zip">
             Code postal
           </label>
-          <input
-            class="form-input"
-            id="zip"
-            type="text"
-            placeholder="69007"
+          <input v-model="invoiceAddress.zipCode"
+                 :disabled="invoiceSameAsDelivery"
+                 class="form-input"
+                 id="zip"
+                 type="text"
+                 placeholder="69007"
           >
         </div>
         <div class="md:w-1/2 px-3">
           <label class="form-label" for="country">
             Pays
           </label>
-          <input
-            class="form-input"
-            id="country"
-            type="text"
-            placeholder="France"
+          <input v-model="invoiceAddress.country"
+                 :disabled="invoiceSameAsDelivery"
+                 class="form-input"
+                 id="country"
+                 type="text"
+                 placeholder="France"
           >
         </div>
       </div>
@@ -84,8 +150,8 @@
           <div class="col-span-3">
             <img :src="product.image" alt="image" class="w-40"/>
           </div>
-          <div class="col-span-2 text-left self-center">
-            <span>{{ product.model }} - {{ product.brand }}</span>
+          <div class="col-span-2 text-left self-center ">
+            <span class="font-bold">{{ product.model }} - {{ product.brand }}</span>
             <br>
             <span>{{ product.color }} -  {{ product.size }}</span>
           </div>
@@ -113,10 +179,10 @@
             </div>
           </div>
           <div class="col-span-2 self-center">
-            {{ fixPriceHt(product.priceHt) }}
+            {{ fixPriceHt(product.priceHt, 0) }}
           </div>
           <div class="col-span-2 self-center">
-            {{ fixPriceTtc(product.priceHt) }}
+            {{ fixPriceTtc(product.priceHt, 0) }}
           </div>
           <div class="col-span-1 self-center">
             <button @click="removeProduct(product, index)" class="">
@@ -132,15 +198,18 @@
       </div>
 
       <div class="text-right">
-        <span>
+        <p>
+          Frais de livraison:
+          {{ fixPriceDelivery(priceDelivery) }}
+        </p>
+        <p>
           Total HT:
-           {{ fixPriceHt(order.priceExclTax) }}
-          </span>
-        <br>
-        <span class="font-bold">
+          {{ fixPriceHt(order.priceExclTax, priceDelivery) }}
+        </p>
+        <p class="font-bold">
           Total TTC:
-          {{ fixPriceTtc(order.priceExclTax) }}
-        </span>
+          {{ fixPriceTtc(order.priceExclTax, priceDelivery) }}
+        </p>
       </div>
     </div>
   </div>
@@ -162,10 +231,29 @@ export default {
           zipCode: "",
           country: ""
         }
-      }
+      },
+      invoiceAddress: {
+        city: "",
+        address: "",
+        zipCode: "",
+        country: ""
+      },
+      invoiceSameAsDelivery: false,
+      priceDelivery: 499,
     }
   },
-  watch: {},
+  watch: {
+    invoiceSameAsDelivery() {
+      this.invoiceSameAsDelivery
+        ? this.invoiceAddress = this.order.address
+        : this.invoiceAddress = {
+          city: "",
+          address: "",
+          zipCode: "",
+          country: ""
+        }
+    }
+  },
   beforeMount() {
     this.createFakeData()
   },
@@ -229,14 +317,16 @@ export default {
       this.editProduct(product)
     },
 
-    fixPriceHt(priceHt) {
+    fixPriceHt(priceHt, priceDelivery) {
+      priceHt += priceDelivery
       return priceHt.toString().substring(0, priceHt.toString().length - 2)
         + "."
         + priceHt.toString().slice(-2)
         + " €"
     },
 
-    fixPriceTtc(priceHt) {
+    fixPriceTtc(priceHt, priceDelivery) {
+      priceHt += priceDelivery
       return (Number(
           priceHt.toString().substring(0, priceHt.toString().length - 2)
           + '.'
@@ -244,7 +334,14 @@ export default {
           ) * 1.20
         ).toFixed(2)
         + " €"
-    }
+    },
+
+    fixPriceDelivery(priceDelivery) {
+      return priceDelivery.toString().substring(0, priceDelivery.toString().length - 2)
+        + "."
+        + priceDelivery.toString().slice(-2)
+        + " €"
+    },
   }
 }
 </script>
