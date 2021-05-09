@@ -29,6 +29,6 @@ module.exports = {
 	postCommentRepository: postCommentRepository,
 	getAllCommentsRepository: getAllCommentsRepository,
 	getCommentByIdRepository: getCommentByIdRepository,
-	putCommentRepository: postCommentRepository,
+	putCommentRepository: putCommentRepository,
 	deleteCommentRepository: deleteCommentRepository
 }
