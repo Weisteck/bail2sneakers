@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const userSchema = new schema({
-  users: [
+const userSchema = new schema(
     {
       interest: {
         man: { type: Boolean },
@@ -21,9 +20,7 @@ const userSchema = new schema({
           country: { type: String },
         }
       ],
-      birthday: { type: Date },
-    }
-  ]
+      birthday: { type: Date }
 })
 
 module.exports = mongoose.model('users', userSchema)

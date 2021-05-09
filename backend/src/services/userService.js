@@ -4,7 +4,7 @@ const {
   getUserByIdRepository,
   putUserRepository,
   deleteUserRepository
-} = require('../services/userRepository');
+} = require('../repositories/userRepository');
 
 const postUserService = async(user) => {
   return await postUserRepository(user)
