@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "David, Hugo, Morgan ",
+  "license": "MIT",
+  "dependencies": {
+    "@yarn-monorepo/config": "1.0.0",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.4",
+    "nodemon": "^2.0.7",
+    "process": "^0.11.10"
+  },
+  "scripts": {
+    "start": "nodemon src/server.js"
+  }
+}
