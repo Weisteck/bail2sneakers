@@ -2,9 +2,7 @@ const User = require('../models/users')
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const postUserRepository = (user) => {
-  const { save } = new User(user)
-
-  return save()
+  return User.create(user)
     .then(() => true)
     .catch(err => console.error(err))
 };
