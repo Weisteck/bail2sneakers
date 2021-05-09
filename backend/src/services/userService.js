@@ -1,4 +1,10 @@
-import userRepository from '../services/userRepository'
+const {
+  postUserRepository,
+  getAllUserRepository,
+  getUserByRepository,
+  putUserRepository,
+  deleteUserRepository
+} = require('../services/userRepository');
 
 const postUser = () => {
 
