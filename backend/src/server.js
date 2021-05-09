@@ -18,6 +18,8 @@ app.get('/', (req, res) => {
 	res.end('hello world!')
 })
 
+app.use('/user', require('./router/user'));
+
 app.listen(CONFIG.PORT, () => {
 	console.clear()
 	console.log(`Listening on ${CONFIG.PORT}`)
