@@ -1,3 +1,5 @@
+import router from "./router/comment";
+
 const express = require('express')
 const CONFIG = require('@yarn-monorepo/config')
 const cors = require('cors')
@@ -18,6 +20,8 @@ app.get('/', (req, res) => {
 	res.end('hello world!')
 })
 
+
+app.use('/comments', router)
 app.use('/basket', require('./router/basket'))
 
 app.listen(CONFIG.PORT, () => {
