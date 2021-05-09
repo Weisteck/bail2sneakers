@@ -1,6 +1,6 @@
 const {
   postUserRepository,
-  getAllUserRepository,
+  getAllUsersRepository,
   getUserByRepository,
   putUserRepository,
   deleteUserRepository

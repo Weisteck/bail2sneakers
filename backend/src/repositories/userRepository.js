@@ -1,13 +1,38 @@
-import users from '../models/users'
+const User = require('../models/users')
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const postUserRepository = (user) => {
-  const newUser = new User(user)
+  const { save } = new User(user)
 
-  newUser.save()
-    .then(res => res)
-    .catch(err => console.log(err))
-}
+  return save()
+    .then(() => true)
+    .catch(err => console.error(err))
+};
 
-export {
-  postUserRepository
+const getAllUsersRepository = async () => {
+  return User.find()
+};
+
+const getUserByIdRepository = (id) => {
+  return User.findOne({ "_id": new ObjectId(id) });
+};
+
+const putUserRepository = (id, user) => {
+  return User.updateOne({
+    "_id": new ObjectId(id)
+  },
+    user
+  )
+};
+
+const deleteUserRepository = (id) => {
+  return User.deleteOne({ "_id": new ObjectId(id) });
+};
+
+module.exports = {
+  postUserRepository: postUserRepository,
+  getAllUsersRepository: getAllUsersRepository,
+  getUserByIdRepository: getUserByIdRepository,
+  putUserRepository: putUserRepository,
+  deleteUserRepository: deleteUserRepository
 }
