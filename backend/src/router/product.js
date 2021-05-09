@@ -1,14 +1,13 @@
 const express = require('express')
 const router = express.Router()
 
-
 const {
-	postProductsService,
+	postProductService,
 	getAllProductsService,
-	getProductsByIdService,
-	putProductsService,
-	deleteProductsService
-} = require('../services/productsService');
+	getProductByIdService,
+	putProductService,
+	deleteProductService
+} = require('../services/productService');
 
 router.get('/get-all', (req, res) => {
 	getAllProductsService()
@@ -17,25 +16,25 @@ router.get('/get-all', (req, res) => {
 })
 
 router.get('/', (req, res) => {
-	getProductsByIdService(req.query.id)
+	getProductByIdService(req.query.id)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
 router.post('/', (req, res) => {
-	postProductsService(req.body)
+	postProductService(req.body)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
 router.put('/', (req, res) => {
-	putProductsService(req.query.id, req.body)
+	putProductService(req.query.id, req.body)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
 router.delete('/', (req, res) => {
-	deleteProductsService(req.query.id)
+	deleteProductService(req.query.id)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
