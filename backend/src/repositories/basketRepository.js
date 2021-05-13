@@ -2,9 +2,7 @@ const Basket = require('../models/Basket')
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const postBasketRepository = (basket) => {
-	const { save } = new Basket(basket)
-
-	return save()
+	return Basket.create(basket)
 		.then(() => true)
 		.catch(err => console.error(err))
 }

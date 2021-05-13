@@ -2,9 +2,7 @@ const Comment = require('../models/Comment')
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const postCommentRepository = (comment) => {
-	const { save } = new Comment(comment)
-
-	return save()
+	return Comment.create(comment)
 		.then(() => true)
 		.catch(err => console.error(err))
 }
@@ -31,6 +29,6 @@ module.exports = {
 	postCommentRepository: postCommentRepository,
 	getAllCommentsRepository: getAllCommentsRepository,
 	getCommentByIdRepository: getCommentByIdRepository,
-	putCommentRepository: postCommentRepository,
+	putCommentRepository: putCommentRepository,
 	deleteCommentRepository: deleteCommentRepository
 }
