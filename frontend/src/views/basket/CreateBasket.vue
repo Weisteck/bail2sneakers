@@ -1,50 +1,50 @@
 <template>
   <div class="container mx-auto">
-    <h1 class="form-title">PANIER</h1>
+    <h1 class="title">PANIER</h1>
 
-    <div class="form-card">
-      <h1 class="form-sub-title">Adresse de livraison</h1>
+    <div class="card">
+      <h1 class="sub-title">Adresse de livraison</h1>
 
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="form-label" for="delivery-city">
+          <label class="label" for="delivery-city">
             Ville
           </label>
           <input v-model="order.address.city"
-                 class="form-input"
+                 class="input"
                  id="delivery-city"
                  type="text"
                  placeholder="Lyon"
           >
         </div>
         <div class="md:w-1/2 px-3">
-          <label class="form-label" for="delivery-address">
+          <label class="label" for="delivery-address">
             Adresse
           </label>
           <input v-model="order.address.address"
-                 class="form-input"
+                 class="input"
                  id="delivery-address"
                  type="text"
                  placeholder="27 Rue Raoul Servant"
           >
         </div>
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="form-label" for="delivery-zip">
+          <label class="label" for="delivery-zip">
             Code postal
           </label>
           <input v-model="order.address.zipCode"
-                 class="form-input"
+                 class="input"
                  id="delivery-zip"
                  type="text"
                  placeholder="69007"
           >
         </div>
         <div class="md:w-1/2 px-3">
-          <label class="form-label" for="delivery-country">
+          <label class="label" for="delivery-country">
             Pays
           </label>
           <input v-model="order.address.country"
-                 class="form-input"
+                 class="input"
                  id="delivery-country"
                  type="text"
                  placeholder="France"
@@ -53,9 +53,9 @@
       </div>
     </div>
 
-    <div class="form-card">
+    <div class="card">
       <div class="grid grid-cols-10 grid-flow-col mb-1">
-        <h1 class="form-sub-title col-span-4">Adresse de facturation</h1>
+        <h1 class="sub-title col-span-4">Adresse de facturation</h1>
 
         <div class="text-right col-span-5">
           <label for="invoice" class="text-right">Utiliser la même adresse que pour la livraison</label>
@@ -69,48 +69,48 @@
 
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="form-label" for="city">
+          <label class="label" for="city">
             Ville
           </label>
           <input v-model="invoiceAddress.city"
                  :disabled="invoiceSameAsDelivery"
-                 class="form-input"
+                 class="input"
                  id="city"
                  type="text"
                  placeholder="Lyon"
           >
         </div>
         <div class="md:w-1/2 px-3">
-          <label class="form-label" for="address">
+          <label class="label" for="address">
             Adresse
           </label>
           <input v-model="invoiceAddress.address"
                  :disabled="invoiceSameAsDelivery"
-                 class="form-input"
+                 class="input"
                  id="address"
                  type="text"
                  placeholder="27 Rue Raoul Servant"
           >
         </div>
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="form-label" for="zip">
+          <label class="label" for="zip">
             Code postal
           </label>
           <input v-model="invoiceAddress.zipCode"
                  :disabled="invoiceSameAsDelivery"
-                 class="form-input"
+                 class="input"
                  id="zip"
                  type="text"
                  placeholder="69007"
           >
         </div>
         <div class="md:w-1/2 px-3">
-          <label class="form-label" for="country">
+          <label class="label" for="country">
             Pays
           </label>
           <input v-model="invoiceAddress.country"
                  :disabled="invoiceSameAsDelivery"
-                 class="form-input"
+                 class="input"
                  id="country"
                  type="text"
                  placeholder="France"
@@ -119,8 +119,8 @@
       </div>
     </div>
 
-    <div class="form-card">
-      <h1 class="form-sub-title">Produits sélectionnées</h1>
+    <div class="card">
+      <h1 class="sub-title">Produits sélectionnées</h1>
 
       <div class="grid grid-cols-12 grid-flow-col mb-1 font-bold">
         <div class="col-span-3">
@@ -159,20 +159,20 @@
             <div class="custom-number-input">
               <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
                 <button @click="decrementQuantity(product)"
-                        class="form-input-number-decrement"
+                        class="input-number-decrement"
                         :disabled="product.quantity <= 1"
                 >
                   <span class="m-auto text-2xl font-thin">−</span>
                 </button>
                 <input type="number"
-                       class="form-input-number"
+                       class="input-number"
                        name="custom-input-number"
                        v-model="selectedProducts[selectedProducts.indexOf(product)].quantity"
                        @change="editProduct(product)"
                        :disabled="product.quantity <= 1"
                 >
                 <button @click="incrementQuantity(product)"
-                        class="form-input-number-increment">
+                        class="input-number-increment">
                   <span class="m-auto text-2xl font-thin">+</span>
                 </button>
               </div>

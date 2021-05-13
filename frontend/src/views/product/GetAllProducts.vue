@@ -4,7 +4,7 @@
   <div class="grid grid-cols-12 grid-flow-col">
     <div v-for="(product, index) in products" :key="product.productId">
 
-      <div class="col-span-6 form-card">
+      <div class="col-span-6 card">
         <img :src="product.images[0]" alt="image" class="w-40"/>
         <p>{{ product.brand.name }}</p>
         <p>{{ product.model }}</p>
