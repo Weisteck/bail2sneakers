@@ -1,66 +1,81 @@
 <template>
-  <h1>Detail d'un produit</h1>
-
-  <div class="container">
-    <div class="grid grid-cols-2">
-      <div class="col-span-1">
-
-      </div>
-      <div class="col-span-1">
-        <img src="{{ product.brand.logo }}" alt="brandLogo">
-        <h1 class="title">
-          {{ product.brand.name }} - {{ product.model }}
-        </h1>
-
-        <p class="text-sm">
-          {{ fixPriceHt(product.priceExclTax, 0) }} HT
-        </p>
-        <p class="text-xl">
-          {{ fixPriceTtc(product.priceExclTax, 0) }} TTC
-        </p>
-
-        <p>⭐ {{ product.rating }} / 10</p>
-
-        <button @click="addProductToBasket" class="button">
-          AJOUTER AU PANIER
-        </button>
-
-        <p class="description">
-          {{ product.details.description }}
-        </p>
-
-        <h2 class="text-left text-xl">Informations sur le produit</h2>
-        <p class="text-left text-lg">Categories</p>
-        <div v-for="category in product.categories">
-          <span class="text-left bg-gray-100">{{ category }}</span>
-          <span class="text-left bg-gray-100 p-1">cat n2</span>
+  <div class="text-left">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-2">
+        <div class="col-span-1">
+          <Slider :images="product.images"/>
         </div>
+        <div class="col-span-1 text-center">
+          <img :src="product.brand.logo" alt="brandLogo" class="mx-auto" height="200" width="200">
+          <h1 class="title">
+            {{ product.brand.name }} - {{ product.model }}
+          </h1>
 
-        <p class="text-left text-lg">Matériaux</p>
-        <ul v-for="materiel in product.details.materials">
-          <li class="text-left">- {{ materiel }}</li>
-        </ul>
-        <p class="text-left text-lg">Origine</p>
-        <p>{{ product.details.origin }}</p>
+          <p class="text-sm">
+            {{ fixPriceHt(product.priceExclTax, 0) }} HT
+          </p>
+          <p class="text-xl">
+            {{ fixPriceTtc(product.priceExclTax, 0) }} TTC
+          </p>
+
+          <p>⭐ {{ product.rating }} / 10</p>
+
+          <button @click="addProductToBasket" class="button">
+            AJOUTER AU PANIER
+          </button>
+        </div>
       </div>
+
+      <p class="description">
+        {{ product.details.description }}
+      </p>
+
+      <h2 class="text-xl">Informations sur le produit</h2>
+      <p class="text-lg">Categories</p>
+      <div class="flex mt-3 mb-3">
+        <div v-for="category in product.categories" class="flex">
+          <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
+            <span>{{ category }}</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-lg">Matériaux</p>
+      <div class="flex mt-3 mb-3">
+        <div v-for="materiel in product.details.materials" class="flex">
+          <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
+            <span>{{ materiel }}</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-lg">Origine</p>
+      <p>{{ product.details.origin }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import Slider from "../../components/Slider.vue";
+import Cookies from 'js-cookie'
+
+
 export default {
   name: 'DetailProduct',
+  components: { Slider },
   data() {
     return {
-      product: {}
+      product: {},
+      productColorSelected: "",
+      productSizeSelected: 0
     }
   },
   methods: {
     getProduct() {
-      console.log("params : ", this.$route.params.id)
+      console.log("cookie : ", Cookies.get('basket'))
+
       this.$store.dispatch('getProduct', { id: this.$route.params.id })
         .then(res => {
-          console.log(res.data)
           this.product = res.data
         })
         .catch(err => console.error(err))
@@ -86,7 +101,24 @@ export default {
     },
 
     addProductToBasket() {
+      const selectedProduct = {
+        productId: this.product._id,
+        brand: this.product.brand.name,
+        model: this.product.model,
+        price: this.product.priceExclTax,
+        image: this.product.images[0],
+        color: this.productColorSelected,
+        size: this.productSizeSelected
+      }
 
+      this.$store.dispatch('addProductToBasket', selectedProduct)
+        .then(res => {
+          console.log("le produit à été ajouter au panier", res)
+
+          // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans un cookie
+          Cookies.set('basket', "result")
+        })
+        .catch(err => console.error(err))
     }
   },
   beforeMount() {

@@ -31,7 +31,6 @@ export default {
     getAllProducts() {
       this.$store.dispatch('getAllProducts')
         .then(res => {
-          console.log(res.data)
           this.products = res.data
         })
         .catch(err => console.error(err))

@@ -5,18 +5,27 @@ export default createStore({
 	state: {},
 	mutations: {},
 	actions: {
-		// Product
+		// #region Product
 		getAllProducts() {
 			return api.get('/product/get-all')
 				.then(res => res)
 				.catch(err => console.error(err))
 		},
 		getProduct(context, payload) {
-			console.log("id : ", payload.id)
 			return api.get(`/product?id=${ payload.id }`)
 				.then(res => res)
 				.catch(err => console.error(err))
-		}
+		},
+		// #endregion
+
+		// #region Basket
+		addProductToBasket(context, payload) {
+			console.log("payload :" ,payload)
+			return api.post('/basket', payload)
+				.then(res => res)
+				.catch(err => console.error(err))
+		},
+		// #endregion
 	},
 	modules: {}
 })
