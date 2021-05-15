@@ -20,7 +20,7 @@ export default createStore({
 
 		// #region Basket
 		addProductToBasket(context, payload) {
-			console.log("payload :" ,payload)
+			console.log("payload :", payload)
 			return api.post('/basket', payload)
 				.then(res => res)
 				.catch(err => console.error(err))

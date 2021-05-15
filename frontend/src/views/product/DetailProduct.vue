@@ -1,7 +1,7 @@
 <template>
   <div class="text-left">
     <div class="container mx-auto">
-      <div class="grid grid-cols-2">
+      <div class="grid grid-cols-2 mb-10">
         <div class="col-span-1">
           <Slider :images="product.images"/>
         </div>
@@ -65,14 +65,42 @@ export default {
   components: { Slider },
   data() {
     return {
-      product: {},
+      product: {
+        categories: [],
+        brand: {
+          name: "",
+          brandDescription: "",
+          logo: ""
+        },
+        model: "",
+        details: {
+          description: "",
+          materials: [],
+          origin: ""
+        },
+        rating: 0,
+        priceExclTax: 0,
+        images: [],
+        variants: [
+          {
+            color: "",
+            sizes: [
+              {
+                size: 0,
+                stock: 0
+              }
+            ]
+          }
+        ]
+      },
       productColorSelected: "",
-      productSizeSelected: 0
+      productSizeSelected: 0,
+      noImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/768px-No_image_available.svg.png"
     }
   },
   methods: {
     getProduct() {
-      console.log("cookie : ", Cookies.get('basket'))
+      console.log("cookie : ", Cookies.get('basketId'))
 
       this.$store.dispatch('getProduct', { id: this.$route.params.id })
         .then(res => {
@@ -116,7 +144,7 @@ export default {
           console.log("le produit à été ajouter au panier", res)
 
           // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans un cookie
-          Cookies.set('basket', "result")
+          Cookies.set('basketId', res.data._id)
         })
         .catch(err => console.error(err))
     }

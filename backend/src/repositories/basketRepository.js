@@ -3,7 +3,10 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const postBasketRepository = (basket) => {
 	return Basket.create(basket)
-		.then(() => true)
+		.then((res) => getBasketByIdRepository(res._id)
+			.then(res => res)
+			.catch(err => console.error(err))
+		)
 		.catch(err => console.error(err))
 }
 

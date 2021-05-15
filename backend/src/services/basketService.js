@@ -7,7 +7,22 @@ const {
 } = require('../repositories/basketRepository')
 
 const postBasketService = async (basket) => {
-	return await postBasketRepository(basket)
+	const newBasket = {
+		selectedProducts: basket,
+		userId: null,
+		order: {
+			status: "In progress",
+			priceExclTax: basket.price,
+			address: {
+				city: null,
+				address: null,
+				zipCode: null,
+				country: null
+			}
+		}
+	}
+
+	return await postBasketRepository(newBasket)
 		.then(res => res)
 		.catch(err => console.error(err))
 }

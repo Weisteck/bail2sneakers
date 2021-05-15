@@ -1,10 +1,11 @@
 <template>
-  <carousel>
+  <carousel :autoplay="5000" :wrap-around="true">
     <slide v-for="image in images">
-      <img :src="image" alt="">
+      <img :src="image" alt="productImage" class="object-contain h-96 w-full">
     </slide>
     <template #addons>
       <navigation/>
+      <pagination/>
     </template>
   </carousel>
 </template>
@@ -49,7 +50,7 @@ export default {
       },
 // sliding transition time in ms
       transition: {
-        default: 300,
+        default: 10,
         type: Number,
       },
 // an object to pass all settings
@@ -76,6 +77,14 @@ export default {
 
 <style>
 .carousel__prev, .carousel__next {
-  background-color: black!important;
+  background-color: black !important;
+}
+
+.carousel__pagination-button--active {
+  background-color: black !important;
+}
+
+.carousel__pagination-button {
+  background-color: gray;
 }
 </style>
