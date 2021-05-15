@@ -1,4 +1,6 @@
 <template>
+  <DeleteProduct v-if="deleteProductModal" :product="productToDelete" v-on:eventConfirmDelete="removeProduct"/>
+
   <div class="container mx-auto">
     <h1 class="title">PANIER</h1>
 
@@ -66,7 +68,6 @@
         </div>
       </div>
 
-
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="label" for="city">
@@ -123,14 +124,11 @@
       <h1 class="sub-title">Produits sélectionnées</h1>
 
       <div class="grid grid-cols-12 grid-flow-col mb-1 font-bold">
-        <div class="col-span-3">
+        <div class="col-span-4">
 
         </div>
         <div class="col-span-2">
           Produit
-        </div>
-        <div class="col-span-2">
-          Quantité
         </div>
         <div class="col-span-2">
           Prix HT
@@ -147,7 +145,7 @@
 
       <div v-for="(product, index) in selectedProducts" :key="product.productId">
         <div class="grid grid-cols-12 grid-flow-col">
-          <div class="col-span-3">
+          <div class="col-span-4">
             <img :src="product.image" alt="image" class="w-40"/>
           </div>
           <div class="col-span-2 text-left self-center ">
@@ -155,29 +153,29 @@
             <br>
             <span>{{ product.color }} -  {{ product.size }}</span>
           </div>
-          <div class="col-span-2 self-center">
-            <div class="custom-number-input">
-              <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-                <button @click="decrementQuantity(product)"
-                        class="input-number-decrement"
-                        :disabled="product.quantity <= 1"
-                >
-                  <span class="m-auto text-2xl font-thin">−</span>
-                </button>
-                <input type="number"
-                       class="input-number"
-                       name="custom-input-number"
-                       v-model="selectedProducts[selectedProducts.indexOf(product)].quantity"
-                       @change="editProduct(product)"
-                       :disabled="product.quantity <= 1"
-                >
-                <button @click="incrementQuantity(product)"
-                        class="input-number-increment">
-                  <span class="m-auto text-2xl font-thin">+</span>
-                </button>
-              </div>
-            </div>
-          </div>
+          <!--          <div class="col-span-2 self-center">
+                      <div class="custom-number-input">
+                        <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
+                          <button @click="decrementQuantity(product)"
+                                  class="input-number-decrement"
+                                  :disabled="product.quantity <= 1"
+                          >
+                            <span class="m-auto text-2xl font-thin">−</span>
+                          </button>
+                          <input type="number"
+                                 class="input-number"
+                                 name="custom-input-number"
+                                 v-model="selectedProducts[selectedProducts.indexOf(product)].quantity"
+                                 @change="editProduct(product)"
+                                 :disabled="product.quantity <= 1"
+                          >
+                          <button @click="incrementQuantity(product)"
+                                  class="input-number-increment">
+                            <span class="m-auto text-2xl font-thin">+</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>-->
           <div class="col-span-2 self-center">
             {{ fixPriceHt(product.priceHt, 0) }}
           </div>
@@ -185,7 +183,7 @@
             {{ fixPriceTtc(product.priceHt, 0) }}
           </div>
           <div class="col-span-1 self-center">
-            <button @click="removeProduct(product, index)" class="">
+            <button @click="showDeleteProductModal(product._id, index)">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-red-500" fill="none" viewBox="0 0 24 24"
                    stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -216,10 +214,15 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
+import DeleteProduct from "../../components/DeleteProduct.vue";
+
 export default {
-  name: 'CreateBasket',
+  name: 'GetBasket',
+  components: { DeleteProduct },
   data() {
     return {
+      basketId: "",
       selectedProducts: [],
       userId: 0,
       order: {
@@ -240,8 +243,11 @@ export default {
       },
       invoiceSameAsDelivery: false,
       priceDelivery: 499,
+      deleteProductModal: false,
+      productToDelete: null
     }
   },
+  emits: ['confirmDelete'],
   watch: {
     invoiceSameAsDelivery() {
       this.invoiceSameAsDelivery
@@ -255,9 +261,41 @@ export default {
     }
   },
   beforeMount() {
-    this.createFakeData()
+    // this.createFakeData()
+    this.getBasketIdInCookie()
   },
   methods: {
+    confirmDelete() {
+      console.log("delete confirm")
+    },
+
+    showDeleteProductModal(product, index) {
+      this.productToDelete = { product, index }
+      this.deleteProductModal = true
+    },
+
+    getBasketIdInCookie() {
+      this.basketId = Cookies.get('basketId')
+
+      this.getBasketById(this.basketId)
+    },
+
+    getBasketById(basketId) {
+      this.$store.dispatch('getBasketById', { id: basketId })
+        .then(res => {
+          this.selectedProducts = res.data.selectedProducts
+
+          console.log(this.selectedProducts)
+          this.selectedProducts.forEach(product => {
+            product.priceHt = product.price
+            product.priceTtc = product.price * 1.2
+
+            this.order.priceExclTax = this.order.priceExclTax + product.priceHt
+          })
+        })
+        .catch(err => console.error(err))
+    },
+
     createFakeData() {
       this.selectedProducts = [
         {
@@ -267,9 +305,7 @@ export default {
           price: 5999,
           image: "https://www.converse.com/on/demandware.static/-/Sites-ConverseMaster/default/dwbebed5b9/images/hi-res/M9160C_standard.jpg",
           color: "black",
-          size: 42,
-
-          quantity: 1,
+          size: 42
         },
         {
           productId: 1,
@@ -278,32 +314,40 @@ export default {
           price: 8999,
           image: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ebad848a-13b1-46d5-a85e-49b4b6a4953c/chaussure-air-force-1-le-pour-plus-age-cJV32q.png",
           color: "white",
-          size: 42,
-          quantity: 1,
+          size: 42
+        },
+        {
+          productId: 2,
+          brand: "Nike",
+          model: "Air Force 1",
+          price: 8999,
+          image: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ebad848a-13b1-46d5-a85e-49b4b6a4953c/chaussure-air-force-1-le-pour-plus-age-cJV32q.png",
+          color: "white",
+          size: 42
         }
       ]
 
       this.selectedProducts.forEach(product => {
-        product.priceHt = (product.price * product.quantity)
-        product.priceTtc = (product.price * product.quantity) * 1.2
+        product.priceHt = product.price
+        product.priceTtc = product.price * 1.2
 
         this.order.priceExclTax = this.order.priceExclTax + product.priceHt
       })
     },
 
-    decrementQuantity(product) {
-      product.quantity = product.quantity -= 1
-      this.editProduct(product)
-    },
+    /*    decrementQuantity(product) {
+          product.quantity = product.quantity -= 1
+          this.editProduct(product)
+        },
 
-    incrementQuantity(product) {
-      product.quantity = product.quantity += 1
-      this.editProduct(product)
-    },
+        incrementQuantity(product) {
+          product.quantity = product.quantity += 1
+          this.editProduct(product)
+        },*/
 
     editProduct(product) {
-      product.priceHt = (product.price * product.quantity)
-      product.priceTtc = (product.price * product.quantity) * 1.2
+      product.priceHt = product.price
+      product.priceTtc = product.price * 1.2
 
       this.order.priceExclTax = 0
 
@@ -312,9 +356,9 @@ export default {
       })
     },
 
-    removeProduct(product, index) {
-      this.selectedProducts.splice(index, 1)
-      this.editProduct(product)
+    removeProduct() {
+      this.selectedProducts.splice(this.productToDelete.index, 1)
+      this.editProduct(this.productToDelete.product)
     },
 
     fixPriceHt(priceHt, priceDelivery) {

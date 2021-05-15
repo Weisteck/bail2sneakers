@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
-import CreateBasket from "../views/basket/CreateBasket.vue"
+import CreateBasket from "../views/basket/GetBasket.vue"
 import GetAllProduct from "../views/product/GetAllProducts.vue"
 import DetailProduct from "../views/product/DetailProduct.vue";
 
@@ -13,7 +13,7 @@ const routes = [
 	},
 	// Basket
 	{
-		path: '/basket/create',
+		path: '/basket',
 		name: 'createBasket',
 		component: CreateBasket
 	},

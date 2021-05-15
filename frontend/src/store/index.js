@@ -20,11 +20,16 @@ export default createStore({
 
 		// #region Basket
 		addProductToBasket(context, payload) {
-			console.log("payload :", payload)
 			return api.post('/basket', payload)
 				.then(res => res)
 				.catch(err => console.error(err))
 		},
+
+		getBasketById(context, payload) {
+			return api.get(`/basket?id=${ payload.id }`)
+				.then(res => res)
+				.catch(err => console.error(err))
+		}
 		// #endregion
 	},
 	modules: {}
