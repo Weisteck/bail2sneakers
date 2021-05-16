@@ -5,7 +5,8 @@ const {
 	postBasketService,
 	getAllBasketsService,
 	getBasketByIdService,
-	putBasketService,
+	removeProductFromBasketService,
+	addProductToBasketService,
 	deleteBasketService
 } = require('../services/basketService');
 
@@ -27,8 +28,15 @@ router.post('/', (req, res) => {
 		.catch(err => console.error(err))
 })
 
-router.put('/', (req, res) => {
-	putBasketService(req.query.id, req.body)
+router.put('/remove-product', (req, res) => {
+	removeProductFromBasketService(req.query.id, req.body)
+		.then(result => res.send(result))
+		.catch(err => console.error(err))
+})
+
+router.put('/add-product', (req, res) => {
+	console.log("add product")
+	addProductToBasketService(req.query.id, req.body)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })

@@ -20,37 +20,71 @@
 
           <p>⭐ {{ product.rating }} / 10</p>
 
-          <button @click="addProductToBasket" class="button">
+          <p>Couleur</p>
+          <div class="flex mt-3 mb-3 ml-5">
+            <div v-for="variant in product.variants">
+              <div class="flex-initial mr-2 p-3 rounded-xl" :class="`bg-${variant.color}-300`">
+                <input v-model="variantSelected" :value="variant" type="radio" :id="variant.color"
+                       class="text-gray-600 bg-red-700 text-red-500"
+                       name="color">
+              </div>
+            </div>
+          </div>
+          <div class="flex mt-3 mb-3 mx-auto w-1/2">
+            <label for="size" class="mr-10 mt-3">Taille</label>
+            <select v-model="sizeSelected" name="size"
+                    class="block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4"
+            >
+              <option v-for="sizes in variantSelected.sizes" v-bind:value="sizes.size">
+                {{ sizes.size }}
+              </option>
+            </select>
+          </div>
+
+          <br>
+
+          <button @click="addProductToBasket" class="button" :disabled="colorAndSizeNotSelected">
             AJOUTER AU PANIER
           </button>
         </div>
       </div>
 
-      <p class="description">
-        {{ product.details.description }}
-      </p>
+      <hr class="mb-10">
+
+      <div class="mb-5">
+        <h2 class="text-xl">Description</h2>
+        <p class="description">
+          {{ product.details.description }}
+        </p>
+      </div>
 
       <h2 class="text-xl">Informations sur le produit</h2>
-      <p class="text-lg">Categories</p>
-      <div class="flex mt-3 mb-3">
-        <div v-for="category in product.categories" class="flex">
-          <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
-            <span>{{ category }}</span>
+      <div class="mb-5">
+        <p class="text-lg">Categories</p>
+        <div class="flex mt-3 mb-3">
+          <div v-for="category in product.categories" class="flex">
+            <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
+              <span>{{ category }}</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <p class="text-lg">Matériaux</p>
-      <div class="flex mt-3 mb-3">
-        <div v-for="materiel in product.details.materials" class="flex">
-          <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
-            <span>{{ materiel }}</span>
+      <div class="mb-5">
+        <p class="text-lg">Matériaux</p>
+        <div class="flex mt-3 mb-3">
+          <div v-for="materiel in product.details.materials" class="flex">
+            <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
+              <span>{{ materiel }}</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <p class="text-lg">Origine</p>
-      <p>{{ product.details.origin }}</p>
+      <div class="mb-5">
+        <p class="text-lg">Origine</p>
+        <p>{{ product.details.origin }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -93,9 +127,18 @@ export default {
           }
         ]
       },
-      productColorSelected: "",
-      productSizeSelected: 0,
-      noImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/768px-No_image_available.svg.png"
+      noImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/768px-No_image_available.svg.png",
+      colorAndSizeNotSelected: true,
+      variantSelected: "",
+      sizeSelected: 0
+    }
+  },
+  watch: {
+    variantSelected() {
+      this.sizeSelected = 0
+    },
+    sizeSelected(val) {
+      val !== 0 ? this.colorAndSizeNotSelected = false : this.colorAndSizeNotSelected = true
     }
   },
   methods: {
@@ -104,6 +147,7 @@ export default {
 
       this.$store.dispatch('getProduct', { id: this.$route.params.id })
         .then(res => {
+          console.log(res.data)
           this.product = res.data
         })
         .catch(err => console.error(err))
@@ -135,18 +179,28 @@ export default {
         model: this.product.model,
         price: this.product.priceExclTax,
         image: this.product.images[0],
-        color: this.productColorSelected,
-        size: this.productSizeSelected
+        color: this.variantSelected.color,
+        size: this.sizeSelected
       }
 
-      this.$store.dispatch('addProductToBasket', selectedProduct)
-        .then(res => {
-          console.log("le produit à été ajouter au panier", res)
-
-          // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans un cookie
-          Cookies.set('basketId', res.data._id)
+      if (Cookies.get('basketId'))
+        this.$store.dispatch('addProductToBasket', {
+          basketId: Cookies.get('basketId'),
+          productSelected: selectedProduct
         })
-        .catch(err => console.error(err))
+          .then(res => {
+            console.log("le produit à bien été ajouter au panier existant", res)
+          })
+          .catch(err => console.error(err))
+      else
+        this.$store.dispatch('addProductToNewBasket', selectedProduct)
+          .then(res => {
+            console.log("le produit à été ajouter au nouveau panier", res)
+
+            // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans un cookie
+            Cookies.set('basketId', res.data._id)
+          })
+          .catch(err => console.error(err))
     }
   },
   beforeMount() {

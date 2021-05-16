@@ -39,8 +39,72 @@ const getBasketByIdService = async (id) => {
 		.catch(err => console.error(err))
 }
 
-const putBasketService = async (id, basket) => {
-	return await putBasketRepository(id, basket)
+const removeProductFromBasketService = async (id, productToEdit) => {
+	const editedBasket = {
+		selectedProducts: [],
+		userId: null,
+		order: {
+			status: "In progress",
+			priceExclTax: productToEdit.price,
+			address: {
+				city: null,
+				address: null,
+				zipCode: null,
+				country: null
+			}
+		}
+	}
+
+	await getBasketByIdService(id)
+		.then(res => {
+			editedBasket.selectedProducts = res.selectedProducts.filter(product => {
+				if (product._id.toString() !== productToEdit._id.toString())
+					return product
+			})
+			editedBasket.userId = res.userId
+			editedBasket.order = {
+				status: res.order.status,
+				priceExclTax: res.order.priceExclTax,
+				address: res.order.address,
+			}
+		})
+
+	return await putBasketRepository(id, editedBasket)
+		.then(res => res)
+		.catch(err => console.error(err))
+}
+
+const addProductToBasketService = async (id, productToEdit) => {
+	const editedBasket = {
+		selectedProducts: [],
+		userId: null,
+		order: {
+			status: "In progress",
+			priceExclTax: productToEdit.price,
+			address: {
+				city: null,
+				address: null,
+				zipCode: null,
+				country: null
+			}
+		}
+	}
+
+	await getBasketByIdService(id)
+		.then(res => {
+			const newSelectedProduct = res.selectedProducts
+			newSelectedProduct.push(productToEdit)
+
+			editedBasket.selectedProducts = newSelectedProduct
+			editedBasket.userId = res.userId
+			editedBasket.order = {
+				status: res.order.status,
+				priceExclTax: res.order.priceExclTax,
+				address: res.order.address,
+			}
+		})
+
+	return await putBasketRepository(id, editedBasket)
 		.then(res => res)
 		.catch(err => console.error(err))
 }
@@ -55,6 +119,7 @@ module.exports = {
 	postBasketService: postBasketService,
 	getAllBasketsService: getAllBasketsService,
 	getBasketByIdService: getBasketByIdService,
-	putBasketService: putBasketService,
+	removeProductFromBasketService: removeProductFromBasketService,
+	addProductToBasketService: addProductToBasketService,
 	deleteBasketService: deleteBasketService
 }

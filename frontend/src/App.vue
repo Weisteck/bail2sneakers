@@ -5,6 +5,8 @@
     <router-link to="/basket">Basket</router-link>
     |
     <router-link to="/product/get-all">Product</router-link>
+    |
+    <router-link to="/product/609fc334ca65e71ada507d10">Product details</router-link>
   </div>
   <router-view/>
 </template>

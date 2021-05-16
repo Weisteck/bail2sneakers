@@ -183,7 +183,7 @@
             {{ fixPriceTtc(product.priceHt, 0) }}
           </div>
           <div class="col-span-1 self-center">
-            <button @click="showDeleteProductModal(product._id, index)">
+            <button @click="showDeleteProductModal(product, index)">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-red-500" fill="none" viewBox="0 0 24 24"
                    stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -205,7 +205,7 @@
           {{ fixPriceHt(order.priceExclTax, priceDelivery) }}
         </p>
         <p class="font-bold">
-          Total TTC:
+          Total TTC (+20% TVA):
           {{ fixPriceTtc(order.priceExclTax, priceDelivery) }}
         </p>
       </div>
@@ -247,7 +247,7 @@ export default {
       productToDelete: null
     }
   },
-  emits: ['confirmDelete'],
+  emits: [ 'confirmDelete' ],
   watch: {
     invoiceSameAsDelivery() {
       this.invoiceSameAsDelivery
@@ -261,14 +261,9 @@ export default {
     }
   },
   beforeMount() {
-    // this.createFakeData()
     this.getBasketIdInCookie()
   },
   methods: {
-    confirmDelete() {
-      console.log("delete confirm")
-    },
-
     showDeleteProductModal(product, index) {
       this.productToDelete = { product, index }
       this.deleteProductModal = true
@@ -284,8 +279,6 @@ export default {
       this.$store.dispatch('getBasketById', { id: basketId })
         .then(res => {
           this.selectedProducts = res.data.selectedProducts
-
-          console.log(this.selectedProducts)
           this.selectedProducts.forEach(product => {
             product.priceHt = product.price
             product.priceTtc = product.price * 1.2
@@ -295,55 +288,6 @@ export default {
         })
         .catch(err => console.error(err))
     },
-
-    createFakeData() {
-      this.selectedProducts = [
-        {
-          productId: 0,
-          brand: "Converse",
-          model: "All Star",
-          price: 5999,
-          image: "https://www.converse.com/on/demandware.static/-/Sites-ConverseMaster/default/dwbebed5b9/images/hi-res/M9160C_standard.jpg",
-          color: "black",
-          size: 42
-        },
-        {
-          productId: 1,
-          brand: "Nike",
-          model: "Air Force 1",
-          price: 8999,
-          image: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ebad848a-13b1-46d5-a85e-49b4b6a4953c/chaussure-air-force-1-le-pour-plus-age-cJV32q.png",
-          color: "white",
-          size: 42
-        },
-        {
-          productId: 2,
-          brand: "Nike",
-          model: "Air Force 1",
-          price: 8999,
-          image: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ebad848a-13b1-46d5-a85e-49b4b6a4953c/chaussure-air-force-1-le-pour-plus-age-cJV32q.png",
-          color: "white",
-          size: 42
-        }
-      ]
-
-      this.selectedProducts.forEach(product => {
-        product.priceHt = product.price
-        product.priceTtc = product.price * 1.2
-
-        this.order.priceExclTax = this.order.priceExclTax + product.priceHt
-      })
-    },
-
-    /*    decrementQuantity(product) {
-          product.quantity = product.quantity -= 1
-          this.editProduct(product)
-        },
-
-        incrementQuantity(product) {
-          product.quantity = product.quantity += 1
-          this.editProduct(product)
-        },*/
 
     editProduct(product) {
       product.priceHt = product.price
@@ -357,12 +301,18 @@ export default {
     },
 
     removeProduct() {
+      this.$store.dispatch('removeProductFromBasket', {
+        basketId: this.basketId,
+        productSelected: this.productToDelete.product
+      })
+        .then(res => console.log("le produit à bien été supprimer du panier", res))
+        .catch(err => console.error(err))
+
       this.selectedProducts.splice(this.productToDelete.index, 1)
       this.editProduct(this.productToDelete.product)
     },
 
-    fixPriceHt(priceHt, priceDelivery) {
-      priceHt += priceDelivery
+    fixPriceHt(priceHt) {
       return priceHt.toString().substring(0, priceHt.toString().length - 2)
         + "."
         + priceHt.toString().slice(-2)
@@ -370,13 +320,30 @@ export default {
     },
 
     fixPriceTtc(priceHt, priceDelivery) {
-      priceHt += priceDelivery
-      return (Number(
-          priceHt.toString().substring(0, priceHt.toString().length - 2)
-          + '.'
-          + priceHt.toString().slice(-2)
-          ) * 1.20
-        ).toFixed(2)
+      return priceHt === 0
+        ? 0
+        : (
+          (Number(
+              Number(
+                (
+                  priceHt.toString().substring(0, priceHt.toString().length - 2)
+                  + '.'
+                  + priceHt.toString().slice(-2)
+                ) * 1.20
+              )
+            )
+          )
+          +
+          (Number(
+              Number(
+                priceDelivery.toString().substring(0, priceDelivery.toString().length - 2)
+                + '.'
+                + priceDelivery.toString().slice(-2)
+              )
+            )
+          )
+        )
+          .toFixed(2)
         + " €"
     },
 

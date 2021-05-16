@@ -19,7 +19,7 @@ export default createStore({
 		// #endregion
 
 		// #region Basket
-		addProductToBasket(context, payload) {
+		addProductToNewBasket(context, payload) {
 			return api.post('/basket', payload)
 				.then(res => res)
 				.catch(err => console.error(err))
@@ -29,7 +29,19 @@ export default createStore({
 			return api.get(`/basket?id=${ payload.id }`)
 				.then(res => res)
 				.catch(err => console.error(err))
-		}
+		},
+
+		removeProductFromBasket(context, payload) {
+			return api.put(`/basket/remove-product?id=${ payload.basketId }`, payload.productSelected)
+				.then(res => res)
+				.catch(err => console.error(err))
+		},
+
+		addProductToBasket(context, payload) {
+			return api.put(`/basket/add-product?id=${ payload.basketId }`, payload.productSelected)
+				.then(res => res)
+				.catch(err => console.error(err))
+		},
 		// #endregion
 	},
 	modules: {}
