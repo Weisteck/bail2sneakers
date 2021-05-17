@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
+import Test from '../views/Test.vue'
 import CreateBasket from "../views/basket/GetBasket.vue"
 import GetAllProduct from "../views/product/GetAllProducts.vue"
 import DetailProduct from "../views/product/DetailProduct.vue";
 
 const routes = [
+	{
+		path: '/test',
+		name: 'Test',
+		component: Test
+	},
 	{
 		path: '/',
 		name: 'Home',

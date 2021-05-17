@@ -1,15 +1,31 @@
 <template>
   <div class="text-left">
     <div class="container mx-auto">
-      <div class="grid grid-cols-2 mb-10">
-        <div class="col-span-1">
-          <Slider :images="product.images"/>
+      <div class="grid grid-cols-12 mb-10">
+        <div class="col-span-12 lg:col-span-7 md:col-span-6 sm:col-span-12">
+          <div class="grid grid-cols-12 col-span-12 mb-10">
+            <div class="col-span-2 lg:col-span-2 md:col-span-6 sm:col-span-12">
+              <div v-for="image in product.images">
+                <img :src="image" alt="productImage"
+                     class="w-full h-32 object-cover cursor-pointer transition border hover:border-gray-400 border-1 hover:border-8 border-white"
+                     @click="changeImageToShow(image)">
+              </div>
+            </div>
+            <div class="col-span-10 lg:col-span-10 md:col-span-6 sm:col-span-12">
+              <img :src="imageToShow" alt="productImage" class="object-cover h-full w-full border border-white">
+            </div>
+          </div>
         </div>
-        <div class="col-span-1 text-center">
+        <div class="col-span-12 lg:col-span-5 md:col-span-6 sm:col-span-12 text-center">
           <img :src="product.brand.logo" alt="brandLogo" class="mx-auto" height="200" width="200">
           <h1 class="title">
             {{ product.brand.name }} - {{ product.model }}
           </h1>
+          <div class="flex justify-center m-10">
+            <div v-for="n in product.rating">
+              <div class="mx-auto">⭐</div>
+            </div>
+          </div>
 
           <p class="text-sm">
             {{ fixPriceHt(product.priceExclTax, 0) }} HT
@@ -18,12 +34,11 @@
             {{ fixPriceTtc(product.priceExclTax, 0) }} TTC
           </p>
 
-          <p>⭐ {{ product.rating }} / 10</p>
+          <p class="mt-5">Couleur</p>
 
-          <p>Couleur</p>
-          <div class="flex mt-3 mb-3 ml-5">
+          <div class="flex mt-3 mb-3 ml-5 justify-center">
             <div v-for="variant in product.variants">
-              <div class="flex-initial mr-2 p-3 rounded-xl" :class="`bg-${variant.color}-300`">
+              <div class="flex-initial mr-2 p-3 rounded-xl border" :class="`bg-${variant.color.toLowerCase()}-300`">
                 <input v-model="variantSelected" :value="variant" type="radio" :id="variant.color"
                        class="text-gray-600 bg-red-700 text-red-500"
                        name="color">
@@ -51,40 +66,43 @@
 
       <hr class="mb-10">
 
-      <div class="mb-5">
-        <h2 class="text-xl">Description</h2>
-        <p class="description">
-          {{ product.details.description }}
-        </p>
-      </div>
+      <div class="grid grid-cols-12">
+        <div class="col-span-3">
+          <h2 class="text-xl mb-3">Description</h2>
+          <p class="description">
+            {{ product.details.description }}
+          </p>
+        </div>
 
-      <h2 class="text-xl">Informations sur le produit</h2>
-      <div class="mb-5">
-        <p class="text-lg">Categories</p>
-        <div class="flex mt-3 mb-3">
-          <div v-for="category in product.categories" class="flex">
-            <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
-              <span>{{ category }}</span>
+        <div class="col-span-3">
+          <p class="text-lg mb-3">Catégories</p>
+          <div class="flex">
+            <div v-for="category in product.categories" class="flex">
+              <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
+                <span>{{ category }}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="mb-5">
-        <p class="text-lg">Matériaux</p>
-        <div class="flex mt-3 mb-3">
-          <div v-for="materiel in product.details.materials" class="flex">
-            <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
-              <span>{{ materiel }}</span>
+        <div class="col-span-3">
+          <p class="text-lg mb-3">Matériaux</p>
+          <div class="flex">
+            <div v-for="materiel in product.details.materials" class="flex">
+              <div class="flex-initial mr-2 bg-gray-200 p-1.5 rounded-xl">
+                <span>{{ materiel }}</span>
+              </div>
             </div>
           </div>
         </div>
+
+        <div class="col-span-3">
+          <p class="text-lg mb-3">Origine</p>
+          <p>{{ product.details.origin }}</p>
+        </div>
       </div>
 
-      <div class="mb-5">
-        <p class="text-lg">Origine</p>
-        <p>{{ product.details.origin }}</p>
-      </div>
+
     </div>
   </div>
 </template>
@@ -130,7 +148,8 @@ export default {
       noImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/768px-No_image_available.svg.png",
       colorAndSizeNotSelected: true,
       variantSelected: "",
-      sizeSelected: 0
+      sizeSelected: 0,
+      imageToShow: "",
     }
   },
   watch: {
@@ -142,13 +161,15 @@ export default {
     }
   },
   methods: {
+    changeImageToShow(image) {
+      console.log(image)
+      this.imageToShow = image
+    },
     getProduct() {
-      console.log("cookie : ", Cookies.get('basketId'))
-
       this.$store.dispatch('getProduct', { id: this.$route.params.id })
         .then(res => {
-          console.log(res.data)
           this.product = res.data
+          this.imageToShow = res.data.images[0]
         })
         .catch(err => console.error(err))
     },

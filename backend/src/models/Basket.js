@@ -3,6 +3,7 @@ const schema = mongoose.Schema
 
 const BasketSchema = new schema({
 	selectedProducts: [{
+		_id: false,
 		productId: { type: String },
 		brand: { type: String },
 		model: { type: String },
