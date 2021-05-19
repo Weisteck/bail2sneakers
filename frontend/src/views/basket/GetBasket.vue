@@ -282,7 +282,11 @@ export default {
         basketId: this.basketId,
         productSelected: this.productToDelete.product
       })
-        .then(res => console.log("le produit à bien été supprimer du panier", res))
+        .then(res => {
+          console.log("le produit à bien été supprimer du panier", res)
+          this.productToDelete = {}
+          this.deleteProductModal = false
+        })
         .catch(err => console.error(err))
 
       this.selectedProducts.splice(this.productToDelete.index, 1)

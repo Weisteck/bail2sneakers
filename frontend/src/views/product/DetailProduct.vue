@@ -162,7 +162,6 @@ export default {
   },
   methods: {
     changeImageToShow(image) {
-      console.log(image)
       this.imageToShow = image
     },
     getProduct() {
