@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const BasketSchema = new schema({
+const CartSchema = new schema({
 	selectedProducts: [{
 		productId: { type: String },
 		brand: { type: String },
@@ -24,4 +24,4 @@ const BasketSchema = new schema({
 	}
 })
 
-module.exports = mongoose.model('basket', BasketSchema)
+module.exports = mongoose.model('cart', CartSchema)

@@ -11,7 +11,7 @@ const getAllProductsRepository = async () => {
 	return Product.find()
 }
 
-const getProductByIdRepository = (id) => {
+const getProductByIdRepository = async (id) => {
 	return Product.findOne({ "_id": new ObjectId(id) })
 }
 
@@ -31,7 +31,7 @@ const deleteProductRepository = (id) => {
 module.exports = {
 	postProductRepository: postProductRepository,
 	getAllProductsRepository: getAllProductsRepository,
-	getProductsByIdRepository: getProductByIdRepository,
+	getProductByIdRepository: getProductByIdRepository,
 	putProductsRepository: putProductRepository,
 	deleteProductsRepository: deleteProductRepository
 }
