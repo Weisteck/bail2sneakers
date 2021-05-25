@@ -101,7 +101,15 @@
       ],
       "userId": 0,
       "order": {
-        "status": "delivering",
+        "history": {
+            "progressedAt": "2021-05-05",
+            "orderedAt": "2021-05-05",
+            "orderedPreparationAt": "2021-05-05",
+            "deliveredAt": "2021-05-05",
+            "endedAt": "2021-05-05",
+            "canceledAt": "2021-05-05",
+            "operatorId": "12zer3458rtkjh5dh642g4dsf89"
+          },
         "priceExclTax": 1599,
         "address": {
           "city": "Lyon",
