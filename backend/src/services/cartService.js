@@ -6,13 +6,23 @@ const {
 	deleteCartRepository
 } = require('../repositories/cartRepository')
 
-const postCartService = async (cart) => {
+const { removeItemFromStockRepository, getProductByIdRepository } = require('../repositories/productRepository')
+
+const postCartService = async (selectedProducts) => {
 	const newCart = {
-		selectedProducts: cart,
+		selectedProducts: selectedProducts,
 		userId: null,
 		order: {
-			status: "In progress",
-			priceExclTax: cart.price,
+			history: {
+				progressedAt: new Date(),
+				orderedAt: null,
+				orderedPreparationAt: null,
+				deliveredAt: null,
+				endedAt: null,
+				canceledAt: null,
+				operatorId: null
+			},
+			priceExclTax: selectedProducts.price,
 			address: {
 				city: null,
 				address: null,
@@ -22,9 +32,30 @@ const postCartService = async (cart) => {
 		}
 	}
 
-	return await postCartRepository(newCart)
-		.then(res => res)
-		.catch(err => console.error(err))
+
+	getProductByIdRepository(selectedProducts.productId)
+		.then(res => {
+			const newVariants = res.variants
+				.filter(variant => {
+					return variant.sizes.map(size => {
+						console.log(size, selectedProducts.size)
+						if (size.size === selectedProducts.size)
+							size.stock--
+					})
+				})
+				// .filter(variant => variant.color === selectedProducts.color)
+				// .map(variant => {
+				// 	return variant.sizes.filter(size => size === selectedProducts.size)
+				// })
+
+			newVariants.forEach(variant => console.log(variant))
+			// removeItemFromStockRepository(product.productId,)
+		})
+
+
+	// return await postCartRepository(newCart)
+	// 	.then(res => res)
+	// 	.catch(err => console.error(err))
 }
 
 const getAllCartsService = async () => {
@@ -44,7 +75,15 @@ const removeProductFromCartService = async (id, productToEdit) => {
 		selectedProducts: [],
 		userId: null,
 		order: {
-			status: "In progress",
+			history: {
+				progressedAt: new Date(),
+				orderedAt: null,
+				orderedPreparationAt: null,
+				deliveredAt: null,
+				endedAt: null,
+				canceledAt: null,
+				operatorId: null
+			},
 			priceExclTax: productToEdit.price,
 			address: {
 				city: null,
@@ -79,7 +118,15 @@ const addProductToCartService = async (id, productToEdit) => {
 		selectedProducts: [],
 		userId: null,
 		order: {
-			status: "In progress",
+			history: {
+				progressedAt: new Date(),
+				orderedAt: null,
+				orderedPreparationAt: null,
+				deliveredAt: null,
+				endedAt: null,
+				canceledAt: null,
+				operatorId: null
+			},
 			priceExclTax: productToEdit.price,
 			address: {
 				city: null,
@@ -104,9 +151,10 @@ const addProductToCartService = async (id, productToEdit) => {
 			}
 		})
 
-	return await putCartRepository(id, editedCart)
-		.then(res => res)
-		.catch(err => console.error(err))
+
+	/*	return await putCartRepository(id, editedCart)
+			.then(res => res)
+			.catch(err => console.error(err))*/
 }
 
 const deleteCartService = async (id) => {

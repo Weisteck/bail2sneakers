@@ -107,8 +107,6 @@
 
 <script>
 import Slider from "../../components/Slider.vue";
-import Cookies from 'js-cookie'
-
 
 export default {
   name: 'DetailProduct',
@@ -191,6 +189,8 @@ export default {
     },
 
     addProductToCart() {
+      localStorage.removeItem('cartId')
+
       const selectedProduct = {
         productId: this.product._id,
         brand: this.product.brand.name,
@@ -201,9 +201,9 @@ export default {
         size: this.sizeSelected
       }
 
-      if (Cookies.get('cartId'))
+      if (localStorage.getItem('cartId'))
         this.$store.dispatch('addProductToCart', {
-          cartId: Cookies.get('cartId'),
+          cartId: localStorage.getItem('cartId'),
           productSelected: selectedProduct
         })
           .then(res => {
@@ -215,8 +215,8 @@ export default {
           .then(res => {
             console.log("le produit à été ajouter au nouveau panier", res)
 
-            // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans un cookie
-            Cookies.set('cartId', res.data._id)
+            // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans le local storage
+            localStorage.setItem('cartId', res.data._id)
           })
           .catch(err => console.error(err))
     }

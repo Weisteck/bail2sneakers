@@ -191,7 +191,6 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
 import DeleteProduct from "../../components/DeleteProduct.vue";
 
 export default {
@@ -238,7 +237,7 @@ export default {
     }
   },
   beforeMount() {
-    this.getCartIdInCookie()
+    this.getCartIdInLocalStorage()
   },
   methods: {
     showDeleteProductModal(product, index) {
@@ -246,8 +245,9 @@ export default {
       this.deleteProductModal = true
     },
 
-    getCartIdInCookie() {
-      this.cartId = Cookies.get('cartId')
+    getCartIdInLocalStorage() {
+      this.cartId = localStorage.getItem('cartId')
+      console.log("localstorage", localStorage.getItem('cartId'))
 
       this.getCartById(this.cartId)
     },
