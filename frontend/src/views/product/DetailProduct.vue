@@ -43,7 +43,7 @@
 
           <br>
 
-          <button @click="addProductToBasket" class="button" :disabled="colorAndSizeNotSelected">
+          <button @click="addProductToCart" class="button" :disabled="colorAndSizeNotSelected">
             AJOUTER AU PANIER
           </button>
         </div>
@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     getProduct() {
-      console.log("cookie : ", Cookies.get('basketId'))
+      console.log("cookie : ", Cookies.get('cartId'))
 
       this.$store.dispatch('getProduct', { id: this.$route.params.id })
         .then(res => {
@@ -172,7 +172,7 @@ export default {
         + " €"
     },
 
-    addProductToBasket() {
+    addProductToCart() {
       const selectedProduct = {
         productId: this.product._id,
         brand: this.product.brand.name,
@@ -183,9 +183,9 @@ export default {
         size: this.sizeSelected
       }
 
-      if (Cookies.get('basketId'))
-        this.$store.dispatch('addProductToBasket', {
-          basketId: Cookies.get('basketId'),
+      if (Cookies.get('cartId'))
+        this.$store.dispatch('addProductToCart', {
+          cartId: Cookies.get('cartId'),
           productSelected: selectedProduct
         })
           .then(res => {
@@ -193,12 +193,12 @@ export default {
           })
           .catch(err => console.error(err))
       else
-        this.$store.dispatch('addProductToNewBasket', selectedProduct)
+        this.$store.dispatch('addProductToNewCart', selectedProduct)
           .then(res => {
             console.log("le produit à été ajouter au nouveau panier", res)
 
             // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans un cookie
-            Cookies.set('basketId', res.data._id)
+            Cookies.set('cartId', res.data._id)
           })
           .catch(err => console.error(err))
     }

@@ -1,6 +1,6 @@
 const comment = require("./router/comment")
 const product = require ("./router/product")
-const basket = require ("./router/basket")
+const cart = require ("./router/cart")
 const user = require("./router/user")
 
 const express = require('express')
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 app.use('/user', user);
 app.use('/comment', comment)
-app.use('/basket', basket)
+app.use('/cart', cart)
 app.use('/product', product)
 
 
