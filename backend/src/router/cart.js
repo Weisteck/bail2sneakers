@@ -2,39 +2,47 @@ const express = require('express')
 const router = express.Router()
 
 const {
-	postBasketService,
-	getAllBasketsService,
-	getBasketByIdService,
-	putBasketService,
-	deleteBasketService
-} = require('../services/basketService');
+	postCartService,
+	getAllCartsService,
+	getCartByIdService,
+	removeProductFromCartService,
+	addProductToCartService,
+	deleteCartService
+} = require('../services/cartService');
 
 router.get('/get-all', (req, res) => {
-	getAllBasketsService()
+	getAllCartsService()
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
 router.get('/', (req, res) => {
-	getBasketByIdService(req.query.id)
+	getCartByIdService(req.query.id)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
 router.post('/', (req, res) => {
-	postBasketService(req.body)
+	postCartService(req.body)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
-router.put('/', (req, res) => {
-	putBasketService(req.query.id, req.body)
+router.put('/remove-product', (req, res) => {
+	removeProductFromCartService(req.query.id, req.body)
+		.then(result => res.send(result))
+		.catch(err => console.error(err))
+})
+
+router.put('/add-product', (req, res) => {
+	console.log("add product")
+	addProductToCartService(req.query.id, req.body)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
 router.delete('/', (req, res) => {
-	deleteBasketService(req.query.id)
+	deleteCartService(req.query.id)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })

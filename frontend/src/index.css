@@ -2,38 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-.form-input {
+.input {
     @apply appearance-none block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4
 }
 
-.form-input-radio {
+.input-radio {
     @apply appearance-none block bg-gray-50 text-gray-600 border border-gray-200 rounded
 }
 
-.form-input-number {
+.input-number {
     @apply bg-gray-50 focus:outline-none border-t border-b text-center w-full font-semibold hover:text-black focus:text-black flex items-center outline-none
 }
 
-.form-input-number-decrement {
+.input-number-decrement {
     @apply bg-gray-50 text-gray-600 border-gray-200 border-t border-b border-l hover:text-gray-700 hover:bg-gray-100 h-full w-20 rounded-l cursor-pointer outline-none
 }
 
-.form-input-number-increment {
+.input-number-increment {
     @apply bg-gray-50 text-gray-600 border-gray-200 border-t border-b border-r hover:text-gray-700 hover:bg-gray-100 h-full w-20 rounded-r cursor-pointer
 }
 
-.form-label {
+.label {
     @apply block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2
 }
 
-.form-title {
+.title {
     @apply text-2xl mb-5
 }
 
-.form-sub-title {
+.sub-title {
     @apply text-xl text-left mb-10
 }
 
-.form-card {
+.description {
+    @apply text-left
+}
+
+.button {
+    @apply px-4 py-2 font-semibold tracking-wider border border-gray-200 rounded bg-gray-50 disabled:bg-gray-100 hover:bg-gray-200 text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300
+}
+
+.card {
     @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2
 }

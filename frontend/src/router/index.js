@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
-import CreateBasket from "../views/basket/CreateBasket.vue"
+import CreateCart from "../views/cart/GetCart.vue"
 import GetAllProduct from "../views/product/GetAllProducts.vue"
+import DetailProduct from "../views/product/DetailProduct.vue";
 
 const routes = [
 	{
@@ -10,11 +11,11 @@ const routes = [
 		name: 'Home',
 		component: Home
 	},
-	// Basket
+	// Cart
 	{
-		path: '/basket/create',
-		name: 'createBasket',
-		component: CreateBasket
+		path: '/cart',
+		name: 'createCart',
+		component: CreateCart
 	},
 
 	// Product
@@ -22,18 +23,17 @@ const routes = [
 		path: '/product/get-all',
 		name: 'getAllProducts',
 		component: GetAllProduct
+	},
+	{
+		path: '/product/:id',
+		name: 'detailProduct',
+		component: DetailProduct
 	}
 ]
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes // raccourci pour `routes: routes`
-})
-
-/*const router = createRouter({
-	//history: createWebHashHistory(process.env.BASE_URL),
 	routes
-})*/
-
+})
 
 export default router

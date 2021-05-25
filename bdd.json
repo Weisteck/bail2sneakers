@@ -85,7 +85,7 @@
       "birthday": "ISODate('1998-12-05')"
     }
   ],
-  "baskets": [
+  "carts": [
     {
       "id": 0,
       "selectedProducts": [
