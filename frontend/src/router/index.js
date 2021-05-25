@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
 import Test from '../views/Test.vue'
-import CreateBasket from "../views/basket/GetBasket.vue"
+import CreateCart from "../views/cart/GetCart.vue"
 import GetAllProduct from "../views/product/GetAllProducts.vue"
 import DetailProduct from "../views/product/DetailProduct.vue";
 
@@ -17,11 +17,11 @@ const routes = [
 		name: 'Home',
 		component: Home
 	},
-	// Basket
+	// Cart
 	{
-		path: '/basket',
-		name: 'createBasket',
-		component: CreateBasket
+		path: '/cart',
+		name: 'createCart',
+		component: CreateCart
 	},
 
 	// Product

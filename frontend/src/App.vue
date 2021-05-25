@@ -2,7 +2,7 @@
   <div id="nav">
     <router-link to="/">Home</router-link>
     |
-    <router-link to="/basket">Basket</router-link>
+    <router-link to="/cart">Cart</router-link>
     |
     <router-link to="/product/get-all">Product</router-link>
     |

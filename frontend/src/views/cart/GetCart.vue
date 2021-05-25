@@ -195,11 +195,11 @@ import Cookies from "js-cookie";
 import DeleteProduct from "../../components/DeleteProduct.vue";
 
 export default {
-  name: 'GetBasket',
+  name: 'GetCart',
   components: { DeleteProduct },
   data() {
     return {
-      basketId: "",
+      cartId: "",
       selectedProducts: [],
       userId: 0,
       order: {
@@ -238,7 +238,7 @@ export default {
     }
   },
   beforeMount() {
-    this.getBasketIdInCookie()
+    this.getCartIdInCookie()
   },
   methods: {
     showDeleteProductModal(product, index) {
@@ -246,14 +246,14 @@ export default {
       this.deleteProductModal = true
     },
 
-    getBasketIdInCookie() {
-      this.basketId = Cookies.get('basketId')
+    getCartIdInCookie() {
+      this.cartId = Cookies.get('cartId')
 
-      this.getBasketById(this.basketId)
+      this.getCartById(this.cartId)
     },
 
-    getBasketById(basketId) {
-      this.$store.dispatch('getBasketById', { id: basketId })
+    getCartById(cartId) {
+      this.$store.dispatch('getCartById', { id: cartId })
         .then(res => {
           this.selectedProducts = res.data.selectedProducts
           this.selectedProducts.forEach(product => {
@@ -278,8 +278,8 @@ export default {
     },
 
     removeProduct() {
-      this.$store.dispatch('removeProductFromBasket', {
-        basketId: this.basketId,
+      this.$store.dispatch('removeProductFromCart', {
+        cartId: this.cartId,
         productSelected: this.productToDelete.product
       })
         .then(res => {
