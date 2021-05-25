@@ -1,6 +1,8 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+import CreateBasket from "../views/basket/CreateBasket.vue"
+import GetAllProduct from "../views/product/GetAllProducts.vue"
 
 const routes = [
 	{
@@ -8,19 +10,30 @@ const routes = [
 		name: 'Home',
 		component: Home
 	},
+	// Basket
 	{
-		path: '/about',
-		name: 'About',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: About
+		path: '/basket/create',
+		name: 'createBasket',
+		component: CreateBasket
 	},
+
+	// Product
+	{
+		path: '/product/get-all',
+		name: 'getAllProducts',
+		component: GetAllProduct
+	}
 ]
 
 const router = createRouter({
-	history: createWebHashHistory(),
-	routes
+	history: createWebHistory(),
+	routes // raccourci pour `routes: routes`
 })
+
+/*const router = createRouter({
+	//history: createWebHashHistory(process.env.BASE_URL),
+	routes
+})*/
+
 
 export default router
