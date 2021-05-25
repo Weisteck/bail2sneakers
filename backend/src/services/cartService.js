@@ -33,29 +33,28 @@ const postCartService = async (selectedProducts) => {
 	}
 
 
-	getProductByIdRepository(selectedProducts.productId)
-		.then(res => {
-			const newVariants = res.variants
-				.filter(variant => {
-					return variant.sizes.map(size => {
-						console.log(size, selectedProducts.size)
-						if (size.size === selectedProducts.size)
-							size.stock--
-					})
-				})
-				// .filter(variant => variant.color === selectedProducts.color)
-				// .map(variant => {
-				// 	return variant.sizes.filter(size => size === selectedProducts.size)
-				// })
+	const product = await getProductByIdRepository(selectedProducts.productId)
 
-			newVariants.forEach(variant => console.log(variant))
-			// removeItemFromStockRepository(product.productId,)
-		})
+	const newVariants = product.variants
+		.map(({ color, sizes }) => ({
+				color: color,
+				sizes: sizes.map(({ size, stock }) => ({
+					size: size,
+					stock: size === selectedProducts.size ? stock - 1 : stock
+				}))
+			})
+		)
+
+	console.log("newVariants:", newVariants)
+
+	removeItemFromStockRepository(selectedProducts.productId, newVariants)
+		.then(res => console.log(res))
+		.catch(err => console.err(err))
 
 
-	// return await postCartRepository(newCart)
-	// 	.then(res => res)
-	// 	.catch(err => console.error(err))
+// return await postCartRepository(newCart)
+// 	.then(res => res)
+// 	.catch(err => console.error(err))
 }
 
 const getAllCartsService = async () => {

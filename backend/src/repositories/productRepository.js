@@ -29,7 +29,7 @@ const removeItemFromStockRepository = (id, newVariant) => {
 		},
 		{
 			$set: {
-				"varitants": newVariant
+				"variants": newVariant
 			}
 		}
 	)

@@ -34,27 +34,43 @@
             {{ fixPriceTtc(product.priceExclTax, 0) }} TTC
           </p>
 
-          <p class="mt-5">Couleur</p>
+          <div class="grid grid-cols-12">
+            <div class="col-span-2">
+              <p>Couleur</p>
+            </div>
+            <div class="col-span-10">
+              <div class="flex mt-3 mb-3 ml-5 justify-center">
+                <div v-for="variant in product.variants">
+                  <div class="flex-initial mr-2 p-3 rounded-xl border" :class="`bg-${variant.color.toLowerCase()}-300`">
+                    <input v-model="variantSelected" :value="variant" type="radio" :id="variant.color"
+                           class="text-gray-600 bg-red-700 text-red-500"
+                           name="color">
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <div class="flex mt-3 mb-3 ml-5 justify-center">
-            <div v-for="variant in product.variants">
-              <div class="flex-initial mr-2 p-3 rounded-xl border" :class="`bg-${variant.color.toLowerCase()}-300`">
-                <input v-model="variantSelected" :value="variant" type="radio" :id="variant.color"
-                       class="text-gray-600 bg-red-700 text-red-500"
-                       name="color">
+            <div class="col-span-2">
+              <p>Taille</p>
+            </div>
+            <div class="col-span-10">
+              <div class="flex mt-3 mb-3 mx-auto w-1/2">
+                <template v-for="variant in product.variants">
+                  <template v-for="size in variant.sizes">
+                    <button class="button mr-3" @click="sizeSelected = size.size" :disabled="size.stock <= 0">
+                      <span>{{ size.size }}</span>
+                    </button>
+                  </template>
+                </template>
               </div>
             </div>
           </div>
-          <div class="flex mt-3 mb-3 mx-auto w-1/2">
-            <label for="size" class="mr-10 mt-3">Taille</label>
-            <select v-model="sizeSelected" name="size"
-                    class="block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4"
-            >
-              <option v-for="sizes in variantSelected.sizes" v-bind:value="sizes.size">
-                {{ sizes.size }}
-              </option>
-            </select>
-          </div>
+
+
+
+
+
+
 
           <br>
 
@@ -160,6 +176,7 @@ export default {
     changeImageToShow(image) {
       this.imageToShow = image
     },
+
     getProduct() {
       this.$store.dispatch('getProduct', { id: this.$route.params.id })
         .then(res => {
