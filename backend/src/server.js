@@ -9,6 +9,7 @@ const cors = require('cors')
 const app = express();
 
 const connectDB = require('../config/connectDB')
+const PORT = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -31,7 +32,7 @@ app.use('/cart', cart)
 app.use('/product', product)
 
 
-app.listen(CONFIG.PORT, () => {
+app.listen(PORT, () => {
 	console.clear()
-	console.log(`Listening on ${ CONFIG.PORT }`)
+	console.log(`Listening on ${ PORT }`)
 })
