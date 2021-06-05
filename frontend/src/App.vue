@@ -10,38 +10,11 @@
   </div>
   <router-view/>
 
-  <div>
-    Moyenne des valeurs : {{ (num1 + num2) / 2 }}
-
-    <Compteur :num="num1" v-on:new-val="updateNumOne" />
-    <Compteur :num="num2" v-on:new-val="updateNumTwo" />
-
-  </div>
+  <h1>TEST</h1>
 </template>
 <script>
-import Compteur from "./components/Compteur.vue";
-
 export default {
   name: "App",
-  components: {
-    Compteur,
-  },
-  data() {
-    return {
-      num1: 0,
-      num2: 0
-    };
-  },
-  methods: {
-    updateNumOne(num) {
-      this.num1 = num;
-    },
-
-    updateNumTwo(num) {
-      this.num2 = num
-    }
-  },
-
 };
 </script>
 <style>

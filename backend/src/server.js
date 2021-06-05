@@ -7,10 +7,25 @@ const CONFIG = require('@yarn-monorepo/config')
 const cors = require('cors')
 const history = require('connect-history-api-fallback')
 const connectDB = require('../config/connectDB')
+const { exec } = require("child_process");
+const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-const path = require("path");
+
+/**
+ * BUILD VUE.JS
+ */
+exec("ls -la", (error, stdout, stderr) => {
+	if (error) {
+		console.log(`error: ${error.message}`);
+		return;
+	}
+	if (stderr) {
+		console.log(`stderr: ${stderr}`);
+		return;
+	}
+	console.log(`stdout: ${stdout}`);
+});
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -32,7 +47,7 @@ app.use('/cart', cart)
 app.use('/product', product)
 
 
-app.listen(PORT, () => {
+app.listen(CONFIG.PORT, () => {
 	console.clear()
 	console.log(`Listening on ${ PORT }`)
 })
