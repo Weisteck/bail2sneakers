@@ -22,7 +22,6 @@ app.use(cors({
 	origin: 'http://localhost:3001'
 }))
 
-app.use(staticFileMiddleware)
 app.use(history())
 app.use('/', express.static(path.join(__dirname, '../frontend/dist')));
 
