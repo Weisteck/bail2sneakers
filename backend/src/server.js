@@ -6,10 +6,13 @@ const user = require("./router/user")
 const express = require('express')
 const CONFIG = require('@yarn-monorepo/config')
 const cors = require('cors')
-const app = express();
+const history = require('connect-history-api-fallback')
 
 const connectDB = require('../config/connectDB')
+
+const app = express();
 const PORT = process.env.PORT || 5000;
+const distPath =
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -17,6 +20,8 @@ app.use(express.static('./images'))
 app.use(cors({
 	origin: 'http://localhost:3001'
 }))
+app.use(history())
+app.use(express.static(distPath))
 
 
 //connectDB (config)

@@ -7,6 +7,7 @@
   "dependencies": {
     "@yarn-monorepo/config": "1.0.0",
     "config": "^3.3.6",
+    "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.12.4",
