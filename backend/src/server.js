@@ -10,9 +10,14 @@ const history = require('connect-history-api-fallback')
 
 const connectDB = require('../config/connectDB')
 
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-const distPath = "../../frontend/dist/"
+const distPath = require("../../frontend/dist/")
+const path = require("path");
+
+const staticFileMiddleware = express.static(path.join(__dirname))
+
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -20,8 +25,9 @@ app.use(express.static('./images'))
 app.use(cors({
 	origin: 'http://localhost:3001'
 }))
+
+app.use(staticFileMiddleware)
 app.use(history())
-app.use(express.static(distPath))
 
 
 //connectDB (config)
