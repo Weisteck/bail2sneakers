@@ -12,23 +12,6 @@ const path = require("path");
 
 const app = express();
 
-/**
- * BUILD VUE.JS
- */
-exec("ls -la", (error, stdout, stderr) => {
-	if (error) {
-		console.log(`error: ${error.message}`);
-		return;
-	}
-	if (stderr) {
-		console.log(`stderr: ${stderr}`);
-		return;
-	}
-	console.log(`stdout: ${stdout}`);
-});
-
-
-
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./images'))
@@ -49,7 +32,7 @@ app.use('/cart', cart)
 app.use('/product', product)
 
 
-app.listen(CONFIG.PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
 	console.clear()
-	console.log(`Listening on ${ PORT }`)
+	console.log(`Listening on ${ process.env.PORT || 5000 }`)
 })
