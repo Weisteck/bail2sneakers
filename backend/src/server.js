@@ -23,7 +23,7 @@ app.use(cors({
 }))
 
 app.use(history())
-app.use('/', express.static(path.join(__dirname, '../frontend/dist')));
+app.use('/', express.static(path.join(__dirname, '../../frontend/dist')));
 
 
 
