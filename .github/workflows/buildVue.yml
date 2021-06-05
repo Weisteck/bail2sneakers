@@ -30,4 +30,4 @@ jobs:
       - run: yarn
 
       # Runs a single command using the runners shell
-      - run: vite build
+      - run: yarn run vite build
