@@ -15,9 +15,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const path = require("path");
 
-const staticFileMiddleware = express.static(path.join(__dirname))
-
-
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./images'))
@@ -27,6 +24,8 @@ app.use(cors({
 
 app.use(staticFileMiddleware)
 app.use(history())
+app.use('/', express.static(path.join(__dirname, '../frontend/dist')));
+
 
 
 //connectDB (config)
@@ -44,5 +43,6 @@ app.use('/product', product)
 
 app.listen(PORT, () => {
 	console.clear()
+	console.log('dirname', __dirname)
 	console.log(`Listening on ${ PORT }`)
 })

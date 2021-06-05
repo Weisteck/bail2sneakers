@@ -1,5 +1,4 @@
 const express = require('express')
-const path = require("path");
 const router = express.Router()
 
 const {
@@ -19,7 +18,7 @@ router.get('/get-all', (req, res) => {
 
 router.get('/', (req, res) => {
 	getCartByIdService(req.query.id)
-		.then(result => res.render(path.join(__dirname + '/index.html'), result))
+		.then(result => res.send(result))
 		.catch(err => console.error(err))
 })
 
