@@ -9,6 +9,7 @@ const userSchema = new schema(
       },
       lastName: { type: String },
       firstName: { type: String },
+      password: { type: String, bcrypt: true },
       role: { type: String },
       mail: { type: String },
       phoneNumber: { type: String },
@@ -23,4 +24,5 @@ const userSchema = new schema(
       birthday: { type: Date }
 })
 
+userSchema.plugin(require('mongoose-bcrypt'))
 module.exports = mongoose.model('users', userSchema)
