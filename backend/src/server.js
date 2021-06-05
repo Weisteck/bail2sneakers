@@ -13,7 +13,6 @@ const connectDB = require('../config/connectDB')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const distPath = require("../../frontend/dist/")
 const path = require("path");
 
 const staticFileMiddleware = express.static(path.join(__dirname))
