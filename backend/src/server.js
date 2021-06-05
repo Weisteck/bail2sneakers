@@ -27,6 +27,7 @@ exec("ls -la", (error, stdout, stderr) => {
 	console.log(`stdout: ${stdout}`);
 });
 
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./images'))
