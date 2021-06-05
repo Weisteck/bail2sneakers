@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+FORM
+ */
 .input {
     @apply appearance-none block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4
 }
@@ -25,7 +28,13 @@
 .label {
     @apply block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2
 }
+/**
+---------------------------------------------------------------------------------------------------
+ */
 
+/**
+TEXT
+ */
 .title {
     @apply text-2xl mb-5
 }
@@ -37,11 +46,30 @@
 .description {
     @apply text-left
 }
+/**
+---------------------------------------------------------------------------------------------------
+ */
 
+/**
+BUTTON
+ */
+
+.btn-primary {
+    @apply bg-blue-500 hover:bg-blue-400 transition font-bold uppercase text-white h-10 w-auto px-10 rounded
+}
 .button {
     @apply px-4 py-2 font-semibold tracking-wider border border-gray-200 rounded bg-gray-50 disabled:bg-gray-100 hover:bg-gray-200 text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300
 }
+/**
+---------------------------------------------------------------------------------------------------
+ */
 
+/**
+DISPLAY
+ */
 .card {
     @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2
 }
+/**
+---------------------------------------------------------------------------------------------------
+ */
