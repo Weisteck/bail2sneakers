@@ -9,8 +9,41 @@
     <router-link to="/product/609fc334ca65e71ada507d10">Product details</router-link>
   </div>
   <router-view/>
-</template>
 
+  <div>
+    Moyenne des valeurs : {{ (num1 + num2) / 2 }}
+
+    <Compteur :num="num1" v-on:new-val="updateNumOne" />
+    <Compteur :num="num2" v-on:new-val="updateNumTwo" />
+
+  </div>
+</template>
+<script>
+import Compteur from "./components/Compteur.vue";
+
+export default {
+  name: "App",
+  components: {
+    Compteur,
+  },
+  data() {
+    return {
+      num1: 0,
+      num2: 0
+    };
+  },
+  methods: {
+    updateNumOne(num) {
+      this.num1 = num;
+    },
+
+    updateNumTwo(num) {
+      this.num2 = num
+    }
+  },
+
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
