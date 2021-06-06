@@ -44,10 +44,10 @@ app.use(
   })
 )
 
-app.use('/user', user);
-app.use('/comment', comment)
-app.use('/cart', cart)
-app.use('/product', product)
+app.use('/api/user', user);
+app.use('/api/comment', comment)
+app.use('/api/cart', cart)
+app.use('/api/product', product)
 
 
 app.listen(process.env.PORT || 5000, () => {
