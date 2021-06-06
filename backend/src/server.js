@@ -11,7 +11,7 @@ const { exec } = require("child_process");
 const path = require("path");
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const morgan = require("morgan")
-const proxy = require("proxy")
+const proxy = require("express-http-proxy")
 
 const app = express();
 
