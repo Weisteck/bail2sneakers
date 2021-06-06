@@ -13,6 +13,28 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 
 const app = express();
 
+// proxy middleware options
+const options = {
+  target: 'https://bail2sneakers.herokuapp.com/', // target host
+  changeOrigin: true, // needed for virtual hosted sites
+  ws: true, // proxy websockets
+//   pathRewrite: {
+//     '^/api/old-path': '/api/new-path', // rewrite path
+//     '^/api/remove/path': '/path', // remove base path
+//   },
+  router: {
+    // when request.headers.host == 'dev.localhost:3000',
+    // override target 'http://www.example.org' to 'http://localhost:8000'
+    'dev.localhost:3000': 'http://localhost:5000',
+  },
+};
+
+// create the proxy (without context)
+const exampleProxy = createProxyMiddleware(options);
+
+
+connectDB()
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./images'))
@@ -20,24 +42,12 @@ app.use(cors({
 	origin: 'http://localhost:3001'
 }))
 
-app.use(
-	'/api',
-	createProxyMiddleware({
-		target: CONFIG.API_ROOT_URL || "127.0.0.1:5000",
-		changeOrigin: true,
-		// ws: true,
-		// pathRewrite: {
-		// 	'^/api': '',
-		// },
-	})
-)
+// mount `exampleProxy` in web server
+app.use('/api', exampleProxy);
+
 
 app.use(history())
 app.use('/', express.static(path.join(__dirname, CONFIG.distPath)));
-
-connectDB()
-
-app.get('/')
 
 app.use('/user', user);
 app.use('/comment', comment)
