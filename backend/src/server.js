@@ -9,6 +9,7 @@ const history = require('connect-history-api-fallback')
 const connectDB = require('../config/connectDB')
 const { exec } = require("child_process");
 const path = require("path");
+const proxy = require('http-proxy-middleware')
 
 const app = express();
 
@@ -18,6 +19,18 @@ app.use(express.static('./images'))
 app.use(cors({
 	origin: 'http://localhost:3001'
 }))
+
+app.use(
+	'/api',
+	proxy({
+		target: process.env.API_ROOT_URL,
+		changeOrigin: true,
+		ws: true,
+		pathRewrite: {
+			'^/api': '',
+		},
+	})
+)
 
 app.use(history())
 app.use('/', express.static(path.join(__dirname, CONFIG.distPath)));
