@@ -11,6 +11,7 @@ const { exec } = require("child_process");
 const path = require("path");
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const morgan = require("morgan")
+const proxy = require("proxy")
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.use(cors({
 app.use(history())
 app.use('/', express.static(path.join(__dirname, CONFIG.distPath)));
 
-app.use(
+/*app.use(
   '/api',
   createProxyMiddleware({
     target: process.env.API_ROOT_URL,
@@ -42,9 +43,11 @@ app.use(
       '^/api': '',
     },
   })
-)
+)*/
 
-app.use('/api/user', user);
+app.use('/api', proxy(API_SERVICE_URL))
+
+app.use('/user', user);
 app.use('/api/comment', comment)
 app.use('/api/cart', cart)
 app.use('/api/product', product)
