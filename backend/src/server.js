@@ -32,32 +32,23 @@ app.use(cors({
 app.use(history())
 app.use('/', express.static(path.join(__dirname, CONFIG.distPath)));
 
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: process.env.API_ROOT_URL,
+    changeOrigin: true,
+    ws: true,
+    pathRewrite: {
+      '^/api': '',
+    },
+  })
+)
+
 app.use('/user', user);
 app.use('/comment', comment)
 app.use('/cart', cart)
 app.use('/product', product)
 
-// Info GET endpoint
-app.get('/info', (req, res, next) => {
-	res.send('This is a proxy service which proxies to Billing and Account APIs.');
-});
-
-/*app.use('', (req, res, next) => {
-	if (req.headers.authorization) {
-		next();
-	} else {
-		res.sendStatus(403);
-	}
-});*/
-
-// Proxy endpoints
-app.use('/json_placeholder', createProxyMiddleware({
-	target: API_SERVICE_URL,
-	changeOrigin: true,
-	pathRewrite: {
-		[`^/json_placeholder`]: '',
-	},
-}));
 
 app.listen(process.env.PORT || 5000, () => {
 	console.clear()
