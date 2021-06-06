@@ -14,25 +14,6 @@ const morgan = require("morgan")
 
 const app = express();
 
-// proxy middleware options
-const options = {
-  target: 'https://bail2sneakers.herokuapp.com/', // target host
-  changeOrigin: true, // needed for virtual hosted sites
-  ws: true, // proxy websockets
-//   pathRewrite: {
-//     '^/api/old-path': '/api/new-path', // rewrite path
-//     '^/api/remove/path': '/path', // remove base path
-//   },
-  router: {
-    // when request.headers.host == 'dev.localhost:3000',
-    // override target 'http://www.example.org' to 'http://localhost:8000'
-    'dev.localhost:3000': 'http://localhost:5000',
-  },
-};
-
-// create the proxy (without context)
-const exampleProxy = createProxyMiddleware(options);
-
 const HOST = "localhost";
 const API_SERVICE_URL = "https://bail2sneakers.herokuapp.com/";
 
@@ -46,9 +27,6 @@ app.use(express.static('./images'))
 app.use(cors({
 	origin: 'http://localhost:3001'
 }))
-
-// mount `exampleProxy` in web server
-app.use('/api', exampleProxy);
 
 
 app.use(history())
@@ -81,7 +59,7 @@ app.use('/json_placeholder', createProxyMiddleware({
 	},
 }));
 
-app.listen(process.env.PORT || 5000, HOST, () => {
+app.listen(process.env.PORT || 5000, () => {
 	console.clear()
-	console.log(`Listening on ${HOST}:${ process.env.PORT || 5000 }`)
+	console.log(`Listening on port ${ process.env.PORT || 5000 }`)
 })
