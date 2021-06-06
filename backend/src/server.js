@@ -9,7 +9,7 @@ const history = require('connect-history-api-fallback')
 const connectDB = require('../config/connectDB')
 const { exec } = require("child_process");
 const path = require("path");
-const proxy = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 
 const app = express();
 
@@ -22,13 +22,13 @@ app.use(cors({
 
 app.use(
 	'/api',
-	proxy({
-		target: process.env.API_ROOT_URL,
+	createProxyMiddleware({
+		target: CONFIG.API_ROOT_URL || "127.0.0.1:5000",
 		changeOrigin: true,
-		ws: true,
-		pathRewrite: {
-			'^/api': '',
-		},
+		// ws: true,
+		// pathRewrite: {
+		// 	'^/api': '',
+		// },
 	})
 )
 
