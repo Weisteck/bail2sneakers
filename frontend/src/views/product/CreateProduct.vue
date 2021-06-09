@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <form class="card">
+    <form class="card" @submit.prevent="createProduct">
       <h1 class="title mb-5">Create product</h1>
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
@@ -117,18 +117,42 @@
       </div>
 
       <h1 class="sub-title mb-5 mt-10">Brand</h1>
+
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <p>Sélectionner une marque existante</p>
+          <select v-model="brandSelected"
+                  class="block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4"
+                  :disabled="addBrand"
+          >
+            <option v-for="brand in preselectedBrands" v-bind:value="brand">
+              {{ brand.name }}
+            </option>
+          </select>
+        </div>
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <p>Ou ajouter une nouvelle marque</p>
+          <button type="button"
+                  class="btn-primary"
+                  v-if="!addBrand" @click="showBrandForm">AJOUTER NOUVELLE MARQUE</button>
+          <button type="button" class="btn-primary" v-else @click="addBrand = false">ANNULER</button>
+        </div>
+      </div>
+
+      <div v-if="addBrand" class="-mx-3 md:flex mb-2">
+        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label for="brandName" class="label">Name</label>
-          <input type="text" name="brandName" id="brandName" class="input">
+          <input v-model="product.brand.name" type="text" name="brandName"
+                 id="brandName" class="input">
         </div>
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label for="brandDescription" class="label">Description</label>
-          <textarea name="brandDescription" id="brandDescription" class="input"/>
+          <textarea v-model="product.brand.brandDescription" name="brandDescription" id="brandDescription"
+                    class="input"/>
         </div>
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label for="brandLogo" class="label">Logo</label>
-          <input type="file" name="brandLogo" id="brandLogo" class="input">
+          <input v-model="product.brand.logo" name="brandLogo" id="brandLogo" class="input">
         </div>
       </div>
 
@@ -163,9 +187,20 @@ export default {
       open: false,
       category: '',
       categories: [],
+      brandSelected: null,
+      addBrand: false,
+    }
+  },
+  computed: {
+    preselectedBrands() {
+      return this.$store.state.productBrand
     }
   },
   methods: {
+    /**
+     * Categories
+     */
+
     addCategory(category) {
       category = category.trim()
       if (category !== "" && !this.hasCategory(category)) this.categories.push(category)
@@ -191,6 +226,24 @@ export default {
     },
     toggleSearch() {
       this.open = this.category !== ''
+    },
+
+    /**
+     * -----------------------------------------------------
+     */
+
+    createProduct() {
+      console.log("create product")
+    },
+
+    showBrandForm() {
+      console.log("t")
+      this.addBrand = true
+      this.brandSelected = {
+        name: "",
+        brandDescription: "",
+        logo: ""
+      }
     }
   }
 }

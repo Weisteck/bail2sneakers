@@ -55,7 +55,7 @@ BUTTON
  */
 
 .btn-primary {
-    @apply bg-blue-500 hover:bg-blue-400 transition font-bold uppercase text-white h-10 w-auto px-10 rounded
+    @apply bg-blue-500 hover:bg-blue-400 transition font-bold uppercase text-white h-11 w-auto px-10 rounded
 }
 .button {
     @apply px-4 py-2 font-semibold tracking-wider border border-gray-200 rounded bg-gray-50 disabled:bg-gray-100 hover:bg-gray-200 text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300
