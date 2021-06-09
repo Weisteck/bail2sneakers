@@ -33,10 +33,19 @@ export default createStore({
 				.then(res => res)
 				.catch(err => console.error(err))
 		},
+
 		getProduct(context, payload) {
 			return api.get(`/product?id=${ payload.id }`)
 				.then(res => res)
 				.catch(err => console.error(err))
+		},
+
+		async createProduct(context, payload) {
+			try {
+				return await api.post('/product', payload)
+			} catch (e) {
+				console.error(e)
+			}
 		},
 		// #endregion
 
