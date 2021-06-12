@@ -7,7 +7,7 @@ export default createStore({
 	actions: {
 		// #region Product
 		getAllProducts() {
-			return api.get('/product/get-all')
+			return api.get('/api/product/get-all')
 				.then(res => res)
 				.catch(err => console.error(err))
 		},
