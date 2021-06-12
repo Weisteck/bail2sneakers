@@ -5,6 +5,7 @@ import CreateCart from "../views/cart/GetCart.vue"
 import GetAllProduct from "../views/product/GetAllProducts.vue"
 import DetailProduct from "../views/product/DetailProduct.vue";
 import CreateProduct from "../views/product/CreateProduct.vue";
+import EditProduct from "../views/product/EditProduct.vue";
 
 const routes = [
 	{
@@ -34,6 +35,11 @@ const routes = [
 		path: '/product/create',
 		name: 'createProduct',
 		component: CreateProduct
+	},
+	{
+		path:'/product/edit/:id',
+		name: 'editProduct',
+		component: EditProduct
 	}
 ]
 

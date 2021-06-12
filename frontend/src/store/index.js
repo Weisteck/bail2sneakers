@@ -30,13 +30,19 @@ export default createStore({
 		// #region Product
 		getAllProducts() {
 			return api.get('/product/get-all')
-				.then(res => res)
+				.then(res => {
+					console.log("all product : ", res)
+					return res
+				})
 				.catch(err => console.error(err))
 		},
 
 		getProduct(context, payload) {
 			return api.get(`/product?id=${ payload.id }`)
-				.then(res => res)
+				.then(res => {
+					console.log("one product : ", res)
+					return res
+				})
 				.catch(err => console.error(err))
 		},
 
@@ -47,6 +53,15 @@ export default createStore({
 				console.error(e)
 			}
 		},
+
+		async editProduct(context, payload) {
+			try {
+				return await api.put(`/product?id=${ payload.id }`, payload)
+			} catch (e) {
+				console.error(e)
+			}
+		},
+
 		// #endregion
 
 		// #region Cart
@@ -73,6 +88,7 @@ export default createStore({
 				.then(res => res)
 				.catch(err => console.error(err))
 		},
+
 		// #endregion
 	},
 	modules: {}

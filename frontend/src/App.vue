@@ -9,6 +9,8 @@
     <router-link to="/product/60acf6a894832a6396b9e9ab">Product details</router-link>
     |
     <router-link to="/product/create">Create product</router-link>
+    |
+    <router-link to="/product/edit/60acf6a894832a6396b9e9ab">Edit product</router-link>
   </div>
   <router-view/>
 </template>

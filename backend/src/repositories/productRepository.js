@@ -32,6 +32,6 @@ module.exports = {
 	postProductRepository: postProductRepository,
 	getAllProductsRepository: getAllProductsRepository,
 	getProductByIdRepository: getProductByIdRepository,
-	putProductsRepository: putProductRepository,
-	deleteProductsRepository: deleteProductRepository
+	putProductRepository: putProductRepository,
+	deleteProductRepository: deleteProductRepository
 }
