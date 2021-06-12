@@ -28,22 +28,20 @@ export default createStore({
 	mutations: {},
 	actions: {
 		// #region Product
-		getAllProducts() {
-			return api.get('/product/get-all')
-				.then(res => {
-					console.log("all product : ", res)
-					return res
-				})
-				.catch(err => console.error(err))
+		async getAllProducts() {
+			try {
+				return await api.get('/product/get-all')
+			} catch (e) {
+				console.error(e)
+			}
 		},
 
-		getProduct(context, payload) {
-			return api.get(`/product?id=${ payload.id }`)
-				.then(res => {
-					console.log("one product : ", res)
-					return res
-				})
-				.catch(err => console.error(err))
+		async getProduct(context, payload) {
+			try {
+				return await api.get(`/product?id=${ payload.id }`)
+			} catch (e) {
+				console.error(e)
+			}
 		},
 
 		async createProduct(context, payload) {
@@ -57,6 +55,14 @@ export default createStore({
 		async editProduct(context, payload) {
 			try {
 				return await api.put(`/product?id=${ payload.id }`, payload)
+			} catch (e) {
+				console.error(e)
+			}
+		},
+
+		async deleteProduct(context, payload) {
+			try {
+				return await api.delete(`/product?id=${ payload.id }`, payload)
 			} catch (e) {
 				console.error(e)
 			}
