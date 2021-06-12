@@ -215,7 +215,7 @@
 
 <script>
 import Cookies from "js-cookie";
-import DeleteProduct from "../../components/DeleteProduct.vue";
+import DeleteProduct from "../../../components/DeleteProduct.vue";
 
 export default {
   name: 'GetCart',

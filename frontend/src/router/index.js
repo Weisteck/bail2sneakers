@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
-import CreateCart from "../views/cart/GetCart.vue"
-import GetAllProduct from "../views/product/GetAllProducts.vue"
-import DetailProduct from "../views/product/DetailProduct.vue";
-import CreateProduct from "../views/product/CreateProduct.vue";
-import EditProduct from "../views/product/EditProduct.vue";
+import CreateCart from "../views/client/cart/GetCart.vue"
+import GetAllProducts from "../views/client/product/GetAllProducts.vue"
+import GetAllProductsBackOffice from "../views/backoffice/product/GetAllProducts.vue"
+import DetailProduct from "../views/client/product/DetailProduct.vue";
+import CreateProduct from "../views/backoffice/product/CreateProduct.vue";
+import EditProduct from "../views/backoffice/product/EditProduct.vue";
 
 const routes = [
 	{
@@ -24,7 +25,7 @@ const routes = [
 	{
 		path: '/product/get-all',
 		name: 'getAllProducts',
-		component: GetAllProduct
+		component: GetAllProducts
 	},
 	{
 		path: '/product/:id',
@@ -37,9 +38,14 @@ const routes = [
 		component: CreateProduct
 	},
 	{
-		path:'/product/edit/:id',
+		path: '/product/edit/:id',
 		name: 'editProduct',
 		component: EditProduct
+	},
+	{
+		path: '/back-office/product/get-all',
+		name: 'GetAllProductsBackOffice',
+		component: GetAllProductsBackOffice
 	}
 ]
 

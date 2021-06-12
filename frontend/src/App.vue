@@ -11,6 +11,8 @@
     <router-link to="/product/create">Create product</router-link>
     |
     <router-link to="/product/edit/60acf6a894832a6396b9e9ab">Edit product</router-link>
+    |
+    <router-link to="/back-office/product/get-all">Get all products back office</router-link>
   </div>
   <router-view/>
 </template>
