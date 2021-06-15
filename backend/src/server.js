@@ -9,13 +9,9 @@ const history = require('connect-history-api-fallback')
 const connectDB = require('../config/connectDB')
 const { exec } = require("child_process");
 const path = require("path");
-const { createProxyMiddleware } = require('http-proxy-middleware')
 const morgan = require("morgan")
 
 const app = express();
-
-const HOST = "localhost";
-const API_SERVICE_URL = "https://bail2sneakers.herokuapp.com/";
 
 
 connectDB()
@@ -24,9 +20,6 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./images'))
-app.use(cors({
-	origin: 'http://localhost:3001'
-}))
 
 
 app.use(history())
