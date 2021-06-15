@@ -9,8 +9,14 @@
     <router-link to="/product/609fc334ca65e71ada507d10">Product details</router-link>
   </div>
   <router-view/>
-</template>
 
+  <h1>TEST</h1>
+</template>
+<script>
+export default {
+  name: "App",
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

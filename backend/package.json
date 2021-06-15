@@ -7,10 +7,15 @@
   "dependencies": {
     "@yarn-monorepo/config": "1.0.0",
     "config": "^3.3.6",
+    "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker-factory-mongoose": "^0.0.1",
+    "express-http-proxy": "^1.6.2",
+    "http-proxy-middleware": "^2.0.0",
     "mongoose": "^5.12.4",
+    "morgan": "^1.10.0",
+    "node-schedule": "^2.0.0",
     "nodemon": "^2.0.7",
     "process": "^0.11.10"
   },

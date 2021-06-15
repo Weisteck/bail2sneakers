@@ -32,7 +32,7 @@ export default {
       },
 // slide number number of initial slide
       currentSlide: {
-        default: 0,
+        default: 1,
         type: Number,
       },
 // control infinite scrolling mode

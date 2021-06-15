@@ -1,3 +1,5 @@
 module.exports = {
-	PORT: '3000'
+	PORT: process.env.PORT,
+	API_ROOT_URL: "https://bail2sneakers.herokuapp.com",
+	distPath: '../../frontend/dist'
 };
