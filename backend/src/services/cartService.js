@@ -14,7 +14,7 @@ const postCartService = async (selectedProducts) => {
 		userId: null,
 		order: {
 			history: {
-				progressedAt: new Date(),
+				progressedAt: new Date('2021-06-14T03:24:00'),
 				orderedAt: null,
 				orderedPreparationAt: null,
 				deliveredAt: null,
@@ -31,7 +31,6 @@ const postCartService = async (selectedProducts) => {
 			}
 		}
 	}
-
 
 	const product = await getProductByIdRepository(selectedProducts.productId)
 

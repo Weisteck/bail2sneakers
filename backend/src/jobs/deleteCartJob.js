@@ -14,8 +14,12 @@ const { deleteCartService } = require("../services/cartService");
 └───────────────────────── second (0 - 59, OPTIONAL)
  */
 
-
-module.exports = schedule.scheduleJob('0 * * * * *', async (jobDate) => {
+/**
+ *
+ * @type {Job}
+ * Every day at 00:00, if products was not ordered and cart was created 24 hours ago, cart is going to be deleted.
+ */
+module.exports = schedule.scheduleJob('* * 0 * * *', async (jobDate) => {
 	try {
 		const carts = await getAllCartsService()
 		const cartsNotOrdered = carts.map(cart => {
