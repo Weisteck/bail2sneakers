@@ -4,10 +4,8 @@ const cart = require ("./router/cart")
 const user = require("./router/user")
 const express = require('express')
 const CONFIG = require('@yarn-monorepo/config')
-const cors = require('cors')
 const history = require('connect-history-api-fallback')
 const connectDB = require('../config/connectDB')
-const { exec } = require("child_process");
 const path = require("path");
 const morgan = require("morgan")
 
@@ -20,9 +18,6 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./images'))
-app.use(cors({
-	origin: 'http://localhost:3001'
-}))
 
 
 app.use(history())
