@@ -23,6 +23,18 @@ const putProductRepository = (id, products) => {
 	)
 }
 
+const removeItemFromStockRepository = (id, newVariant) => {
+	return Product.updateOne({
+			"_id": new ObjectId(id)
+		},
+		{
+			$set: {
+				"variants": newVariant
+			}
+		}
+	)
+}
+
 const deleteProductRepository = (id) => {
 	return Product.deleteOne({ "_id": new ObjectId(id) })
 }
@@ -32,6 +44,7 @@ module.exports = {
 	postProductRepository: postProductRepository,
 	getAllProductsRepository: getAllProductsRepository,
 	getProductByIdRepository: getProductByIdRepository,
+	removeItemFromStockRepository: removeItemFromStockRepository
 	putProductRepository: putProductRepository,
 	deleteProductRepository: deleteProductRepository
 }

@@ -124,10 +124,10 @@
       <h1 class="sub-title">Produits sélectionnées</h1>
 
       <div class="grid grid-cols-12 grid-flow-col mb-1 font-bold">
-        <div class="col-span-4">
+        <div class="col-span-3">
 
         </div>
-        <div class="col-span-2">
+        <div class="col-span-3">
           Produit
         </div>
         <div class="col-span-2">
@@ -136,7 +136,7 @@
         <div class="col-span-2">
           Prix TTC
         </div>
-        <div class="col-span-1">
+        <div class="col-span-2">
           Actions
         </div>
       </div>
@@ -145,44 +145,21 @@
 
       <div v-for="(product, index) in selectedProducts" :key="product.productId">
         <div class="grid grid-cols-12 grid-flow-col">
-          <div class="col-span-4">
+          <div class="col-span-3">
             <img :src="product.image" alt="image" class="w-40"/>
           </div>
-          <div class="col-span-2 text-left self-center ">
+          <div class="col-span-3 text-left self-center ">
             <span class="font-bold">{{ product.model }} - {{ product.brand }}</span>
             <br>
             <span>{{ product.color }} -  {{ product.size }}</span>
           </div>
-          <!--          <div class="col-span-2 self-center">
-                      <div class="custom-number-input">
-                        <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-                          <button @click="decrementQuantity(product)"
-                                  class="input-number-decrement"
-                                  :disabled="product.quantity <= 1"
-                          >
-                            <span class="m-auto text-2xl font-thin">−</span>
-                          </button>
-                          <input type="number"
-                                 class="input-number"
-                                 name="custom-input-number"
-                                 v-model="selectedProducts[selectedProducts.indexOf(product)].quantity"
-                                 @change="editProduct(product)"
-                                 :disabled="product.quantity <= 1"
-                          >
-                          <button @click="incrementQuantity(product)"
-                                  class="input-number-increment">
-                            <span class="m-auto text-2xl font-thin">+</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>-->
           <div class="col-span-2 self-center">
             {{ fixPriceHt(product.priceHt, 0) }}
           </div>
           <div class="col-span-2 self-center">
             {{ fixPriceTtc(product.priceHt, 0) }}
           </div>
-          <div class="col-span-1 self-center">
+          <div class="col-span-2 self-center">
             <button @click="showDeleteProductModal(product, index)">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-red-500" fill="none" viewBox="0 0 24 24"
                    stroke="currentColor">
@@ -195,7 +172,7 @@
         <hr>
       </div>
 
-      <div class="text-right">
+      <div class="text-right mt-10">
         <p>
           Frais de livraison:
           {{ fixPriceDelivery(priceDelivery) }}
@@ -214,8 +191,7 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import DeleteProduct from "../../../components/DeleteProduct.vue";
+import DeleteProduct from "../../components/DeleteProduct.vue";
 
 export default {
   name: 'GetCart',
@@ -261,7 +237,7 @@ export default {
     }
   },
   beforeMount() {
-    this.getCartIdInCookie()
+    this.getCartIdInLocalStorage()
   },
   methods: {
     showDeleteProductModal(product, index) {
@@ -269,8 +245,9 @@ export default {
       this.deleteProductModal = true
     },
 
-    getCartIdInCookie() {
-      this.cartId = Cookies.get('cartId')
+    getCartIdInLocalStorage() {
+      this.cartId = localStorage.getItem('cartId')
+      console.log("localstorage", localStorage.getItem('cartId'))
 
       this.getCartById(this.cartId)
     },
@@ -305,7 +282,11 @@ export default {
         cartId: this.cartId,
         productSelected: this.productToDelete.product
       })
-        .then(res => console.log("le produit à bien été supprimer du panier", res))
+        .then(res => {
+          console.log("le produit à bien été supprimer du panier", res)
+          this.productToDelete = {}
+          this.deleteProductModal = false
+        })
         .catch(err => console.error(err))
 
       this.selectedProducts.splice(this.productToDelete.index, 1)
