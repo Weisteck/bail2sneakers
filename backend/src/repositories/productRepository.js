@@ -39,11 +39,12 @@ const deleteProductRepository = (id) => {
 	return Product.deleteOne({ "_id": new ObjectId(id) })
 }
 
+
 module.exports = {
 	postProductRepository: postProductRepository,
 	getAllProductsRepository: getAllProductsRepository,
 	getProductByIdRepository: getProductByIdRepository,
-	putProductsRepository: putProductRepository,
-	deleteProductsRepository: deleteProductRepository,
-	removeItemFromStockRepository: removeItemFromStockRepository
+	removeItemFromStockRepository: removeItemFromStockRepository,
+	putProductRepository: putProductRepository,
+	deleteProductRepository: deleteProductRepository
 }
