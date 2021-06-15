@@ -52,9 +52,9 @@ const postCartService = async (selectedProducts) => {
 		.catch(err => console.err(err))
 
 
-// return await postCartRepository(newCart)
-// 	.then(res => res)
-// 	.catch(err => console.error(err))
+ return await postCartRepository(newCart)
+ 	.then(res => res)
+ 	.catch(err => console.error(err))
 }
 
 const getAllCartsService = async () => {

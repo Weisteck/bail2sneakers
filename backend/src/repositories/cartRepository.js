@@ -1,13 +1,13 @@
 const Cart = require('../models/Cart')
 const ObjectId = require('mongoose').Types.ObjectId;
 
-const postCartRepository = (cart) => {
-	return Cart.create(cart)
-		.then((res) => getCartByIdRepository(res._id)
-			.then(res => res)
-			.catch(err => console.error(err))
-		)
-		.catch(err => console.error(err))
+const postCartRepository = async (cart) => {
+	try {
+		const productCreated = await Cart.create(cart)
+		return getCartByIdRepository(productCreated._id)
+	} catch (e) {
+		console.error(e)
+	}
 }
 
 const getAllCartsRepository = async () => {
