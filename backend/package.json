@@ -21,6 +21,7 @@
     "process": "^0.11.10"
   },
   "scripts": {
-    "start": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   }
 }
