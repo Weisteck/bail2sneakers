@@ -1,12 +1,14 @@
+
 <template>
   <h1 class="text-center text-xl mt-4">Produits</h1>
   <hr>
   <main class="container px-8 pt-24 mx-auto lg:px-4">
     <div class="flex flex-wrap">
-      <div v-for="(product, index) in products" :key="product.productId">
 
-      <div class="col-span-6 card">
-        <img :src="product.images[0]" alt="image" class="w-40"/>
+      <div v-for="(product) in products" :key="product.productId" class="mt-8">
+
+      <div class="rounded bg-white border-gray-200 shadow-md overflow-hidden">
+        <img :src="product.images[0]" alt="image" class=" justify-items-start object-cover w-1/4"/>
         <p>{{ product.brand.name }}</p>
         <p>{{ product.model }}</p>
         <p>{{ product.priceExclTax }}</p>
@@ -18,6 +20,7 @@
       </div>
     </div>
   </div>
+  </main>
 </template>
 
 <script>
