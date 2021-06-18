@@ -1,8 +1,9 @@
 <template>
-  <h1>Produits</h1>
+  <h1 class="text-center text-xl mt-4">Produits</h1>
   <hr>
-  <div class="grid grid-cols-12 grid-flow-col">
-    <div v-for="(product, index) in products" :key="product.productId">
+  <main class="container px-8 pt-24 mx-auto lg:px-4">
+    <div class="flex flex-wrap">
+      <div v-for="(product, index) in products" :key="product.productId">
 
       <div class="col-span-6 card">
         <img :src="product.images[0]" alt="image" class="w-40"/>

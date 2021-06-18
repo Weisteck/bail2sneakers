@@ -1,20 +1,17 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    |
-    <router-link to="/cart">Cart</router-link>
-    |
-    <router-link to="/product/get-all">Product</router-link>
-    |
-    <router-link to="/product/609fc334ca65e71ada507d10">Product details</router-link>
+<div id="app">
+    <NavBar />
+    <router-view />
   </div>
-  <router-view/>
-
   <h1>TEST</h1>
 </template>
+
+
 <script>
+import NavBar from "./components/Navbar.vue"
 export default {
   name: "App",
+  components: {NavBar}
 };
 </script>
 <style>
@@ -26,9 +23,9 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
+/* #nav {
   padding: 30px;
-}
+} */
 
 #nav a {
   font-weight: bold;
