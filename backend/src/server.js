@@ -10,11 +10,19 @@ const connectDB = require('../config/connectDB')
 const { exec } = require("child_process");
 const path = require("path");
 const morgan = require("morgan")
+const authentification = require('./router/authentification')
+const bodyParser = require("body-parser")
 
 const app = express();
 
 
 connectDB()
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }))
@@ -33,6 +41,7 @@ app.use('/api/user', user);
 app.use('/api/comment', comment)
 app.use('/api/cart', cart)
 app.use('/api/product', product)
+app.use('/api/authentification', authentification)
 
 
 app.listen(process.env.PORT || 5000, () => {
