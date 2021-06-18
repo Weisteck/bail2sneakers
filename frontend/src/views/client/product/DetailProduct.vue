@@ -122,11 +122,8 @@
 </template>
 
 <script>
-import Slider from "../../components/Slider.vue";
-
 export default {
   name: 'DetailProduct',
-  components: { Slider },
   data() {
     return {
       product: {

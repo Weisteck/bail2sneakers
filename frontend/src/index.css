@@ -2,46 +2,177 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+FORM
+ */
 .input {
-    @apply appearance-none block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4
+    @apply
+    appearance-none
+    block
+    w-full
+
+    bg-gray-50
+    text-gray-600
+
+    border
+    border-gray-200
+
+    disabled:bg-gray-100
+
+    rounded
+    py-3 px-4
 }
 
 .input-radio {
-    @apply appearance-none block bg-gray-50 text-gray-600 border border-gray-200 rounded
+    @apply
+    appearance-none
+    block
+    bg-gray-50
+    text-gray-600
+    border
+    border-gray-200
+    rounded
 }
 
 .input-number {
-    @apply bg-gray-50 focus:outline-none border-t border-b text-center w-full font-semibold hover:text-black focus:text-black flex items-center outline-none
+    @apply
+    bg-gray-50
+    focus:outline-none
+    border-t
+    border-b
+    text-center
+    w-full
+    font-semibold
+    hover:text-black
+    focus:text-black
+    flex
+    items-center
+    outline-none
 }
 
 .input-number-decrement {
-    @apply bg-gray-50 text-gray-600 border-gray-200 border-t border-b border-l hover:text-gray-700 hover:bg-gray-100 h-full w-20 rounded-l cursor-pointer outline-none
+    @apply
+    bg-gray-50
+    text-gray-600
+    border-gray-200
+    border-t border-b border-l
+    hover:text-gray-700
+    hover:bg-gray-100
+    h-full w-20
+    rounded-l
+    cursor-pointer
+    outline-none
 }
 
 .input-number-increment {
-    @apply bg-gray-50 text-gray-600 border-gray-200 border-t border-b border-r hover:text-gray-700 hover:bg-gray-100 h-full w-20 rounded-r cursor-pointer
+    @apply
+    bg-gray-50
+    text-gray-600
+    border-gray-200
+    border-t border-b border-r
+    hover:text-gray-700
+    hover:bg-gray-100
+    h-full w-20
+    rounded-r
+    cursor-pointer
 }
 
 .label {
-    @apply block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2
+    @apply
+    block
+    uppercase
+    tracking-wide
+    text-gray-600
+    text-xs
+    font-bold
+    mb-2
 }
 
+/**
+---------------------------------------------------------------------------------------------------
+ */
+
+/**
+TEXT
+ */
 .title {
-    @apply text-2xl mb-5
+    @apply
+    text-2xl
+    mb-5
 }
 
 .sub-title {
-    @apply text-xl text-left mb-10
+    @apply
+    text-xl
+    text-left
+    mb-10
 }
 
 .description {
-    @apply text-left
+    @apply
+    text-left
 }
+
+/**
+---------------------------------------------------------------------------------------------------
+ */
 
 .button {
-    @apply px-4 py-2 font-semibold tracking-wider border border-gray-200 rounded bg-gray-50 disabled:bg-gray-100 hover:bg-gray-200 text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300
+    @apply
+    py-3 px-4
+    font-semibold
+    tracking-wider
+    text-gray-600
+
+    border
+    border-gray-200
+
+    rounded
+    bg-gray-50
+
+    disabled:bg-gray-100
+
+    hover:bg-gray-200
+
+    focus:outline-none
+    focus:ring-2
+    focus:ring-gray-300
 }
 
-.card {
-    @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2
+/**
+BUTTON
+ */
+.btn-primary {
+    @apply
+    bg-blue-500
+    hover:bg-blue-400
+    transition
+    font-bold
+    uppercase
+    text-white
+    h-11
+    w-auto
+    px-10
+    rounded
 }
+
+/**
+---------------------------------------------------------------------------------------------------
+ */
+
+/**
+COMPONENTS
+ */
+.card {
+    @apply
+    bg-white
+    shadow-md
+    rounded
+    px-8 pt-6 pb-8
+    mb-4 my-2
+    flex flex-col
+}
+
+/**
+---------------------------------------------------------------------------------------------------
+ */

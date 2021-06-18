@@ -191,11 +191,8 @@
 </template>
 
 <script>
-import DeleteProduct from "../../components/DeleteProduct.vue";
-
 export default {
   name: 'GetCart',
-  components: { DeleteProduct },
   data() {
     return {
       cartId: "",
