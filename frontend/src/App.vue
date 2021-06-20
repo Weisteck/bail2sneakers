@@ -15,8 +15,6 @@
     <router-link to="/back-office/product/get-all">Get all products back office</router-link>
   </div>
   <router-view/>
-
-  <h1>TEST</h1>
 </template>
 <script>
 export default {

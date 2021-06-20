@@ -101,7 +101,7 @@ export default createStore({
 
     async createCheckoutSession(context, payload) {
       try {
-				return await api.post('/payment/create-checkout-session')
+				return await api.post('/payment/create-checkout-session', payload)
       } catch (e) {
         console.error(e)
       }

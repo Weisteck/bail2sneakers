@@ -288,17 +288,12 @@ export default {
       const file = (e.target.files[0])
 
       this.product.images.push(URL.createObjectURL(file))
-      console.log("upload image", this.product.images)
-      console.log("upload logo", this.product.brand.logo)
     },
 
     uploadBrandLogo(e) {
       const file = (e.target.files[0])
 
       this.product.brand.logo = URL.createObjectURL(file)
-
-      console.log("upload image", this.product.images)
-      console.log("upload logo", this.product.brand.logo)
     }
   }
 }

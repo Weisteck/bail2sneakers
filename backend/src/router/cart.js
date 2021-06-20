@@ -35,7 +35,6 @@ router.put('/remove-product', (req, res) => {
 })
 
 router.put('/add-product', (req, res) => {
-	console.log("add product")
 	addProductToCartService(req.query.id, req.body)
 		.then(result => res.send(result))
 		.catch(err => console.error(err))
