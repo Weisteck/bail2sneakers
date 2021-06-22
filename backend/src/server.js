@@ -1,27 +1,3 @@
-/**
- * ----------------------------------------------------------------
- *  NOTE *
- *  ******
- *
- * Command for connect to /login
- * curl http://localhost:5000/api/authentification/login -c cookie-file.txt -H 'Content-Type: application/json' -d '{"email":"test@gmail.com", "password":"trouDuCul"}' -L
- *
- * Problems: redirect to/api/authentification/authrequired is not working
- *
- *
- * With insomnia, redirect works, but without the file cookie-file.txt, it's seem that log in not working
- */
-
-
-
-
-
-
-
-
-
-
-
 const bcrypt = require("bcrypt");
 const comment = require("./router/comment")
 const product = require("./router/product")
@@ -33,11 +9,9 @@ const CONFIG = require('@yarn-monorepo/config')
 const cors = require('cors')
 const history = require('connect-history-api-fallback')
 const connectDB = require('../config/connectDB')
-const { exec } = require("child_process");
 const path = require("path");
 const morgan = require("morgan")
 const passport = require("passport");
-const axios = require("axios");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const LocalStrategy = require('passport-local').Strategy;
@@ -56,12 +30,11 @@ passport.use(new LocalStrategy(
     User.findOne({ "mail": email })
       .then(response => {
         const user = response
-        if (!user) {
+        if (!user)
           return done(null, false, { message: 'Invalid credentials.\n' });
-        }
-        if (!bcrypt.compare(password, user.password)) {
+
+        if (!bcrypt.compare(password, user.password))
           return done(null, false, { message: 'Invalid credentials.\n' });
-        }
 
         return done(null, user);
       })
@@ -85,22 +58,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // tell passport how to serialize the user
-passport.serializeUser((user, done) => {
-  console.log("serializeUser", user)
-  done(null, user._id);
-});
+passport.serializeUser((user, done) => done(null, user._id));
 
 passport.deserializeUser((id, done) => {
-  console.log("deserializeUser, id", id)
   User.findOne({ "_id": new ObjectId(id) })
-    .then(res => {
-      console.log("User =", res)
-      return done(null, res)
-    })
-    .catch(error => {
-      console.log("catch error", error)
-      return done(error, false)
-    })
+    .then(res => done(null, res))
+    .catch(error => done(error, false))
 });
 
 connectDB()
@@ -126,6 +89,6 @@ app.use('/api/authentification', authentification)
 
 
 app.listen(process.env.PORT || 5000, () => {
-  // console.clear()
+  console.clear()
   console.log(`Listening on port ${ process.env.PORT || 5000 }`)
 })
