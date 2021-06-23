@@ -15,9 +15,19 @@
           <li class="mr-5 text-sm font-semibold hover:text-gray-800">
             <router-link to="/product/609fc334ca65e71ada507d10">Product details</router-link>
           </li>
-          <li class="place-items-end ml-20 ">
-            <input type="text" placeholder="chercher un produit " class="w-72 border-2 border-black rounded-md"  >
+          <li class="mr-5 text-sm font-semibold hover:text-gray-800">
+            <router-link to="/product/create">Create product</router-link>
           </li>
+          <li class="mr-5 text-sm font-semibold hover:text-gray-800">
+            <router-link to="/product/edit/60acf6a894832a6396b9e9ab">Edit product</router-link>
+          </li>
+          <li class="mr-5 text-sm font-semibold hover:text-gray-800">
+            <router-link to="/back-office/product/get-all">Get all products back office</router-link>
+          </li>
+          <li class="place-items-end ml-20 ">
+            <input id="search" type="text" placeholder="chercher un produit " v-model="search" name="search" class="w-72 border-2 border-black rounded-md"  >
+          </li>
+         
         </ul>
       </nav>
     </div>
@@ -26,6 +36,32 @@
 
 <script>
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    data(){
+      return{
+        search: '',
+
+      }
+      
+    },
+    computed:{
+      searchWords(){
+        if(!this.search.length) return {};
+        return this.search.toLowerCase().split(' ');
+      }
+    },
+    watch:{
+      search(){
+        this.filteredProduct();
+      }
+
+    },
+    methods:{
+      filteredProduct(){
+        this.filteredProduct = this.nonFilteredProducts
+
+        .filter((products) => this.searchWords.every((word) => products.brand.name.toLowerCase.normalize('NFD').includes(word)))
+      }
+    }
 }
 </script>
