@@ -1,9 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const passport = require("passport")
-const LocalStrategy = require('passport-local').Strategy
-const bcrypt = require("bcrypt")
-const User = require('../models/users')
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
@@ -20,7 +17,7 @@ router.post('/login', (req, res, next) => {
       if (err)
         return next(err)
 
-      return res.redirect('/api/authentification/authrequired')
+      return res.redirect('/api/authentication/profile')
     })
   })(req, res, next)
 })
@@ -31,8 +28,24 @@ router.get('/authrequired', (req, res) => {
     : res.send("you are not connected")
 })
 
-router.get('/login', (req, res) => {
-  res.send(`You got the login page!\n`)
+router.get('/logout', (req, res) => {
+  console.log("session before destroy : ", req.session)
+  req.logout()
+  req.session.destroy()
+  console.log("session after destroy : ", req.session)
+  //res.send("You are disconnected")
+  res.send("session endpoint")
+})
+
+router.get('/profile', (req, res) => {
+  console.log("user: ", req.user)
+  if (req.isAuthenticated()) {
+    if (req.user)
+      res.send(req.user)
+    else
+      res.send("no req.user")
+  } else
+    res.send("you are not connected")
 })
 
 module.exports = router

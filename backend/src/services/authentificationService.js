@@ -3,7 +3,7 @@ const passport = require('passport')
 
 const User = require('../models/users');
 
-const authentificationService = (email, password) => {
+const authenticationService = (email, password) => {
   passport.use(new LocalStrategy(
     (done) => {
       User.findOne({ mail: email }, (err, user) => {
@@ -21,5 +21,5 @@ const authentificationService = (email, password) => {
 }
 
 module.exports = {
-  authentificationService: authentificationService,
+  authenticationService: authenticationService,
 }

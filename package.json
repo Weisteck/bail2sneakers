@@ -11,7 +11,7 @@
   ],
   "scripts": {
 	"start": "yarn workspace backend start",
-	"start:back": "yarn workspace backend start",
+	"start:back": "yarn workspace backend dev",
 	"start:front": "yarn workspace frontend dev",
 	"build:front": "yarn workspace frontend build",
     "heroku-postbuild": "yarn workspace frontend vite:build"

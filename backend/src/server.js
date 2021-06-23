@@ -3,7 +3,7 @@ const comment = require("./router/comment")
 const product = require("./router/product")
 const cart = require("./router/cart")
 const user = require("./router/user")
-const authentification = require("./router/authentification")
+const authentication = require("./router/authentication")
 const express = require('express')
 const CONFIG = require('@yarn-monorepo/config')
 const cors = require('cors')
@@ -86,7 +86,7 @@ app.use('/api/user', user)
 app.use('/api/comment', comment)
 app.use('/api/cart', cart)
 app.use('/api/product', product)
-app.use('/api/authentification', authentification)
+app.use('/api/authentication', authentication)
 
 
 app.listen(process.env.PORT || 5000, () => {
