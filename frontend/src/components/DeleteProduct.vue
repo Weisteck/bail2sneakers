@@ -59,6 +59,7 @@ import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } f
 import { ExclamationIcon } from '@heroicons/vue/outline'
 
 export default {
+  name: 'DeleteProduct',
   components: {
     Dialog,
     DialogOverlay,
@@ -68,9 +69,6 @@ export default {
     ExclamationIcon,
   },
   props: [ 'product' ],
-  beforeMount() {
-    console.log("product : ", this.product)
-  },
   methods: {
     confirmDelete() {
       this.open = false
