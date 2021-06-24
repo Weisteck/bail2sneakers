@@ -24,9 +24,7 @@
           <li class="mr-5 text-sm font-semibold hover:text-gray-800">
             <router-link to="/back-office/product/get-all">Get all products back office</router-link>
           </li>
-          <li class="place-items-end ml-20 ">
-            <input id="search" type="text" placeholder="chercher un produit " v-model="search" name="search" class="w-72 border-2 border-black rounded-md"  >
-          </li>
+         
          
         </ul>
       </nav>
@@ -37,31 +35,6 @@
 <script>
 export default {
     name: 'NavBar',
-    data(){
-      return{
-        search: '',
-
-      }
-      
-    },
-    computed:{
-      searchWords(){
-        if(!this.search.length) return {};
-        return this.search.toLowerCase().split(' ');
-      }
-    },
-    watch:{
-      search(){
-        this.filteredProduct();
-      }
-
-    },
-    methods:{
-      filteredProduct(){
-        this.filteredProduct = this.nonFilteredProducts
-
-        .filter((products) => this.searchWords.every((word) => products.brand.name.toLowerCase.normalize('NFD').includes(word)))
-      }
-    }
+    
 }
 </script>

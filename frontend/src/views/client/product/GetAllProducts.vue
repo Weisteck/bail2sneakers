@@ -1,5 +1,10 @@
 
 <template>
+<header>
+   <li class="place-items-end ml-20 ">
+            <input id="search" type="text" placeholder="chercher un produit " v-model="search" name="search" class="w-72 border-2 border-black rounded-md"  >
+          </li>
+</header>
   <h1 class="text-center text-xl mt-4">Produits</h1>
   <hr>
   <main class="container px-8 pt-2 mx-auto lg:px-4">
@@ -30,16 +35,36 @@ export default {
   name: 'getAllProducts',
   data() {
     return {
-      products: {}
+      products: {},
+      search: ''
     }
+  },
+  computed:{
+    searchWords(){
+      if(!this.search.length)return {};
+
+      return this.search.toLowerCase().split(' ');
+    }
+  },
+  watch:{
+    search(){
+      this.filteredProducts();
+    }
+
   },
   methods: {
     getAllProducts() {
       this.$store.dispatch('getAllProducts')
         .then(res => {
           this.products = res.data
+          this.filteredProduct = this.nonFilteredProducts
+          this.$emit('getAllproducts', this.nonFilteredProducts)
         })
         .catch(err => console.error(err))
+    },
+    filteredProducts(){
+      this.filteredProduct = this.nonFilteredProducts
+        .filter((products) => this.serchWords.every((word)=> products.brand.name.toLowerCase().normalize('NFD').includes(word)))
     }
   },
   beforeMount() {

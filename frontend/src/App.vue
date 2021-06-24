@@ -13,6 +13,7 @@ export default {
   name: "App",
   components: {NavBar}
 };
+
 </script>
 <style>
 #app {
