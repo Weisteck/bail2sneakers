@@ -23,9 +23,12 @@ router.post('/login', (req, res, next) => {
 })
 
 router.get('/authrequired', (req, res) => {
-  req.isAuthenticated()
-    ? res.send('you are connected!\n')
-    : res.send("you are not connected")
+  if (req.isAuthenticated())
+     res.send('you are connected!\n')
+    else {
+      res.status(403)
+      res.send("you are not connected")
+  }
 })
 
 router.get('/logout', (req, res) => {
@@ -44,8 +47,10 @@ router.get('/profile', (req, res) => {
       res.send(req.user)
     else
       res.send("no req.user")
-  } else
+  } else {
+    res.status(403)
     res.send("you are not connected")
+  }
 })
 
 module.exports = router

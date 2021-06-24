@@ -15,15 +15,12 @@
     <router-link to="/back-office/product/get-all">Get all products back office</router-link>
     |
 
-
-    <button v-if="user" class="btn" @click="login">login -</button>
+    <button v-if="!user" class="btn cursor-pointer hover:text-blue-600 transition" @click="login">login</button>
 
     <div v-else>
       Bonjour {{ user.mail }}
-      |
+      <button class="btn cursor-pointer hover:text-blue-600 transition" @click="logout"> | logout </button>
     </div>
-    <button class="btn" @click="logout">logout</button>
-    <button class="btn" @click="getUser">get user</button>
 
   </div>
 </template>
@@ -35,21 +32,20 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      user: {}
+      user: null
     }
   },
   created() {
-    // this.getUser()
+    this.getUser()
   },
   methods: {
     async getUser() {
       try {
-        const response = await axios.get('/api/authentication/get-user')
-        console.log("get user: ", response.data)
+        const response = await axios.get('/api/authentication/profile')
         this.user = response.data
-
       } catch (e) {
-        console.error(e)
+        this.user = null
+        console.error(e.response.data)
       }
     },
 
@@ -61,7 +57,6 @@ export default {
         })
 
         this.user = response.data
-        console.log("response: ", response)
       } catch (e) {
         console.error(e)
       }
@@ -70,8 +65,7 @@ export default {
     async logout() {
       try {
         const response = await axios.get('/api/authentication/logout')
-
-        console.log("response: ", response)
+        this.user = null
       } catch (e) {
         console.error(e)
       }

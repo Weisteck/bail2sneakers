@@ -63,7 +63,13 @@ passport.serializeUser((user, done) => done(null, user._id))
 
 passport.deserializeUser((id, done) => {
   User.findOne({ "_id": new ObjectId(id) })
-    .then(res => done(null, res))
+    .then(res => {
+      const user = {}
+
+      user.mail = res.mail
+
+      return done(null, user)
+    })
     .catch(error => done(error, false))
 })
 
