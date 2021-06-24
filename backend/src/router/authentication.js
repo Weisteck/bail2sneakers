@@ -16,6 +16,7 @@ router.post('/login', (req, res, next) => {
     req.login(user, (err) => {
       if (err)
         return next(err)
+      console.log("login")
 
       return res.redirect('/api/authentication/profile')
     })

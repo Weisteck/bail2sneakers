@@ -31,12 +31,12 @@ passport.use(new LocalStrategy(
       .then(response => {
         const user = response
 
-        if (!user)
+        if (!user) {
           return done(null, false, { message: 'Invalid credentials.\n' })
-
-        if (!bcrypt.compare(password, user.password))
+        }
+        if (!bcrypt.compare(password, user.password)) {
           return done(null, false, { message: 'Invalid credentials.\n' })
-
+        }
         return done(null, user)
       })
       .catch(error => done(error))
