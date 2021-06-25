@@ -16,20 +16,11 @@ router.post('/login', (req, res, next) => {
     req.login(user, (err) => {
       if (err)
         return next(err)
-      console.log("login")
+      console.log("login", req.user)
 
       return res.redirect('/api/authentication/profile')
     })
   })(req, res, next)
-})
-
-router.get('/authrequired', (req, res) => {
-  if (req.isAuthenticated())
-     res.send('you are connected!\n')
-    else {
-      res.status(403)
-      res.send("you are not connected")
-  }
 })
 
 router.get('/logout', (req, res) => {
@@ -46,11 +37,14 @@ router.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
     if (req.user)
       res.send(req.user)
-    else
+    else {
+      req.session.destroy()
       res.send("no req.user")
+    }
   } else {
+    req.session.destroy()
     res.status(403)
-    res.send("you are not connected")
+    res.send("Error, redirected to /prodile but you are not connected")
   }
 })
 
