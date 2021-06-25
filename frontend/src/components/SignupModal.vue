@@ -105,21 +105,15 @@ export default {
           password: this.user.password
         })
 
-        console.log(response)
+        const loginResponse = await axios.post('/api/authentication/login', {
+          email: this.user.email,
+          password: this.user.password
+        })
 
-        if (response.status === 200) {
-          const response = await axios.post('/api/authentication/login', {
-            email: this.user.email,
-            password: this.user.password
-          })
-
-          response.status === 202
-            ? this.$emit('signup', response.data)
-            : this.errors = response.data
-        } else this.errors = response.data
+        this.$emit('signup', loginResponse.data)
       } catch (e) {
-        this.errors = e.message
-        console.error(e)
+        this.errors = "Un utilisateur avec la même adresse email existe déjà."
+        console.error("catch error", e)
       }
     },
 

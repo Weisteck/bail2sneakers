@@ -27,10 +27,6 @@
     "passport-local": "^1.0.0",
     "process": "^0.11.10"
   },
-  "scripts": {
-    "start": "nodemon --ignore 'sessions/*' src/server.js",
-    "dev": "node src/server.js"
-  },
   "devDependencies": {
     "uuid": "^8.3.2",
     "axios": "^0.21.1",
@@ -38,12 +34,12 @@
     "body-parser": "^1.19.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "session-file-store": "^1.1.2"
+    "session-file-store": "^1.1.2",
     "process": "^0.11.10",
     "stripe": "^8.156.0"
   },
   "scripts": {
-    "dev": "nodemon src/server.js",
+    "dev": "node src/server.js",
     "start": "node src/server.js"
   }
 }
