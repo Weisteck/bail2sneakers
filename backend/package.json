@@ -25,7 +25,11 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "process": "^0.11.10",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "axios": "^0.21.1",
+    "bcrypt-nodejs": "^0.0.3",
+    "session-file-store": "^1.1.2",
+    "stripe": "^8.156.0"
   },
   "devDependencies": {
     "axios": "^0.21.1",
