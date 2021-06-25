@@ -40,6 +40,10 @@ router.put('/add-product', (req, res) => {
 		.catch(err => console.error(err))
 })
 
+router.put('/', (req, res) => {
+	// TODO: Une fois le payement effectué, modifier le panier pour y ajouter une date de payement à order.history.orderedAt
+})
+
 router.delete('/', (req, res) => {
 	deleteCartService(req.query.id)
 		.then(result => res.send(result))

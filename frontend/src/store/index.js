@@ -105,6 +105,14 @@ export default createStore({
       } catch (e) {
         console.error(e)
       }
+    },
+
+    async getSessionData(context, payload) {
+      try {
+				return await api.get('/payment/checkout-session?id=' + payload)
+      } catch (e) {
+        console.error(e)
+      }
     }
 
     // #endregion
