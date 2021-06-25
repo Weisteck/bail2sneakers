@@ -15,7 +15,8 @@
     <router-link to="/back-office/product/get-all">Get all products back office</router-link>
     |
 
-    <button v-if="!user" class="btn cursor-pointer hover:text-blue-600 transition" @click="openLogin = true">login</button>
+    <button v-if="!user" class="btn cursor-pointer hover:text-blue-600 transition" @click="openLogin = true">Connexion | </button>
+    <button v-if="!user" class="btn cursor-pointer hover:text-blue-600 transition" @click="openSignup = true"> Inscription</button>
 
     <div v-else>
       Bonjour {{ user.mail }}
@@ -23,30 +24,24 @@
     </div>
   </div>
 
-  <LoginModal v-if="openLogin" @login="loginUser" v-bind:open="openLogin" @close="closeModal"/>
+  <LoginModal v-if="openLogin" @login="loginUser" v-bind:open="openLogin" @close="openLogin = false"/>
+
+  <SignupModal v-if="openSignup" @signup="signupUser" v-bind:open="openSignup" @close="openSignup = false"/>
 </template>
 
 <script>
 import axios from "axios"
-import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { ExclamationIcon } from '@heroicons/vue/outline'
 import LoginModal from "../../components/LoginModal.vue"
+import SignupModal from "../../components/SignupModal.vue"
 
 export default {
   name: 'Navbar',
-  components: {
-    Dialog,
-    DialogOverlay,
-    DialogTitle,
-    TransitionChild,
-    TransitionRoot,
-    ExclamationIcon,
-    LoginModal
-  },
+  components: { LoginModal, SignupModal },
   data() {
     return {
       user: null,
       openLogin: false,
+      openSignup: false,
       login: {
         email: null,
         password: null
@@ -72,6 +67,11 @@ export default {
       this.openLogin = false
     },
 
+    signupUser(user) {
+      this.user = user
+      this.openSignup = false
+    },
+
     async logout() {
       try {
         await axios.get('/api/authentication/logout')
@@ -80,10 +80,6 @@ export default {
         console.error(e)
       }
     },
-
-    closeModal() {
-      this.openLogin = false
-    }
   }
 }
 </script>
