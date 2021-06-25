@@ -11,7 +11,7 @@ const userSchema = new schema(
       firstName: { type: String },
       password: { type: String, bcrypt: true },
       role: { type: String },
-      mail: { type: String },
+      mail: { type: String, unique: true },
       phoneNumber: { type: String },
       deliveryAdresses: [
         {
