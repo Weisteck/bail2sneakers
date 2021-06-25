@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="open">
-    <Dialog as="div" static class="fixed z-10 inset-0 overflow-y-auto" @close="open = false" :open="open">
+    <Dialog as="div" static class="fixed z-10 inset-0 overflow-y-auto" @close="close" :open="open">
       <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                          leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
@@ -104,10 +104,9 @@ export default {
           password: this.user.password
         })
 
-        if (typeof response.data !== "object")
-          this.errors = response.data
-        else
-          this.$emit('login', response.data)
+        response.status === 202
+          ? this.$emit('login', response.data)
+          : this.errors = response.data
       } catch (e) {
         this.errors = e.message
         console.error(e)

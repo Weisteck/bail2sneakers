@@ -68,15 +68,13 @@ export default {
     },
 
     loginUser(user) {
-      console.log("emit")
-
       this.user = user
       this.openLogin = false
     },
 
     async logout() {
       try {
-        const response = await axios.get('/api/authentication/logout')
+        await axios.get('/api/authentication/logout')
         this.user = null
       } catch (e) {
         console.error(e)

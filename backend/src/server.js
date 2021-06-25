@@ -31,16 +31,8 @@ passport.use(new LocalStrategy(
       .then(response => {
         const user = response
 
-        if (!user) {
+        if (!user)
           return done(null, false, { message: 'Incorrect username.\n' })
-        }
-        /*
-        console.log("password: ", password, user.password)
-        if (!bcrypt.compare(password, user.password)) {
-          console.log("mot de passe invalid")
-          return done(null, false, { message: 'Invalid credentials.\n' })
-        }
-        */
 
         bcrypt.compare(password, user.password, (err, result) => {
           if (err)
@@ -51,18 +43,6 @@ passport.use(new LocalStrategy(
 
           return done(null, user)
         })
-        /* .then((result) => {
-           console.log("bcrypt compare result: ", result)
-
-           if (!result)
-             return done(null, false, { message: 'Invalid credentials.\n' })
-
-           return done(null, user)
-         })
-         .catch(err => {
-           console.log(err)
-           return done(null, false, { message: 'Invalid credentials.\n' })
-         })*/
       })
   }
 ))

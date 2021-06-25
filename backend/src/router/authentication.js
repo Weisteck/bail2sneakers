@@ -11,25 +11,20 @@ router.post('/login', (req, res, next) => {
       return next(err)
 
     if (!user)
-      return res.redirect('/login')
+      res.status(404).send("User not found")
 
     req.login(user, (err) => {
       if (err)
         return next(err)
-      console.log("login", req.user)
-
-      return res.redirect('/api/authentication/profile')
+      res.status(202).send(req.user)
     })
   })(req, res, next)
 })
 
 router.get('/logout', (req, res) => {
-  console.log("session before destroy : ", req.session)
   req.logout()
   req.session.destroy()
-  console.log("session after destroy : ", req.session)
-  //res.send("You are disconnected")
-  res.send("session endpoint")
+  res.send("logout success")
 })
 
 router.get('/profile', (req, res) => {
@@ -43,8 +38,7 @@ router.get('/profile', (req, res) => {
     }
   } else {
     req.session.destroy()
-    res.status(403)
-    res.send("Error, redirected to /prodile but you are not connected")
+    res.status(403).send("Error, redirected to /prodile but you are not connected")
   }
 })
 
