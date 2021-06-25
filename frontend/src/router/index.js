@@ -7,6 +7,9 @@ import GetAllProductsBackOffice from "../views/backoffice/product/GetAllProducts
 import DetailProduct from "../views/client/product/DetailProduct.vue";
 import CreateProduct from "../views/backoffice/product/CreateProduct.vue";
 import EditProduct from "../views/backoffice/product/EditProduct.vue";
+import Success from "../views/client/payment/Success.vue";
+import Cancel from "../views/client/payment/Cancel.vue";
+import Checkout from "../views/client/payment/Checkout.vue";
 
 const routes = [
 	{
@@ -46,6 +49,21 @@ const routes = [
 		path: '/back-office/product/get-all',
 		name: 'GetAllProductsBackOffice',
 		component: GetAllProductsBackOffice
+	},
+	{
+		path: '/checkout/success',
+		name: 'success',
+		component: Success
+	},
+	{
+		path: '/checkout/cancel',
+		name: 'cancel',
+		component: Cancel
+	},
+	{
+		path: '/checkout',
+		name: 'checkout',
+		component: Checkout
 	}
 ]
 

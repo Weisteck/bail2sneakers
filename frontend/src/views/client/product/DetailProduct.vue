@@ -1,4 +1,5 @@
 <template>
+
   <div class="text-left">
     <div class="container mx-auto">
       <div class="grid grid-cols-12 mb-10">
@@ -17,9 +18,16 @@
           </div>
         </div>
         <div class="col-span-12 lg:col-span-5 md:col-span-6 sm:col-span-12 text-center">
+
+
+          <button class="btn-primary" @click="deleteLocalStorage">
+            delete localstorage
+          </button>
+
+
           <img :src="product.brand.logo" alt="brandLogo" class="mx-auto" height="200" width="200">
           <h1 class="title">
-            {{ product.brand.name }} - {{ product.model }}
+            {{ product.brand.name }} - {{ product.model }} fdsdfds
           </h1>
           <div class="flex justify-center m-10">
             <div v-for="n in product.rating">
@@ -65,11 +73,6 @@
               </div>
             </div>
           </div>
-
-
-
-
-
 
 
           <br>
@@ -170,6 +173,10 @@ export default {
     }
   },
   methods: {
+    deleteLocalStorage() {
+      localStorage.removeItem('cartId')
+    },
+
     changeImageToShow(image) {
       this.imageToShow = image
     },
@@ -203,8 +210,6 @@ export default {
     },
 
     addProductToCart() {
-      localStorage.removeItem('cartId')
-
       const selectedProduct = {
         productId: this.product._id,
         brand: this.product.brand.name,
@@ -221,13 +226,11 @@ export default {
           productSelected: selectedProduct
         })
           .then(res => {
-            console.log("le produit à bien été ajouter au panier existant", res)
           })
           .catch(err => console.error(err))
       else
         this.$store.dispatch('addProductToNewCart', selectedProduct)
           .then(res => {
-            console.log("le produit à été ajouter au nouveau panier", res)
 
             // TODO: Si l'utilisateur n'est pas connecté, alors stocker l'id du panier créer dans le local storage
             localStorage.setItem('cartId', res.data._id)
