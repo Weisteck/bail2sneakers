@@ -57,6 +57,7 @@ const postCartService = async (selectedProducts) => {
 
 const putCartService = async (cartId) => {
   try {
+    console.log("in putCartService")
     const getCartResponse = await getCartByIdService(cartId)
 
     getCartResponse.order.history.orderedAt = new Date()
