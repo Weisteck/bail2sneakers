@@ -13,10 +13,6 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
     All product
     <br>
     {{ allProducts }}
@@ -42,8 +38,9 @@ export default {
       })
       .catch(err => console.error(err))
 
-    this.$store.dispatch('getProduct', { id: "60acf6a894832a6396b9e9ab" })
+    this.$store.dispatch('getProduct', { id: "60cf9e42eb8e9a755662bc72" })
       .then(res => {
+        console.log("get one product", res)
         this.oneProduct = res.data
       })
       .catch(err => console.error(err))
