@@ -20,4 +20,15 @@ router.get('/checkout-session', async (req, res) => {
   res.json(session)
 })
 
+
+router.get('/checkout-success', async (req, res) => {
+  console.log("in checkout success api")
+  const session = await stripe.checkout.sessions.retrieve(req.query.id, {
+    expand: ['line_items']
+  })
+
+  const putCartServiceResponse = await putCartService(session.data.metadata.cartId)
+  res.send(`<html lang="en"><body><h1>Thanks for your order!</h1></body></html>`);
+})
+
 module.exports = router

@@ -7,12 +7,16 @@ const createCheckoutSessionService = async (items, cartId) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: [ 'card' ],
       line_items: items,
+      metadata: {
+        'cartId': cartId
+      },
       mode: 'payment',
-      success_url: 'http://localhost:3000/checkout/success',
+      success_url: 'http://localhost:3000/checkout/success?id={CHECKOUT_SESSION_ID}',
       cancel_url: 'http://localhost:3000/checkout/cancel'
     })
 
-    await putCartService(cartId)
+    //const putCartServiceResponse = await putCartService(cartId)
+    //console.log(putCartServiceResponse)
 
     return ({ id: session.id })
   } catch (e) {
