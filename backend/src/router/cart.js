@@ -42,16 +42,14 @@ router.put('/add-product', (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-  console.log(req.params)
   console.log(req.query)
-  /**
-   try {
-    const response = await putCartService(req.params.id, req.body.cart)
-		res.send(response)
-  } catch (e) {
+  try {
+    const serviceResponse = await putCartService(req.query.id)
 
-}
-   **/
+    res.send(serviceResponse)
+  } catch (e) {
+    console.error(e)
+  }
 })
 
 router.delete('/', (req, res) => {

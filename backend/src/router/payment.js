@@ -13,11 +13,11 @@ router.post('/create-checkout-session', async (req, res) => {
 })
 
 router.get('/checkout-session', async (req, res) => {
-  console.log("query: ", req.query.id)
   const session = await stripe.checkout.sessions.retrieve(req.query.id, {
     expand: ['line_items']
   })
   res.json(session)
 })
+
 
 module.exports = router
