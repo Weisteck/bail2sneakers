@@ -95,6 +95,14 @@ export default createStore({
         .catch(err => console.error(err))
     },
 
+    putCart(context, payload) {
+      try {
+        return api.put(`/cart?id=${ payload }`)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
     // #endregion
 
     // #region checkout

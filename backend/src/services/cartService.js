@@ -55,6 +55,14 @@ const postCartService = async (selectedProducts) => {
     .catch(err => console.error(err))
 }
 
+const putCartService = async (cartId, editedProduct) => {
+  try {
+    return await putCartRepository(cartId, editedProduct)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 const getAllCartsService = async () => {
   return await getAllCartsRepository()
     .then(res => res)
@@ -166,5 +174,6 @@ module.exports = {
   getCartByIdService: getCartByIdService,
   removeProductFromCartService: removeProductFromCartService,
   addProductToCartService: addProductToCartService,
-  deleteCartService: deleteCartService
+  deleteCartService: deleteCartService,
+  putCartService: putCartService
 }

@@ -2,52 +2,62 @@ const express = require('express')
 const router = express.Router()
 
 const {
-	postCartService,
-	getAllCartsService,
-	getCartByIdService,
-	removeProductFromCartService,
-	addProductToCartService,
-	deleteCartService
+  postCartService,
+  getAllCartsService,
+  getCartByIdService,
+  removeProductFromCartService,
+  addProductToCartService,
+  deleteCartService,
+  putCartService
 } = require('../services/cartService');
 
 router.get('/get-all', (req, res) => {
-	getAllCartsService()
-		.then(result => res.send(result))
-		.catch(err => console.error(err))
+  getAllCartsService()
+    .then(result => res.send(result))
+    .catch(err => console.error(err))
 })
 
 router.get('/', (req, res) => {
-	getCartByIdService(req.query.id)
-		.then(result => res.send(result))
-		.catch(err => console.error(err))
+  getCartByIdService(req.query.id)
+    .then(result => res.send(result))
+    .catch(err => console.error(err))
 })
 
 router.post('/', (req, res) => {
-	postCartService(req.body)
-		.then(result => res.send(result))
-		.catch(err => console.error(err))
+  postCartService(req.body)
+    .then(result => res.send(result))
+    .catch(err => console.error(err))
 })
 
 router.put('/remove-product', (req, res) => {
-	removeProductFromCartService(req.query.id, req.body)
-		.then(result => res.send(result))
-		.catch(err => console.error(err))
+  removeProductFromCartService(req.query.id, req.body)
+    .then(result => res.send(result))
+    .catch(err => console.error(err))
 })
 
 router.put('/add-product', (req, res) => {
-	addProductToCartService(req.query.id, req.body)
-		.then(result => res.send(result))
-		.catch(err => console.error(err))
+  addProductToCartService(req.query.id, req.body)
+    .then(result => res.send(result))
+    .catch(err => console.error(err))
 })
 
-router.put('/', (req, res) => {
-	// TODO: Une fois le payement effectué, modifier le panier pour y ajouter une date de payement à order.history.orderedAt
+router.put('/', async (req, res) => {
+  console.log(req.params)
+  console.log(req.query)
+  /**
+   try {
+    const response = await putCartService(req.params.id, req.body.cart)
+		res.send(response)
+  } catch (e) {
+
+}
+   **/
 })
 
 router.delete('/', (req, res) => {
-	deleteCartService(req.query.id)
-		.then(result => res.send(result))
-		.catch(err => console.error(err))
+  deleteCartService(req.query.id)
+    .then(result => res.send(result))
+    .catch(err => console.error(err))
 })
 
 module.exports = router

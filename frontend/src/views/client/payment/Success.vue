@@ -3,7 +3,7 @@
 
   <div class="container mx-auto">
     <pre class="card text-left">
-    {{ sessionData.metadata }}
+    <!-- {{ sessionData.metadata }} -->
   </pre>
     <pre class="card text-left">
     {{ sessionData }}
@@ -25,13 +25,18 @@ export default {
   },
   methods: {
     async getSessionData() {
-      console.log("id: ", this.$route.query.id)
+      console.log("in getSessionData")
       try {
-
-        const response = await this.$store.dispatch('getSessionData', this.$route.query.id)
-        console.log(response)
+        console.log("try")
+        const response = await this.$store.dispatch('getSessionData', this.$route.query.id )
+        /**
+        console.log("response :", response)
         this.sessionData = response.data
+
+        await this.$store.dispatch('putCart', response.data.metadata.cartId)
+         **/
       } catch (e) {
+        console.log("ERROR: ")
         console.error(e)
       }
     }

@@ -96,7 +96,6 @@ app.use('/api/product', product)
 app.use('/api/authentication', authentication)
 app.use('/api/payment', payment)
 
-const bodyParser = require('body-parser');
 const stripe = require('stripe')('sk_test_51J4S4HC2Kud8irFw2YvIgWGrZczNQ2PN1kpq59XMQTtHcUyjxpxEbrJbq0BRE8JW2YXDSzqKfdFVFDJ1pfLKqVgK00tsHHEtW7')
 
 const endpointSecret = 'whsec_AmAAu6LPRulEGLCuuwmj30U3klOgIIzw';
