@@ -2,6 +2,7 @@ const {
   postCartRepository,
   getAllCartsRepository,
   getCartByIdRepository,
+  getCartsByStatusRepository,
   putCartRepository,
   deleteCartRepository
 } = require('../repositories/cartRepository')
@@ -79,6 +80,14 @@ const getCartByIdService = async (id) => {
     return await getCartByIdRepository(id)
   } catch (e) {
     console.error(e)
+  }
+}
+
+const getCartByStatusService = async (status) => {
+  try {
+    return await getCartsByStatusRepository(status)
+  } catch (e) {
+    return { status: 404, message: e }
   }
 }
 
@@ -177,6 +186,7 @@ module.exports = {
   postCartService: postCartService,
   getAllCartsService: getAllCartsService,
   getCartByIdService: getCartByIdService,
+  getCartByStatusService: getCartByStatusService,
   removeProductFromCartService: removeProductFromCartService,
   addProductToCartService: addProductToCartService,
   deleteCartService: deleteCartService,
