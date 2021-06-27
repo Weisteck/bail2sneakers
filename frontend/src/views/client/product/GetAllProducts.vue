@@ -10,7 +10,7 @@
   <main class="container px-8 pt-2 mx-auto lg:px-4">
     <div class="flex flex-wrap items-center justify-center">
 
-      <div v-for="(product, index) in products" :key="product.productId" class="mt-8">
+      <div v-for="(product, index) in filteredProduct" :key="product.productId" class="mt-8">
 
       <div class="flex-shrink-0 m-6 relative overlay-hidden bg-white-500 rounded-lg max-w-xs shadow-lg">
       <div class="relative pt-10 px-10 flex items-center justify-center">
@@ -35,8 +35,9 @@ export default {
   name: 'getAllProducts',
   data() {
     return {
-      products: {},
-      search: ''
+      search: '',
+      nonFilteredProducts: [],
+      filteredProduct: []
     }
   },
   computed:{
@@ -48,7 +49,7 @@ export default {
   },
   watch:{
     search(){
-      this.filteredProducts();
+      this.productsFiltered();
     }
 
   },
@@ -56,18 +57,25 @@ export default {
     getAllProducts() {
       this.$store.dispatch('getAllProducts')
         .then(res => {
-          this.products = res.data
-          this.filteredProduct = this.nonFilteredProducts
-          this.$emit('getAllproducts', this.nonFilteredProducts)
+          this.nonFilteredProducts = res.data
+          this.filteredProduct = res.data
         })
         .catch(err => console.error(err))
     },
-    filteredProducts(){
-      this.filteredProduct = this.nonFilteredProducts
-        .filter((products) => this.serchWords.every((word)=> products.brand.name.toLowerCase().normalize('NFD').includes(word)))
+    productsFiltered(){
+       this.searchWords.length !== undefined
+         ? this.filteredProduct = this.nonFilteredProducts
+          // Recherche
+          .filter((product) => this.searchWords.every((word) => product.brand.name 
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .includes(word) || product.model.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(word)))
+
+      : this.filteredProduct = this.nonFilteredProducts
     }
   },
-  beforeMount() {
+  created() {
     this.getAllProducts()
   }
 }
