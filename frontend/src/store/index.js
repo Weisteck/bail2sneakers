@@ -103,13 +103,29 @@ export default createStore({
       }
     },
 
+    getCarts() {
+      try {
+        return api.get('cart/get-all')
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
+    getCartsByStatus(context, payload) {
+      try {
+        return api.get(`cart/get-by-status?status=${ payload.status }`)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
     // #endregion
 
     // #region checkout
 
     async createCheckoutSession(context, payload) {
       try {
-				return await api.post('/payment/create-checkout-session', payload)
+        return await api.post('/payment/create-checkout-session', payload)
       } catch (e) {
         console.error(e)
       }
@@ -117,7 +133,7 @@ export default createStore({
 
     async getSessionData(context, payload) {
       try {
-				return await api.get('/payment/checkout-session?id=' + payload)
+        return await api.get('/payment/checkout-session?id=' + payload)
       } catch (e) {
         console.error(e)
       }

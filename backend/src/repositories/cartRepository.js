@@ -19,7 +19,9 @@ const getCartByIdRepository = (id) => {
 }
 
 const getCartsByStatusRepository = async (status) => {
-  return await Cart.find({ [`order.history.${status}`]: null })
+  const carts = await Cart.find({ [`order.history.${ status }`]: { $ne: null } })
+  console.log(carts)
+  return carts
 }
 
 const putCartRepository = (id, cart) => {
