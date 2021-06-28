@@ -1,5 +1,11 @@
 <template>
-  <ChangeOrderStatus v-if="changeOrderStatusModal" @editOrderStatus="editOrderStatus" v-bind:open="changeOrderStatusModal" @close="changeOrderStatusModal = false"/>
+  <ChangeOrderStatus v-if="changeOrderStatusModal"
+                     @editOrderStatus="editOrderStatus"
+                     v-bind:open="changeOrderStatusModal"
+                     v-bind:cart-selected="cartSelected"
+                     @close="changeOrderStatusModal = false"
+                     @reload="reload"
+  />
 
   <div class="container mx-auto">
     <div class="card">
@@ -19,33 +25,34 @@
       </div>
 
       <div class="overflow-auto">
-        <table class="table-auto">
+        <table class="w-full">
           <thead>
           <tr class="font-bold uppercase border-b border-gray-300">
             <th>User ID</th>
             <th>PRIX HTC</th>
             <th>Progressed at</th>
             <th>Ordered at at</th>
-            <th>canceled at at</th>
+            <th>Ordered preparation at</th>
             <th>Delivered at</th>
             <th>Ended at</th>
-            <th>Ordered preparation at</th>
+            <th>canceled at at</th>
             <th>Changer le status</th>
           </tr>
           </thead>
-          <tr class="text-left border-b border-gray-200 hover:bg-gray-50 transition cursor-pointer" v-for="cart in carts"
+          <tr class="text-left border-b border-gray-200 hover:bg-gray-50 transition cursor-pointer"
+              v-for="cart in carts"
               @click="$router.push(`/cart/${cart._id}`)">
             <td>{{ cart.user_id }}</td>
             <td>{{ cart.order.priceExclTax }}</td>
             <td>{{ cart.order.history.progressedAt }}</td>
             <td>{{ cart.order.history.orderedAt || "null" }}</td>
-            <td>{{ cart.order.history.canceledAtc || "null" }}</td>
+            <td>{{ cart.order.history.orderedPreparationAt || "null" }}</td>
             <td>{{ cart.order.history.deliveredAt || "null" }}</td>
             <td>{{ cart.order.endedAt || "null" }}</td>
-            <td>{{ cart.order.orderedPreparationAt || "null" }}</td>
+            <td>{{ cart.order.canceledAt || "null" }}</td>
 
             <td class="flex justify-center">
-              <button @click.stop="">
+              <button @click.stop="openOrderModal(cart)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
@@ -60,14 +67,17 @@
 </template>
 
 <script>
+import ChangeOrderStatus from "../../../components/ChangeOrderStatus.vue"
+
 export default {
   name: 'GetCarts',
-  components: {ChangeOrderStatus},
+  components: { ChangeOrderStatus },
   data() {
     return {
       carts: [],
       orderStatus: null,
-      changeOrderStatusModal: false
+      changeOrderStatusModal: false,
+      cartSelected: null
     }
   },
   watch: {
@@ -114,6 +124,16 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+
+    openOrderModal(cart) {
+      this.cartSelected = cart
+      this.changeOrderStatusModal = true
+    },
+
+    reload() {
+      this.changeOrderStatusModal = false
+      this.getCarts()
     }
   }
 }

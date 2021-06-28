@@ -1,9 +1,9 @@
 <template>
   <div class="container mx-auto">
-      <div class="card w-1/3 mx-auto">
-        <h1 class="title">
-          Félicitation, votre commmande à bien été passé !
-        </h1>
+    <div class="card w-1/3 mx-auto">
+      <h1 class="title">
+        Félicitation, votre commmande à bien été passé !
+      </h1>
     </div>
 
   </div>
@@ -25,16 +25,13 @@ export default {
     async getSessionData() {
       console.log("in getSessionData")
       try {
-        console.log("try")
-        const response = await this.$store.dispatch('getSessionData', this.$route.query.id )
+        const response = await this.$store.dispatch('getSessionData', this.$route.query.id)
 
-        console.log("response :", response)
         this.sessionData = response.data
 
-        await this.$store.dispatch('putCart', response.data.metadata.cartId)
+        await this.$store.dispatch('putCart', { id: response.data.metadata.cartId, status: 'orderedAt' })
 
       } catch (e) {
-        console.log("ERROR: ")
         console.error(e)
       }
     }

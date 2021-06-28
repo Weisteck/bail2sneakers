@@ -53,9 +53,9 @@ router.put('/add-product', (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-  console.log(req.query)
+  console.log("body:", req.body)
   try {
-    const serviceResponse = await putCartService(req.query.id)
+    const serviceResponse = await putCartService(req.query.id, req.body.status)
 
     res.send(serviceResponse)
   } catch (e) {

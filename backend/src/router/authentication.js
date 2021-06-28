@@ -38,7 +38,7 @@ router.get('/profile', (req, res) => {
     }
   } else {
     req.session.destroy()
-    res.status(403).send("Error, redirected to /prodile but you are not connected")
+    res.status(403).send("Error, redirected to /profile but you are not connected")
   }
 })
 

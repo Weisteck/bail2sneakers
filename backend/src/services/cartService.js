@@ -56,12 +56,11 @@ const postCartService = async (selectedProducts) => {
     .catch(err => console.error(err))
 }
 
-const putCartService = async (cartId) => {
+const putCartService = async (cartId, status) => {
   try {
-    console.log("in putCartService")
     const getCartResponse = await getCartByIdService(cartId)
 
-    getCartResponse.order.history.orderedAt = new Date()
+    getCartResponse.order.history[status] = new Date()
 
     return await putCartRepository(cartId, getCartResponse)
   } catch (e) {

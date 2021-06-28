@@ -97,7 +97,7 @@ export default createStore({
 
     putCart(context, payload) {
       try {
-        return api.put(`/cart?id=${ payload }`)
+        return api.put(`/cart?id=${ payload.id }`, {status:  payload.status })
       } catch (e) {
         console.error(e)
       }
