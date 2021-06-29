@@ -14,6 +14,8 @@ import Cancel from "../views/client/payment/Cancel.vue"
 import Checkout from "../views/client/payment/Checkout.vue"
 import GetCarts from "../views/backoffice/cart/GetCarts.vue"
 import NotAuthorized from "../views/redirect/NotAuthorized.vue"
+import Login from "../views/client/authentication/Login.vue"
+import Signup from "../views/client/authentication/Signup.vue"
 
 const routes = [
   {
@@ -84,6 +86,18 @@ const routes = [
     name: 'notAuthorized',
     path: '/not-authorized',
     component: NotAuthorized
+  },
+
+  // Authentication
+  {
+    name: 'login',
+    path: '/authentication/login',
+    component: Login
+  },
+  {
+    name: 'signup',
+    path: '/authentication/signup',
+    component: Signup
   }
 ]
 
@@ -104,15 +118,17 @@ router.beforeEach(async (to, from, next) => {
           path: '/not-authorized'
         })
       else
-        next()
+        next({
+          path: '/authentication/login'
+        })
     } catch (e) {
-      console.error(e)
+      next({
+        path: '/authentication/login'
+      })
+      console.error("Aucun utilisateur n'est connecté.", e)
     }
-
-
-  } else {
+  } else
     next()
-  }
 })
 
 export default router

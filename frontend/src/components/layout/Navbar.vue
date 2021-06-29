@@ -6,7 +6,7 @@
     |
     <router-link :to="{name: 'getAllProducts'}">Product</router-link>
     |
-    <router-link to="/back-office/product/60acf6a894832a6396b9e9ab">Product details</router-link>
+    <router-link to="/product/60acf6a894832a6396b9e9ab">Product details</router-link>
     |
     <router-link to="/back-office/product/create">Create product</router-link>
     |
@@ -64,13 +64,11 @@ export default {
 
     loginUser(user) {
       this.user = user
-      this.$store.commit('setUser', user)
       this.openLogin = false
     },
 
     signupUser(user) {
       this.user = user
-      this.$store.commit('setUser', user)
       this.openSignup = false
     },
 
