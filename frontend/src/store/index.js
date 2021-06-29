@@ -23,9 +23,14 @@ export default createStore({
 				`,
         logo: "https://upload.wikimedia.org/wikipedia/commons/3/36/Logo_nike_principal.jpg"
       }
-    ]
+    ],
+    userLogged: {}
   },
-  mutations: {},
+  mutations: {
+    setUser (state, user) {
+      state.userLogged = user
+    }
+  },
   actions: {
     // #region Product
     async getAllProducts() {
@@ -97,7 +102,7 @@ export default createStore({
 
     putCart(context, payload) {
       try {
-        return api.put(`/cart?id=${ payload.id }`, {status:  payload.status })
+        return api.put(`/cart?id=${ payload.id }`, { status: payload.status })
       } catch (e) {
         console.error(e)
       }
