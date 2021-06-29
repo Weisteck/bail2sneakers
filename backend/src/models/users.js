@@ -13,10 +13,10 @@ const userSchema = new schema(
       role: { type: String },
       mail: { type: String, unique: true },
       phoneNumber: { type: String },
-      deliveryAdresses: [
+      deliveryAddresses: [
         {
           city: { type: String },
-          adress: { type: String },
+          address: { type: String },
           zipCode: { type: String },
           country: { type: String },
         }
