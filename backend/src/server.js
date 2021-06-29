@@ -70,7 +70,11 @@ passport.deserializeUser((id, done) => {
     .then(res => {
       const user = {}
 
+      user.id = res._id
       user.mail = res.mail
+      user.lastName = res.lastName
+      user.firstName = res.firstName
+      user.role = res.role
 
       return done(null, user)
     })

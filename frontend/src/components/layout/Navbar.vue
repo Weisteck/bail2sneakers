@@ -4,13 +4,13 @@
     |
     <router-link to="/cart">Cart</router-link>
     |
-    <router-link to="/product/get-all">Product</router-link>
+    <router-link :to="{name: 'getAllProducts'}">Product</router-link>
     |
     <router-link to="/product/60acf6a894832a6396b9e9ab">Product details</router-link>
     |
-    <router-link to="/product/create">Create product</router-link>
+    <router-link to="/back-office/product/create">Create product</router-link>
     |
-    <router-link to="/product/edit/60acf6a894832a6396b9e9ab">Edit product</router-link>
+    <router-link to="/back-office/product/edit/60acf6a894832a6396b9e9ab">Edit product</router-link>
     |
     <router-link to="/back-office/product/get-all">Get all products back office</router-link>
     |

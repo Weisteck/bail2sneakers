@@ -28,17 +28,16 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/profile', (req, res) => {
-  console.log("user: ", req.user)
   if (req.isAuthenticated()) {
     if (req.user)
       res.send(req.user)
     else {
       req.session.destroy()
-      res.send("no req.user")
+      res.send("There are no user.")
     }
   } else {
     req.session.destroy()
-    res.status(403).send("Error, redirected to /profile but you are not connected")
+    res.status(403).send("User is not authenticated.")
   }
 })
 

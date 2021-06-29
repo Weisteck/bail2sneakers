@@ -78,7 +78,7 @@ import { UserIcon } from '@heroicons/vue/outline'
 import axios from "axios"
 
 export default {
-  name: 'Login',
+  name: 'LoginModal',
   components: {
     Dialog,
     DialogOverlay,
