@@ -10,6 +10,7 @@ import EditProduct from "../views/backoffice/product/EditProduct.vue";
 import Success from "../views/client/payment/Success.vue";
 import Cancel from "../views/client/payment/Cancel.vue";
 import Checkout from "../views/client/payment/Checkout.vue";
+import GetCarts from "../views/backoffice/cart/GetCarts.vue"
 
 const routes = [
 	{
@@ -22,6 +23,11 @@ const routes = [
 		path: '/cart',
 		name: 'createCart',
 		component: CreateCart
+	},
+	{
+		path: '/orders',
+		name: 'GetCarts',
+		component: GetCarts
 	},
 
 	// Product

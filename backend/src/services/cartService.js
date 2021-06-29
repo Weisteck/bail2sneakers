@@ -2,6 +2,7 @@ const {
   postCartRepository,
   getAllCartsRepository,
   getCartByIdRepository,
+  getCartsByStatusRepository,
   putCartRepository,
   deleteCartRepository
 } = require('../repositories/cartRepository')
@@ -55,6 +56,18 @@ const postCartService = async (selectedProducts) => {
     .catch(err => console.error(err))
 }
 
+const putCartService = async (cartId, status) => {
+  try {
+    const getCartResponse = await getCartByIdService(cartId)
+
+    getCartResponse.order.history[status] = new Date()
+
+    return await putCartRepository(cartId, getCartResponse)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 const getAllCartsService = async () => {
   return await getAllCartsRepository()
     .then(res => res)
@@ -66,6 +79,14 @@ const getCartByIdService = async (id) => {
     return await getCartByIdRepository(id)
   } catch (e) {
     console.error(e)
+  }
+}
+
+const getCartByStatusService = async (status) => {
+  try {
+    return await getCartsByStatusRepository(status)
+  } catch (e) {
+    return { status: 404, message: e }
   }
 }
 
@@ -164,7 +185,9 @@ module.exports = {
   postCartService: postCartService,
   getAllCartsService: getAllCartsService,
   getCartByIdService: getCartByIdService,
+  getCartByStatusService: getCartByStatusService,
   removeProductFromCartService: removeProductFromCartService,
   addProductToCartService: addProductToCartService,
-  deleteCartService: deleteCartService
+  deleteCartService: deleteCartService,
+  putCartService: putCartService
 }
