@@ -137,7 +137,7 @@
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <p>Sélectionner une marque existante</p>
           <select v-model="brandSelected"
-                  class="block w-full bg-gray-50 text-gray-600 border border-gray-200 disabled:bg-gray-100 rounded py-3 px-4"
+                  class="input-select"
                   :disabled="addBrand"
           >
             <option v-for="brand in preselectedBrands" v-bind:value="brand">
@@ -288,17 +288,12 @@ export default {
       const file = (e.target.files[0])
 
       this.product.images.push(URL.createObjectURL(file))
-      console.log("upload image", this.product.images)
-      console.log("upload logo", this.product.brand.logo)
     },
 
     uploadBrandLogo(e) {
       const file = (e.target.files[0])
 
       this.product.brand.logo = URL.createObjectURL(file)
-
-      console.log("upload image", this.product.images)
-      console.log("upload logo", this.product.brand.logo)
     }
   }
 }

@@ -10,10 +10,9 @@
 	"packages/*"
   ],
   "scripts": {
-	"start": "yarn workspace backend start",
-	"start:back": "yarn workspace backend start",
-	"start:front": "yarn workspace frontend dev",
-	"build:front": "yarn workspace frontend build",
-    "heroku-postbuild": "yarn workspace frontend vite:build"
+	"dev:back": "yarn workspace backend dev",
+	"dev:front": "yarn workspace frontend dev",
+	"build": "yarn workspace frontend build",
+    "start": "yarn workspace backend start"
   }
 }

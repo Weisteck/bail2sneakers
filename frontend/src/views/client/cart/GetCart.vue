@@ -2,197 +2,209 @@
   <DeleteProduct v-if="deleteProductModal" :product="productToDelete" v-on:eventConfirmDelete="removeProduct"/>
 
   <div class="container mx-auto">
+
     <h1 class="title">PANIER</h1>
 
-    <div class="card">
-      <h1 class="sub-title">Adresse de livraison</h1>
+    <form @submit.prevent="proceedToCheckout">
+      <div class="card">
+        <h1 class="sub-title">Adresse de livraison</h1>
 
-      <div class="-mx-3 md:flex mb-2">
-        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="label" for="delivery-city">
-            Ville
-          </label>
-          <input v-model="order.address.city"
-                 class="input"
-                 id="delivery-city"
-                 type="text"
-                 placeholder="Lyon"
-          >
-        </div>
-        <div class="md:w-1/2 px-3">
-          <label class="label" for="delivery-address">
-            Adresse
-          </label>
-          <input v-model="order.address.address"
-                 class="input"
-                 id="delivery-address"
-                 type="text"
-                 placeholder="27 Rue Raoul Servant"
-          >
-        </div>
-        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="label" for="delivery-zip">
-            Code postal
-          </label>
-          <input v-model="order.address.zipCode"
-                 class="input"
-                 id="delivery-zip"
-                 type="text"
-                 placeholder="69007"
-          >
-        </div>
-        <div class="md:w-1/2 px-3">
-          <label class="label" for="delivery-country">
-            Pays
-          </label>
-          <input v-model="order.address.country"
-                 class="input"
-                 id="delivery-country"
-                 type="text"
-                 placeholder="France"
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="grid grid-cols-10 grid-flow-col mb-1">
-        <h1 class="sub-title col-span-4">Adresse de facturation</h1>
-
-        <div class="text-right col-span-5">
-          <label for="invoice" class="text-right">Utiliser la même adresse que pour la livraison</label>
-        </div>
-
-        <div class="text-right col-span-1">
-          <input v-model="invoiceSameAsDelivery" type="checkbox" id="invoice" class="text-gray-600">
+        <div class="-mx-3 md:flex mb-2">
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="label" for="delivery-city">
+              Ville
+            </label>
+            <input v-model="order.address.city"
+                   class="input"
+                   id="delivery-city"
+                   type="text"
+                   placeholder="Lyon"
+            >
+          </div>
+          <div class="md:w-1/2 px-3">
+            <label class="label" for="delivery-address">
+              Adresse
+            </label>
+            <input v-model="order.address.address"
+                   class="input"
+                   id="delivery-address"
+                   type="text"
+                   placeholder="27 Rue Raoul Servant"
+            >
+          </div>
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="label" for="delivery-zip">
+              Code postal
+            </label>
+            <input v-model="order.address.zipCode"
+                   class="input"
+                   id="delivery-zip"
+                   type="text"
+                   placeholder="69007"
+            >
+          </div>
+          <div class="md:w-1/2 px-3">
+            <label class="label" for="delivery-country">
+              Pays
+            </label>
+            <input v-model="order.address.country"
+                   class="input"
+                   id="delivery-country"
+                   type="text"
+                   placeholder="France"
+            >
+          </div>
         </div>
       </div>
 
-      <div class="-mx-3 md:flex mb-2">
-        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="label" for="city">
-            Ville
-          </label>
-          <input v-model="invoiceAddress.city"
-                 :disabled="invoiceSameAsDelivery"
-                 class="input"
-                 id="city"
-                 type="text"
-                 placeholder="Lyon"
-          >
-        </div>
-        <div class="md:w-1/2 px-3">
-          <label class="label" for="address">
-            Adresse
-          </label>
-          <input v-model="invoiceAddress.address"
-                 :disabled="invoiceSameAsDelivery"
-                 class="input"
-                 id="address"
-                 type="text"
-                 placeholder="27 Rue Raoul Servant"
-          >
-        </div>
-        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="label" for="zip">
-            Code postal
-          </label>
-          <input v-model="invoiceAddress.zipCode"
-                 :disabled="invoiceSameAsDelivery"
-                 class="input"
-                 id="zip"
-                 type="text"
-                 placeholder="69007"
-          >
-        </div>
-        <div class="md:w-1/2 px-3">
-          <label class="label" for="country">
-            Pays
-          </label>
-          <input v-model="invoiceAddress.country"
-                 :disabled="invoiceSameAsDelivery"
-                 class="input"
-                 id="country"
-                 type="text"
-                 placeholder="France"
-          >
-        </div>
-      </div>
-    </div>
+      <div class="card">
+        <div class="grid grid-cols-10 grid-flow-col mb-1">
+          <h1 class="sub-title col-span-4">Adresse de facturation</h1>
 
-    <div class="card">
-      <h1 class="sub-title">Produits sélectionnées</h1>
+          <div class="text-right col-span-5">
+            <label for="invoice" class="text-right">Utiliser la même adresse que pour la livraison</label>
+          </div>
 
-      <div class="grid grid-cols-12 grid-flow-col mb-1 font-bold">
-        <div class="col-span-3">
+          <div class="text-right col-span-1">
+            <input v-model="invoiceSameAsDelivery" type="checkbox" id="invoice" class="text-gray-600">
+          </div>
+        </div>
 
-        </div>
-        <div class="col-span-3">
-          Produit
-        </div>
-        <div class="col-span-2">
-          Prix HT
-        </div>
-        <div class="col-span-2">
-          Prix TTC
-        </div>
-        <div class="col-span-2">
-          Actions
+        <div class="-mx-3 md:flex mb-2">
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="label" for="city">
+              Ville
+            </label>
+            <input v-model="invoiceAddress.city"
+                   :disabled="invoiceSameAsDelivery"
+                   class="input"
+                   id="city"
+                   type="text"
+                   placeholder="Lyon"
+            >
+          </div>
+          <div class="md:w-1/2 px-3">
+            <label class="label" for="address">
+              Adresse
+            </label>
+            <input v-model="invoiceAddress.address"
+                   :disabled="invoiceSameAsDelivery"
+                   class="input"
+                   id="address"
+                   type="text"
+                   placeholder="27 Rue Raoul Servant"
+            >
+          </div>
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="label" for="zip">
+              Code postal
+            </label>
+            <input v-model="invoiceAddress.zipCode"
+                   :disabled="invoiceSameAsDelivery"
+                   class="input"
+                   id="zip"
+                   type="text"
+                   placeholder="69007"
+            >
+          </div>
+          <div class="md:w-1/2 px-3">
+            <label class="label" for="country">
+              Pays
+            </label>
+            <input v-model="invoiceAddress.country"
+                   :disabled="invoiceSameAsDelivery"
+                   class="input"
+                   id="country"
+                   type="text"
+                   placeholder="France"
+            >
+          </div>
         </div>
       </div>
 
-      <hr>
+      <div class="card">
+        <h1 class="sub-title">Produits sélectionnées</h1>
 
-      <div v-for="(product, index) in selectedProducts" :key="product.productId">
-        <div class="grid grid-cols-12 grid-flow-col">
+        <div class="grid grid-cols-12 grid-flow-col mb-1 font-bold">
           <div class="col-span-3">
-            <img :src="product.image" alt="image" class="w-40"/>
+
           </div>
-          <div class="col-span-3 text-left self-center ">
-            <span class="font-bold">{{ product.model }} - {{ product.brand }}</span>
-            <br>
-            <span>{{ product.color }} -  {{ product.size }}</span>
+          <div class="col-span-3">
+            Produit
           </div>
-          <div class="col-span-2 self-center">
-            {{ fixPriceHt(product.priceHt, 0) }}
+          <div class="col-span-2">
+            Prix HT
           </div>
-          <div class="col-span-2 self-center">
-            {{ fixPriceTtc(product.priceHt, 0) }}
+          <div class="col-span-2">
+            Prix TTC
           </div>
-          <div class="col-span-2 self-center">
-            <button @click="showDeleteProductModal(product, index)">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-red-500" fill="none" viewBox="0 0 24 24"
-                   stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-              </svg>
-            </button>
+          <div class="col-span-2">
+            Actions
           </div>
         </div>
+
         <hr>
+
+        <div v-for="(product, index) in selectedProducts" :key="product.productId">
+          <div class="grid grid-cols-12 grid-flow-col">
+            <div class="col-span-3">
+              <img :src="product.image" alt="image" class="w-40"/>
+            </div>
+            <div class="col-span-3 text-left self-center ">
+              <span class="font-bold">{{ product.model }} - {{ product.brand }}</span>
+              <br>
+              <span>{{ product.color }} -  {{ product.size }}</span>
+            </div>
+            <div class="col-span-2 self-center">
+              {{ fixPriceHt(product.priceHt, 0) }}
+            </div>
+            <div class="col-span-2 self-center">
+              {{ fixPriceTtc(product.priceHt, 0) }}
+            </div>
+            <div class="col-span-2 self-center">
+              <button @click="showDeleteProductModal(product, index)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-red-500" fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="text-right mt-10">
+          <p>
+            Frais de livraison:
+            {{ fixPriceDelivery(priceDelivery) }}
+          </p>
+          <p>
+            Total HT:
+            {{ fixPriceHt(order.priceExclTax, priceDelivery) }}
+          </p>
+          <p class="font-bold">
+            Total TTC (+20% TVA):
+            {{ fixPriceTtc(order.priceExclTax, priceDelivery) }}
+          </p>
+        </div>
       </div>
 
-      <div class="text-right mt-10">
-        <p>
-          Frais de livraison:
-          {{ fixPriceDelivery(priceDelivery) }}
-        </p>
-        <p>
-          Total HT:
-          {{ fixPriceHt(order.priceExclTax, priceDelivery) }}
-        </p>
-        <p class="font-bold">
-          Total TTC (+20% TVA):
-          {{ fixPriceTtc(order.priceExclTax, priceDelivery) }}
-        </p>
-      </div>
-    </div>
+      <button type="submit" class="btn btn-primary mr-2">
+        PAYER
+      </button>
+    </form>
   </div>
 </template>
 
 <script>
+import DeleteProduct from "../../../components/DeleteProduct.vue";
+import { loadStripe } from "@stripe/stripe-js";
+
 export default {
   name: 'GetCart',
+  components: { DeleteProduct },
   data() {
     return {
       cartId: "",
@@ -244,7 +256,6 @@ export default {
 
     getCartIdInLocalStorage() {
       this.cartId = localStorage.getItem('cartId')
-      console.log("localstorage", localStorage.getItem('cartId'))
 
       this.getCartById(this.cartId)
     },
@@ -279,8 +290,7 @@ export default {
         cartId: this.cartId,
         productSelected: this.productToDelete.product
       })
-        .then(res => {
-          console.log("le produit à bien été supprimer du panier", res)
+        .then(() => {
           this.productToDelete = {}
           this.deleteProductModal = false
         })
@@ -331,6 +341,44 @@ export default {
         + priceDelivery.toString().slice(-2)
         + " €"
     },
+
+    async proceedToCheckout() {
+      const items = []
+
+      this.selectedProducts.forEach(product => items.push({
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: product.brand + '-' + product.model,
+            images: [ product.image ]
+          },
+          unit_amount: product.price
+        },
+        quantity: 1
+      }))
+
+      try {
+        const stripePromise = loadStripe("pk_test_51J4S4HC2Kud8irFwiMr7d1bEaVMAyivRya7v2DmUK5FdMPnXkquSnSg3uaENJDOB5DBrbXNnB2tQvPwNsqC3EdPm002GE9ZmyY")
+
+        const stripe = await stripePromise;
+
+        const response = await this.$store.dispatch('createCheckoutSession', {
+          items: items,
+          cartId: this.cartId
+        })
+
+        const session = await response.data;
+
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id,
+        })
+
+        if (result.error)
+          console.error((result.error.message))
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 }
 </script>

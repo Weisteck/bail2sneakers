@@ -11,29 +11,36 @@ const postCartRepository = async (cart) => {
 }
 
 const getAllCartsRepository = async () => {
-	return Cart.find()
+  return Cart.find()
 }
 
 const getCartByIdRepository = (id) => {
-	return Cart.findOne({ "_id": new ObjectId(id) })
+  return Cart.findOne({ "_id": new ObjectId(id) })
+}
+
+const getCartsByStatusRepository = async (status) => {
+  const carts = await Cart.find({ [`order.history.${ status }`]: { $ne: null } })
+  console.log(carts)
+  return carts
 }
 
 const putCartRepository = (id, cart) => {
-	return Cart.updateOne({
-			"_id": new ObjectId(id)
-		},
-		cart
-	)
+  return Cart.updateOne({
+      "_id": new ObjectId(id)
+    },
+    cart
+  )
 }
 
 const deleteCartRepository = (id) => {
-	return Cart.deleteOne({ "_id": new ObjectId(id) })
+  return Cart.deleteOne({ "_id": new ObjectId(id) })
 }
 
 module.exports = {
-	postCartRepository: postCartRepository,
-	getAllCartsRepository: getAllCartsRepository,
-	getCartByIdRepository: getCartByIdRepository,
-	putCartRepository: putCartRepository,
-	deleteCartRepository: deleteCartRepository
+  postCartRepository: postCartRepository,
+  getAllCartsRepository: getAllCartsRepository,
+  getCartByIdRepository: getCartByIdRepository,
+  getCartsByStatusRepository: getCartsByStatusRepository,
+  putCartRepository: putCartRepository,
+  deleteCartRepository: deleteCartRepository
 }
