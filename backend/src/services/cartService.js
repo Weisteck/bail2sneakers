@@ -80,6 +80,14 @@ const getCartByIdService = async (id) => {
 		.catch(err => console.error(err))
 }
 
+const getCartByStatusService = async (status) => {
+  try {
+    return await getCartsByStatusRepository(status)
+  } catch (e) {
+    return { status: 404, message: e }
+  }
+}
+
 const removeProductFromCartService = async (id, productToEdit) => {
   const editedCart = {
     selectedProducts: [],
