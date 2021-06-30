@@ -2,8 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { Role } from '../_helpers/role';
 import { api } from "../api/api";
 
-import Home from '../views/Home.vue'
-import CreateCart from "../views/client/cart/GetCart.vue"
+import GetCart from "../views/client/cart/GetCart.vue"
 import GetAllProducts from "../views/client/product/GetAllProducts.vue"
 import GetAllProductsBackOffice from "../views/backoffice/product/GetAllProducts.vue"
 import DetailProduct from "../views/client/product/DetailProduct.vue"
@@ -17,18 +16,19 @@ import NotAuthorized from "../views/redirect/NotAuthorized.vue"
 import Login from "../views/client/authentication/Login.vue"
 import Signup from "../views/client/authentication/Signup.vue"
 import GetAllUsers from "../views/backoffice/user/GetAllUsers.vue"
+import Accueil from "../views/client/Accueil.vue";
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Accueil',
+    component: Accueil
   },
   // Cart
   {
     path: '/cart',
-    name: 'createCart',
-    component: CreateCart
+    name: 'GetCart',
+    component: GetCart
   },
   {
     path: '/orders',
