@@ -66,19 +66,21 @@ app.use(passport.session())
 passport.serializeUser((user, done) => done(null, user._id))
 
 passport.deserializeUser((id, done) => {
-  User.findOne({ "_id": new ObjectId(id) })
-    .then(res => {
-      const user = {}
+  try {
+    const response = User.findOne({ "_id": new ObjectId(id) })
+    const user = {}
 
-      user.id = res._id
-      user.mail = res.mail
-      user.lastName = res.lastName
-      user.firstName = res.firstName
-      user.role = res.role
+    user.id = response._id
+    user.mail = response.mail
+    user.lastName = response.lastName
+    user.firstName = response.firstName
+    user.role = response.role
 
-      return done(null, user)
-    })
-    .catch(error => done(error, false))
+    return done(null, user)
+  } catch (error) {
+    console.error(error)
+    done(error, false)
+  }
 })
 
 connectDB()
@@ -105,36 +107,36 @@ const stripe = require('stripe')('sk_test_51J4S4HC2Kud8irFw2YvIgWGrZczNQ2PN1kpq5
 const endpointSecret = 'whsec_AmAAu6LPRulEGLCuuwmj30U3klOgIIzw';
 
 const fulfillOrder = (session) => {
-	// TODO: fill me in
-	console.log("Fulfilling order", session);
+  // TODO: fill me in
+  console.log("Fulfilling order", session);
 }
 
 app.get('/test', (req, res) => {
-	res.send("test")
+  res.send("test")
 })
 
-app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
-	const payload = request.body;
-	const sig = request.headers['stripe-signature'];
+app.post('/webhook', bodyParser.raw({ type: 'application/json' }), (request, response) => {
+  const payload = request.body;
+  const sig = request.headers['stripe-signature'];
 
-	let event;
+  let event;
 
-	try {
-		event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
-	} catch (err) {
-		return response.status(400).send(`Webhook Error: ${err.message}`);
-	}
+  try {
+    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+  } catch (err) {
+    return response.status(400).send(`Webhook Error: ${ err.message }`);
+  }
 
-	// Handle the checkout.session.completed event
-	if (event.type === 'checkout.session.completed') {
-		console.log("-------------SESSION COMPLETED------------")
-		const session = event.data.object;
+  // Handle the checkout.session.completed event
+  if (event.type === 'checkout.session.completed') {
+    console.log("-------------SESSION COMPLETED------------")
+    const session = event.data.object;
 
-		// Fulfill the purchase...
-		fulfillOrder(session);
-	}
+    // Fulfill the purchase...
+    fulfillOrder(session);
+  }
 
-	response.status(200);
+  response.status(200);
 });
 app.listen(process.env.PORT || 5000, () => {
   // console.clear()

@@ -29,7 +29,7 @@
                 </div>
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:mr-4 sm:text-left w-full">
                   <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900 mb-10 mt-2">
-                    Inscription
+                    {{ title || 'Inscription' }}
                   </DialogTitle>
                   <div class="mt-2">
                     <div class="w-full">
@@ -48,7 +48,6 @@
                             </label>
                           </div>
                         </div>
-
 
                         <div class="grid grid-cols-2 gap-4">
                           <div class="col-span-1">
@@ -73,7 +72,6 @@
                             </label>
                           </div>
                         </div>
-
 
                         <div class="border-t mt-5">
                           <p class="font-bold mb-5 mt-5">Adresse</p>
@@ -104,7 +102,6 @@
                           </div>
                         </div>
 
-
                         <div class="border-t mt-5">
                           <label class="label mt-4">
                             Date de naissance <span class="text-red-400">*</span>
@@ -134,6 +131,21 @@
                             </div>
                           </div>
                         </div>
+
+                        <div v-if="fromAdmin" class="border-t mt-5 pb-5">
+                          <div class="grid grid-cols-1 mt-5">
+                            <div class="col-span-1">
+                              <label class="label">
+                                Role
+                                <select class="input-select mt-3" name="role" id="role" v-model="user.role">
+                                  <option value="ADMIN">Administrateur</option>
+                                  <option value="VENDEUR">Vendeur</option>
+                                  <option value="CLIENT">Client</option>
+                                </select>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
                       </form>
                     </div>
                   </div>
@@ -147,7 +159,8 @@
                       @click="signup"
                       :disabled="!validateForm"
               >
-                S'inscricre
+                <span v-if="title">Créer l'utilisateur</span>
+                <span v-else>S'inscricre</span>
               </button>
               <button type="button"
                       class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
@@ -202,7 +215,7 @@ export default {
       errors: null
     }
   },
-  props: [ 'open' ],
+  props: [ 'open', 'fromAdmin', 'title' ],
   methods: {
     async signup() {
       try {
@@ -216,7 +229,7 @@ export default {
           },
           lastName: this.user.lastName,
           firstName: this.user.firstName,
-          role: "CLIENT",
+          role: this.user.role,
           phoneNumber: this.user.phoneNumber,
           deliveryAddresses: [
             {
