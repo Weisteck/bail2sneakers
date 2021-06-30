@@ -15,7 +15,7 @@ const postCartService = async (selectedProducts) => {
     userId: null,
     order: {
       history: {
-        progressedAt: new Date(),
+        progressedAt: new Date('2021-06-14T03:24:00'),
         orderedAt: null,
         orderedPreparationAt: null,
         deliveredAt: null,
@@ -75,11 +75,9 @@ const getAllCartsService = async () => {
 }
 
 const getCartByIdService = async (id) => {
-  try {
-    return await getCartByIdRepository(id)
-  } catch (e) {
-    console.error(e)
-  }
+	return await getCartByIdRepository(id)
+		.then(res => res)
+		.catch(err => console.error(err))
 }
 
 const getCartByStatusService = async (status) => {

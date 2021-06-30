@@ -11,6 +11,7 @@ const history = require('connect-history-api-fallback')
 const connectDB = require('../config/connectDB')
 const path = require("path")
 const morgan = require("morgan")
+const deleteCartJob = require("./jobs/deleteCartJob")
 const passport = require("passport")
 const bodyParser = require("body-parser")
 const session = require("express-session")
@@ -47,6 +48,9 @@ passport.use(new LocalStrategy(
   }
 ))
 
+/**
+ * Connection to database
+ */
 // add & configure middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -84,17 +88,38 @@ passport.deserializeUser((id, done) => {
 
 connectDB()
 
+/**
+ * Jobs
+ */
+const deleteJob = deleteCartJob
+
+/**
+ * Express configuration
+ */
+app.use(morgan('dev'));
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./images'))
 
 
+/**
+ * Serve frontend client
+ */
 app.use(history())
 app.use('/', express.static(path.join(__dirname, CONFIG.distPath)))
 
+/**
+ * Configure images folder
+ */
+app.use(express.static('./images'))
 
 app.use('/api/user', user)
+
+/**
+ * Router
+ */
+app.use('/api/user', user);
 app.use('/api/comment', comment)
 app.use('/api/cart', cart)
 app.use('/api/product', product)
@@ -126,6 +151,9 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), (request, res
     return response.status(400).send(`Webhook Error: ${ err.message }`);
   }
 
+/**
+ * Listen server
+ */
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
     console.log("-------------SESSION COMPLETED------------")
