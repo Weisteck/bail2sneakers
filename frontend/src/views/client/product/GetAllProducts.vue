@@ -1,34 +1,50 @@
 
 <template>
-  <header>
-    <li class="place-items-end ml-20">
+    <li class="place-items-end ml-20 list-none">
       <input
         id="search"
         type="text"
         placeholder="chercher un produit "
         v-model="search"
         name="search"
-        class="w-72 border-2 border-black rounded-md"
+        class="w-5/6 border-2 h-8 mt-3 rounded-md"
+        style="border-color: #786362;"
       />
     </li>
-  </header>
-  <h1 class="text-center text-xl mt-4">Produits</h1>
-  <hr />
   
       <div class="grid grid-col-6 gap-4">
         <div class="col-span-2">
           <div id="prdFilter ">
-            <h4 class="flex mb-3">
-              <span class="text-gray-700">Filter:</span>
+            <h4 class="flex mb-3 mt-9">
+              <span class="text-gray-700 text-4xl">Filter:</span>
             </h4>
             <div>
-              <label for="filterPrd">By categories</label>
+              <label for="filterPrd">Par categories</label>
 
-              <select name="" id="filterPrdSlt" v-model="selectedCategory">
+              <select name="category" class="border-2" id="filterPrdSlt" v-model="categories">
                 <option value="all">All</option>
                 <option value="montantes">Montantes</option>
-                <option value="montantes">Sans lacet </option>
-                <option value="montantes">Sans lacet </option>
+                <option value="sans lacets">Sans lacet </option>
+                <option value="basket basse">Basket basse </option>
+                <option value="homme">Homme </option>
+                <option value="femme">Femme </option>
+              </select>
+
+              <label for="filterPrd"> Par Marque </label>
+
+              <select name="category" class="border-2" id="filterPrdSlt" v-model="selectedCategory">
+                <option value="all">All</option>
+                <option value="adidas">Adidas</option>
+                <option value="homme">Air Jordan  </option>
+                <option value="femme">Alexander Mc QUEEN </option>
+                <option value="femme">Balenciaga </option>
+                <option value="sans lacets">Converse </option>
+                <option value="femme">Dior </option>
+                <option value="femme">New Balance </option>
+                <option value="basket basse">Nike </option>
+                <option value="femme">Reebok </option>
+                
+
               </select>
             </div>
           </div>
@@ -49,35 +65,39 @@
                       overlay-hidden
                       bg-white-500
                       rounded-lg
-                      max-w-xs
+                      max-w-prose
                       shadow-lg
+                      hover:bg-gray-100
+                    
                     "
+                    style="height: 500px"
                     @click="$router.push(`/product/${product._id}`)"
                   >
                     <div
                       class="relative pt-10 px-10 flex items-center justify-center"
                     >
                       <div
-                        class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                        class="block absolute w-48 h-40 bottom-0 left-0 -mb-24 ml-3"
                       ></div>
                       <img
                         :src="product.images[0]"
                         alt="image"
-                        class="relative w-40"
+                        class="relative w-40 "
+                        style="width: 230px;"
                       />
                     </div>
-                    <div class="relative text-black px-6 pb-6 mt-6">
-                      <span class="block opacity-75 -mb-1">{{
+                    <div class="relative text-black px-6 pb-6 mt-5  text-2xl">
+                      <span class="block opacity-75 mb-5">{{
                         product.brand.name
                       }}</span>
                       <div class="flex justify-between">
-                        <span class="block font-semibold text-lg">{{
+                        <span class="block font-semibold text-lg ">{{
                           product.model
                         }}</span>
                         <span
                           class="
                             block
-                            bg-green-600
+                            bg-gray-600
                             rounded-full
                             text-white text-xs
                             font-bold
@@ -124,6 +144,9 @@ export default {
     search() {
       this.productsFiltered();
     },
+    categories(){
+      this.productsFiltered();
+    }
   },
   methods: {
     getAllProducts() {
@@ -136,6 +159,7 @@ export default {
         .catch((err) => console.error(err));
     },
     productsFiltered() {
+      console.log(this.searchWord.length)
       this.searchWords.length !== undefined
         ? (this.filteredProduct = this.nonFilteredProducts
             // Recherche
@@ -155,8 +179,8 @@ export default {
               )
             ))
         : (this.filteredProduct = this.nonFilteredProducts.filter((product) => {
-            if (this.category === []) return true;
-            return product.categories === this.category;
+            if (this.categories === []) return true;
+            return product.categories === this.categories;
           }));
     },
   },
