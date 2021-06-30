@@ -22,7 +22,6 @@ router.get('/checkout-session', async (req, res) => {
 
 
 router.get('/checkout-success', async (req, res) => {
-  console.log("in checkout success api")
   const session = await stripe.checkout.sessions.retrieve(req.query.id, {
     expand: [ 'line_items' ]
   })
@@ -48,7 +47,6 @@ router.get('/checkout', async (req, res) => {
       return data
   })
 
-  console.log(data)
   res.send(paymentIntents)
 })
 

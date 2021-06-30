@@ -15,9 +15,6 @@ const createCheckoutSessionService = async (items, cartId) => {
       cancel_url: 'http://localhost:3000/checkout/cancel'
     })
 
-    //const putCartServiceResponse = await putCartService(cartId)
-    //console.log(putCartServiceResponse)
-
     return ({ id: session.id })
   } catch (e) {
     console.error(e)

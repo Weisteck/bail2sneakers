@@ -16,7 +16,7 @@ import GetCarts from "../views/backoffice/cart/GetCarts.vue"
 import NotAuthorized from "../views/redirect/NotAuthorized.vue"
 import Login from "../views/client/authentication/Login.vue"
 import Signup from "../views/client/authentication/Signup.vue"
-import getAllUsers from "../views/backoffice/user/getAllUsers.vue"
+import GetAllUsers from "../views/backoffice/user/GetAllUsers.vue"
 
 const routes = [
   {
@@ -105,11 +105,8 @@ const routes = [
   {
     name: 'getUsers',
     path: '/back-office/user/get-all',
-    component: getAllUsers
-  },
-  {
-    name: 'createUser',
-    path: '/back-office/user/create'
+    component: GetAllUsers,
+    meta: { authorize: [ Role.Admin ] }
   },
 ]
 
