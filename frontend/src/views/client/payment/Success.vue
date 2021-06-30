@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     async getSessionData() {
-      console.log("in getSessionData")
       try {
         const response = await this.$store.dispatch('getSessionData', this.$route.query.id)
 

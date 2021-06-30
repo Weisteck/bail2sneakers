@@ -138,8 +138,20 @@ export default createStore({
       } catch (e) {
         console.error(e)
       }
-    }
+    },
 
+    // #endregion
+    
+    // #region checkout
+    
+    async getUsers() {
+      try {
+        return await api.get('/user/get-all')
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    
     // #endregion
   },
   modules: {}

@@ -14,6 +14,8 @@
     |
     <router-link to="/back-office/product/get-all">Get all products back office</router-link>
     |
+    <router-link :to="{name: 'getUsers'}">Get all users</router-link>
+    |
 
     <button v-if="!user" class="btn cursor-pointer hover:text-blue-600 transition" @click="openLogin = true">Connexion | </button>
     <button v-if="!user" class="btn cursor-pointer hover:text-blue-600 transition" @click="openSignup = true"> Inscription</button>
