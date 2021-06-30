@@ -16,6 +16,7 @@ import GetCarts from "../views/backoffice/cart/GetCarts.vue"
 import NotAuthorized from "../views/redirect/NotAuthorized.vue"
 import Login from "../views/client/authentication/Login.vue"
 import Signup from "../views/client/authentication/Signup.vue"
+import getAllUsers from "../views/backoffice/user/getAllUsers.vue"
 
 const routes = [
   {
@@ -98,7 +99,18 @@ const routes = [
     name: 'signup',
     path: '/authentication/signup',
     component: Signup
-  }
+  },
+
+  // Users
+  {
+    name: 'getUsers',
+    path: '/back-office/user/get-all',
+    component: getAllUsers
+  },
+  {
+    name: 'createUser',
+    path: '/back-office/user/create'
+  },
 ]
 
 const router = createRouter({
