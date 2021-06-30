@@ -66,8 +66,7 @@ app.use(passport.session())
 passport.serializeUser((user, done) => done(null, user._id))
 
 passport.deserializeUser((id, done) => {
-  try {
-    const response = User.findOne({ "_id": new ObjectId(id) })
+  User.findOne({ "_id": new ObjectId(id) }).then(response => {
     const user = {}
 
     user.id = response._id
@@ -77,10 +76,10 @@ passport.deserializeUser((id, done) => {
     user.role = response.role
 
     return done(null, user)
-  } catch (error) {
+  }).catch(error => {
     console.error(error)
     done(error, false)
-  }
+  })
 })
 
 connectDB()

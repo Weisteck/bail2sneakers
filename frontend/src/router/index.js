@@ -34,7 +34,7 @@ const routes = [
     path: '/orders',
     name: 'GetCarts',
     component: GetCarts,
-    meta: { authorize: [ Role.Vendeur ] }
+    meta: { authorize: [ Role.Vendeur, Role.Admin ] }
   },
 
   // Product
@@ -52,19 +52,19 @@ const routes = [
     path: '/back-office/product/create',
     name: 'createProduct',
     component: CreateProduct,
-    meta: { authorize: [ Role.Vendeur ] }
+    meta: { authorize: [ Role.Vendeur, Role.Admin ] }
   },
   {
     path: '/back-office/product/edit/:id',
     name: 'editProduct',
     component: EditProduct,
-    meta: { authorize: [ Role.Vendeur ] }
+    meta: { authorize: [ Role.Vendeur, Role.Admin ] }
   },
   {
     path: '/back-office/product/get-all',
     name: 'GetAllProductsBackOffice',
     component: GetAllProductsBackOffice,
-    meta: { authorize: [ Role.Vendeur ] }
+    meta: { authorize: [ Role.Vendeur, Role.Admin ] }
   },
   {
     path: '/checkout/success',
@@ -120,8 +120,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.authorize)) {
-    console.log("record: ", to.meta.authorize)
-
     try {
       const userResponse = await api.get(`/authentication/profile`)
 
@@ -129,10 +127,9 @@ router.beforeEach(async (to, from, next) => {
         next({
           path: '/not-authorized'
         })
-      else
-        next({
-          path: '/authentication/login'
-        })
+      else {
+        next()
+      }
     } catch (e) {
       next({
         path: '/authentication/login'

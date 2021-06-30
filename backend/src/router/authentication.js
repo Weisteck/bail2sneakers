@@ -29,13 +29,15 @@ router.get('/logout', (req, res) => {
 
 router.get('/profile', (req, res) => {
   if (req.isAuthenticated()) {
-    if (req.user)
+    if (req.user) {
+      console.log("user found: ", req.user)
       res.send(req.user)
-    else {
+    } else {
       req.session.destroy()
       res.send("There are no user.")
     }
   } else {
+    console.log("is not authenticated")
     req.session.destroy()
     res.status(403).send("User is not authenticated.")
   }
