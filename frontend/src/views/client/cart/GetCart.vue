@@ -3,121 +3,128 @@
 
   <div class="container mx-auto">
 
-    <h1 class="title">PANIER</h1>
+    <div class="my-8">
+      <h1 class="text-4xl">PANIER</h1>
+    </div>
 
     <form @submit.prevent="proceedToCheckout">
-      <div class="card">
-        <h1 class="sub-title">Adresse de livraison</h1>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-1">
+          <div class="card h-60">
+            <h1 class="sub-title">Adresse de livraison</h1>
 
-        <div class="-mx-3 md:flex mb-2">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="label" for="delivery-city">
-              Ville
-            </label>
-            <input v-model="order.address.city"
-                   class="input"
-                   id="delivery-city"
-                   type="text"
-                   placeholder="Lyon"
-            >
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label class="label" for="delivery-address">
-              Adresse
-            </label>
-            <input v-model="order.address.address"
-                   class="input"
-                   id="delivery-address"
-                   type="text"
-                   placeholder="27 Rue Raoul Servant"
-            >
-          </div>
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="label" for="delivery-zip">
-              Code postal
-            </label>
-            <input v-model="order.address.zipCode"
-                   class="input"
-                   id="delivery-zip"
-                   type="text"
-                   placeholder="69007"
-            >
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label class="label" for="delivery-country">
-              Pays
-            </label>
-            <input v-model="order.address.country"
-                   class="input"
-                   id="delivery-country"
-                   type="text"
-                   placeholder="France"
-            >
+            <div class="-mx-3 md:flex mb-2">
+              <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="label" for="delivery-city">
+                  Ville
+                </label>
+                <input v-model="order.address.city"
+                       class="input"
+                       id="delivery-city"
+                       type="text"
+                       placeholder="Lyon"
+                >
+              </div>
+              <div class="md:w-1/2 px-3">
+                <label class="label" for="delivery-address">
+                  Adresse
+                </label>
+                <input v-model="order.address.address"
+                       class="input"
+                       id="delivery-address"
+                       type="text"
+                       placeholder="27 Rue Raoul Servant"
+                >
+              </div>
+              <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="label" for="delivery-zip">
+                  Code postal
+                </label>
+                <input v-model="order.address.zipCode"
+                       class="input"
+                       id="delivery-zip"
+                       type="text"
+                       placeholder="69007"
+                >
+              </div>
+              <div class="md:w-1/2 px-3">
+                <label class="label" for="delivery-country">
+                  Pays
+                </label>
+                <input v-model="order.address.country"
+                       class="input"
+                       id="delivery-country"
+                       type="text"
+                       placeholder="France"
+                >
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="col-span-1">
+          <div class="card h-60">
+            <div class="grid grid-cols-10 grid-flow-col mb-1">
+              <h1 class="sub-title col-span-4">Adresse de facturation</h1>
 
-      <div class="card">
-        <div class="grid grid-cols-10 grid-flow-col mb-1">
-          <h1 class="sub-title col-span-4">Adresse de facturation</h1>
+              <div class="text-right col-span-5">
+                <label for="invoice" class="text-right">Utiliser la même adresse que pour la livraison</label>
+              </div>
 
-          <div class="text-right col-span-5">
-            <label for="invoice" class="text-right">Utiliser la même adresse que pour la livraison</label>
-          </div>
+              <div class="text-right col-span-1">
+                <input v-model="invoiceSameAsDelivery" type="checkbox" id="invoice" class="text-gray-600">
+              </div>
+            </div>
 
-          <div class="text-right col-span-1">
-            <input v-model="invoiceSameAsDelivery" type="checkbox" id="invoice" class="text-gray-600">
-          </div>
-        </div>
-
-        <div class="-mx-3 md:flex mb-2">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="label" for="city">
-              Ville
-            </label>
-            <input v-model="invoiceAddress.city"
-                   :disabled="invoiceSameAsDelivery"
-                   class="input"
-                   id="city"
-                   type="text"
-                   placeholder="Lyon"
-            >
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label class="label" for="address">
-              Adresse
-            </label>
-            <input v-model="invoiceAddress.address"
-                   :disabled="invoiceSameAsDelivery"
-                   class="input"
-                   id="address"
-                   type="text"
-                   placeholder="27 Rue Raoul Servant"
-            >
-          </div>
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="label" for="zip">
-              Code postal
-            </label>
-            <input v-model="invoiceAddress.zipCode"
-                   :disabled="invoiceSameAsDelivery"
-                   class="input"
-                   id="zip"
-                   type="text"
-                   placeholder="69007"
-            >
-          </div>
-          <div class="md:w-1/2 px-3">
-            <label class="label" for="country">
-              Pays
-            </label>
-            <input v-model="invoiceAddress.country"
-                   :disabled="invoiceSameAsDelivery"
-                   class="input"
-                   id="country"
-                   type="text"
-                   placeholder="France"
-            >
+            <div class="-mx-3 md:flex mb-2">
+              <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="label" for="city">
+                  Ville
+                </label>
+                <input v-model="invoiceAddress.city"
+                       :disabled="invoiceSameAsDelivery"
+                       class="input"
+                       id="city"
+                       type="text"
+                       placeholder="Lyon"
+                >
+              </div>
+              <div class="md:w-1/2 px-3">
+                <label class="label" for="address">
+                  Adresse
+                </label>
+                <input v-model="invoiceAddress.address"
+                       :disabled="invoiceSameAsDelivery"
+                       class="input"
+                       id="address"
+                       type="text"
+                       placeholder="27 Rue Raoul Servant"
+                >
+              </div>
+              <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="label" for="zip">
+                  Code postal
+                </label>
+                <input v-model="invoiceAddress.zipCode"
+                       :disabled="invoiceSameAsDelivery"
+                       class="input"
+                       id="zip"
+                       type="text"
+                       placeholder="69007"
+                >
+              </div>
+              <div class="md:w-1/2 px-3">
+                <label class="label" for="country">
+                  Pays
+                </label>
+                <input v-model="invoiceAddress.country"
+                       :disabled="invoiceSameAsDelivery"
+                       class="input"
+                       id="country"
+                       type="text"
+                       placeholder="France"
+                >
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -189,11 +196,14 @@
             {{ fixPriceTtc(order.priceExclTax, priceDelivery) }}
           </p>
         </div>
-      </div>
 
-      <button type="submit" class="btn btn-primary mr-2">
-        PAYER
-      </button>
+        <div class="w-40 mx-auto">
+          <button type="submit" class="mt-8 btn btn-primary mr-2">
+            PAYER
+          </button>
+        </div>
+
+      </div>
     </form>
   </div>
 </template>
