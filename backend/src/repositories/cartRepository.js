@@ -18,6 +18,10 @@ const getCartByIdRepository = (id) => {
   return Cart.findOne({ "_id": new ObjectId(id) })
 }
 
+const getCartByUserIdRepository = (userId) => {
+  return Cart.find({ "userId": new ObjectId(userId) })
+}
+
 const getCartsByStatusRepository = async (status) => {
   const carts = await Cart.find({ [`order.history.${ status }`]: { $ne: null } })
   console.log(carts)
@@ -42,5 +46,6 @@ module.exports = {
   getCartByIdRepository: getCartByIdRepository,
   getCartsByStatusRepository: getCartsByStatusRepository,
   putCartRepository: putCartRepository,
-  deleteCartRepository: deleteCartRepository
+  deleteCartRepository: deleteCartRepository,
+  getCartByUserIdRepository: getCartByUserIdRepository
 }

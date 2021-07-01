@@ -9,7 +9,8 @@ const {
   addProductToCartService,
   deleteCartService,
   putCartService,
-  getCartByStatusService
+  getCartByStatusService,
+  getCartByUserIdService
 } = require('../services/cartService');
 
 router.get('/get-all', (req, res) => {
@@ -31,7 +32,15 @@ router.get('/get-by-status', async (req, res) => {
   } catch (e) {
     res.status(400)
   }
+})
 
+router.get('/get-by-user-id', async (req, res) => {
+  try {
+    const cartResponse = await getCartByUserIdService(req.query.userid)
+    res.send(cartResponse)
+  } catch (e) {
+    res.status(400)
+  }
 })
 
 router.post('/', (req, res) => {
