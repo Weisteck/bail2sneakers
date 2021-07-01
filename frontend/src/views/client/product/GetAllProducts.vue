@@ -1,106 +1,119 @@
 <template>
-  <li class="place-items-end ml-20 list-none">
-    <input
-      id="search"
-      type="text"
-      placeholder="chercher un produit "
-      v-model="search"
-      name="search"
-      class="border input w-5/6 border-2 h-8 mt-3 rounded-md"
-    />
-  </li>
-
-  <div class="grid grid-col-6 gap-4">
+  <div class="grid grid-cols-8 gap-4">
     <div class="col-span-2">
-      <div id="prdFilter ">
+      <div class="ml-6">
+        <h4 class="flex mb-3 mt-9 text-gray-700 text-4xl">
+          Rechercher parmi {{ filteredProduct.length }} produits
+        </h4>
+        <input
+          id="search"
+          type="text"
+          placeholder="Chercher une marque ou un model"
+          v-model="search"
+          name="search"
+          class="input"
+        />
+
         <h4 class="flex mb-3 mt-9">
           <span class="text-gray-700 text-4xl">Filtrer les produits</span>
         </h4>
         <div>
-          <label class="label">
-            Par categories
-            <select name="selectedCategory" class="border-2 input-select" v-model="selectedCategory">
-              <option value="">All</option>
-              <option value="montantes">Montantes</option>
-              <option value="sans lacets">Sans lacet</option>
-              <option value="basquette basse">Basket basse</option>
-              <option value="Hommes">Homme</option>
-              <option value="Femmes">Femme</option>
-            </select>
-          </label>
+          <h2 class="text-2xl mb-2 mt-5">Par categories</h2>
+          <div class="ml-2">
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Hommes" v-model="selectedCategory">
+              Hommes
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Femmes" v-model="selectedCategory">
+              Femmes
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="montantes" v-model="selectedCategory">
+              Montantes
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="sans lacets" v-model="selectedCategory">
+              Sans lacet
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="basquette basse" v-model="selectedCategory">
+              Basket basse
+            </label>
+          </div>
 
-          <label class="label">
-            Par Marque
-            <select name="selectedBrand" class="border-2 input-select" v-model="selectedBrand">
-              <option value="">All</option>
-              <option value="Converse">Converse</option>
-              <option value="Nike">Nike</option>
-              <option value="Air Jordan">Air Jordan</option>
-              <option value="Adidas">Adidas</option>
-              <option value="New Balance">New Balance</option>
-              <option value="Reebok">Reebok</option>
-              <option value="Alexander McQUEEN">Alexander Mc QUEEN</option>
-              <option value="Jordan">Jordan</option>
-            </select>
-          </label>
+          <h2 class="text-2xl mb-2 mt-5">Par marques</h2>
+          <div class="ml-2">
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Nike" v-model="selectedBrand">
+              Nike
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Converse" v-model="selectedBrand">
+              Converse
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Air Jordan" v-model="selectedBrand">
+              Air Jordan
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Adidas" v-model="selectedBrand">
+              Adidas
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="New Balance" v-model="selectedBrand">
+              New Balance
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Reebok" v-model="selectedBrand">
+              Reebok
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Alexander McQUEEN" v-model="selectedBrand">
+              Alexander McQUEEN
+            </label>
+            <label class="label">
+              <input type="checkbox" class="input-checkbox" value="Jordan" v-model="selectedBrand">
+              Jordan
+            </label>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-span-4">
+    <div class="col-span-6">
       <main class="container px-8 pt-2 mx-auto lg:px-4">
-        <div class="">
+        <div class="grid grid-cols-3 gap-4">
           <div
             v-for="(product, index) in filteredProduct"
             :key="product.productId"
-            class="mt-8 grid grid-col-3"
+            class="mt-8 md:col-span-1 sm:col-span-3"
           >
-            <div class="
-                        overlay-hidden
-                        bg-white-500
-                        rounded-lg
-                        shadow-lg
-                        hover:bg-gray-100
-                        col-span-1
-                      "
-                 style="height: 500px"
-                 @click="$router.push(`/product/${product._id}`)"
-            >
-              <div
-                class="relative pt-10 px-10 flex items-center justify-center"
-              >
-                <div
-                  class="block absolute w-48 h-40 bottom-0 left-0 -mb-24 ml-3"
-                ></div>
+            <div class="h-96 shadow hover:shadow-lg transition cursor-pointer card"
+                 @click="$router.push(`/product/${product._id}`)">
+              <div class="relative pt-10 mx-auto">
                 <img
                   :src="product.images[0]"
                   alt="image"
-                  class="relative w-40 "
+                  class="relative h-40 object-contain"
                   style="width: 230px;"
                 />
               </div>
-              <div class="relative text-black px-6 pb-6 mt-5  text-2xl">
-                      <span class="block opacity-75 mb-5">{{
-                          product.brand.name
-                        }}</span>
-                <div class="flex justify-between">
-                        <span class="block font-semibold text-lg ">{{
-                            product.model
-                          }}</span>
-                  <span
-                    class="
-                            block
-                            bg-gray-600
-                            rounded-full
-                            text-white text-xs
-                            font-bold
-                            px-3
-                            py-2
-                            leading-none
-                            flex
-                            items-center
-                          "
-                  >{{ product.priceExclTax }}€</span
-                  >
+              <div class="relative text-black pb-2 mt-5  text-2xl">
+                <span>
+                  {{ product.brand.name }}
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-1">
+                <div class="col-span-2">
+                   <span class="block font-semibold text-lg ">
+                    {{ product.model }}
+                  </span>
+                </div>
+                <div class="col-span-1 flex justify-self-end">
+                <span
+                  class="self-center w-16 py-2 col-end-7 text-center block bg-brown-1 rounded-full text-white text-xs font-bold">
+                    {{ product.priceExclTax }} €
+                  </span>
                 </div>
               </div>
             </div>
@@ -119,8 +132,8 @@ export default {
       search: "",
       nonFilteredProducts: [],
       filteredProduct: [],
-      selectedCategory: "",
-      selectedBrand: "",
+      selectedCategory: [],
+      selectedBrand: [],
       categories: [],
       brand: {},
     };
@@ -158,7 +171,7 @@ export default {
         .catch((err) => console.error(err));
     },
     productsFiltered() {
-      console.log("search words: ", this.searchWords.length)
+      console.log("selectedCategory", this.selectedCategory)
       this.searchWords.length !== undefined
         ? (
           this.filteredProduct = this.nonFilteredProducts
@@ -179,22 +192,23 @@ export default {
               )
             )
             .filter((product) => {
-              if (this.selectedCategory === "") return true;
-              return product.categories.includes(this.selectedCategory)
+              if (this.selectedCategory.length === 0) return true
+              return product.categories.some(category => this.selectedCategory.includes(category))
             })
             .filter((product) => {
-              if (this.selectedBrand === "") return true;
-              return product.brand.name.replace(/\s/g, '').toLowerCase() === this.selectedBrand.replace(/\s/g, '').toLowerCase()
+              if (this.selectedBrand.length === 0) return true
+              return this.selectedBrand.includes(product.brand.name)
             })
         )
         : this.filteredProduct = this.nonFilteredProducts
           .filter((product) => {
-            if (this.selectedCategory === "") return true;
-            return product.categories.includes(this.selectedCategory)
+            if (this.selectedCategory.length === 0) return true
+            console.log(product.categories.some(category => this.selectedCategory.includes(category)))
+            return product.categories.some(category => this.selectedCategory.includes(category))
           })
           .filter((product) => {
-            if (this.selectedBrand === "") return true;
-            return product.brand.name.replace(/\s/g, '').toLowerCase() === this.selectedBrand.replace(/\s/g, '').toLowerCase()
+            if (this.selectedBrand.length === 0) return true
+            return this.selectedBrand.includes(product.brand.name)
           })
     },
   },
@@ -203,3 +217,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.bg-brown-1 {
+  background-color: #4B3838;
+}
+</style>
