@@ -140,9 +140,9 @@ export default {
       } catch (e) {
         this.user = {
           firstName: "",
-            lastName: "",
-            role: "",
-            mail: ""
+          lastName: "",
+          role: "",
+          mail: ""
         }
         console.error(e.response.data)
       }
@@ -169,8 +169,8 @@ export default {
   }
 }
 </script>
-<style>
 
+<style>
 .bg-brown-1 {
   background-color: #4B3838;
 }
