@@ -31,7 +31,7 @@ const routes = [
     component: GetCart
   },
   {
-    path: '/orders',
+    path: '/back-office/orders',
     name: 'GetCarts',
     component: GetCarts,
     meta: { authorize: [ Role.Vendeur, Role.Admin ] }

@@ -25,8 +25,7 @@ export default createStore({
       }
     ],
   },
-  mutations: {
-  },
+  mutations: {},
   actions: {
     // #region Product
     async getAllProducts() {
@@ -98,7 +97,7 @@ export default createStore({
 
     putCart(context, payload) {
       try {
-        return api.put(`/cart?id=${ payload.id }`, { status: payload.status })
+        return api.put(`/cart?id=${ payload.id }`, payload)
       } catch (e) {
         console.error(e)
       }
@@ -141,17 +140,26 @@ export default createStore({
     },
 
     // #endregion
-    
+
     // #region checkout
-    
+
     async getUsers() {
       try {
         return await api.get('/user/get-all')
       } catch (e) {
         console.error(e)
       }
+    },
+
+    async getUser() {
+      try {
+        const response = await api.get('/authentication/profile')
+        return response
+      } catch (e) {
+        console.error(e)
+      }
     }
-    
+
     // #endregion
   },
   modules: {}

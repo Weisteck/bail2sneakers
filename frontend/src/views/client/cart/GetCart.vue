@@ -239,7 +239,14 @@ export default {
       invoiceSameAsDelivery: false,
       priceDelivery: 499,
       deleteProductModal: false,
-      productToDelete: null
+      productToDelete: null,
+      user: {
+        id: "",
+        firstName: "",
+        lastName: "",
+        role: "",
+        mail: ""
+      },
     }
   },
   emits: [ 'confirmDelete' ],
@@ -256,9 +263,25 @@ export default {
     }
   },
   beforeMount() {
+    this.getUser()
     this.getCartIdInLocalStorage()
   },
   methods: {
+    async getUser() {
+      try {
+        const response = await this.$store.dispatch('getUser')
+        this.user = response.data
+      } catch (e) {
+        this.user = {
+          firstName: "",
+          lastName: "",
+          role: "",
+          mail: ""
+        }
+        console.error(e.response.data)
+      }
+    },
+
     showDeleteProductModal(product, index) {
       this.productToDelete = { product, index }
       this.deleteProductModal = true
@@ -385,6 +408,13 @@ export default {
 
         if (result.error)
           console.error((result.error.message))
+
+        await this.$store.dispatch('putCart', {
+          status: null,
+          id: this.cartId,
+          userId: this.user.id,
+          userAddress: this.invoiceAddress
+        })
       } catch (e) {
         console.error(e)
       }
