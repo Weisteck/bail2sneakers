@@ -76,6 +76,18 @@ FORM
     rounded-r
     cursor-pointer
 }
+.input-select {
+  @apply
+  block
+  w-full
+  bg-gray-50
+  text-gray-600
+  border
+  border-gray-200
+  disabled:bg-gray-100
+  rounded
+  py-3 px-4
+}
 
 .label {
     @apply

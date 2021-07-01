@@ -3,8 +3,13 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const postUserRepository = (user) => {
   return User.create(user)
-    .then(() => true)
-    .catch(err => console.error(err))
+    .then(() => {
+      return { message: "L'utilisateur à bien été créer.", status: 200 }
+    })
+    .catch(err => {
+      console.error(err)
+      return { status: 409 }
+    })
 };
 
 const getAllUsersRepository = async () => {
@@ -17,8 +22,8 @@ const getUserByIdRepository = (id) => {
 
 const putUserRepository = (id, user) => {
   return User.updateOne({
-    "_id": new ObjectId(id)
-  },
+      "_id": new ObjectId(id)
+    },
     user
   )
 };

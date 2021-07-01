@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-
-
 const CartSchema = new schema({
 	selectedProducts: [ {
 		productId: { type: String },

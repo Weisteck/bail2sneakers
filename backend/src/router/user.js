@@ -11,8 +11,8 @@ const {
 
 router.post('/', (req, res) => {
   postUserService(req.body)
-    .then(result => res.send(result))
-    .catch(err => console.error(err))
+    .then(response => res.status(response.status).send(response.message))
+    .catch(err => res.send(err))
 });
 
 router.get('/get-all', (req, res) => {

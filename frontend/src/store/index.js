@@ -23,9 +23,10 @@ export default createStore({
 				`,
         logo: "https://upload.wikimedia.org/wikipedia/commons/3/36/Logo_nike_principal.jpg"
       }
-    ]
+    ],
   },
-  mutations: {},
+  mutations: {
+  },
   actions: {
     // #region Product
     async getAllProducts() {
@@ -95,18 +96,62 @@ export default createStore({
         .catch(err => console.error(err))
     },
 
+    putCart(context, payload) {
+      try {
+        return api.put(`/cart?id=${ payload.id }`, { status: payload.status })
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
+    getCarts() {
+      try {
+        return api.get('cart/get-all')
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
+    getCartsByStatus(context, payload) {
+      try {
+        return api.get(`cart/get-by-status?status=${ payload.status }`)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
     // #endregion
 
     // #region checkout
 
     async createCheckoutSession(context, payload) {
       try {
-				return await api.post('/payment/create-checkout-session', payload)
+        return await api.post('/payment/create-checkout-session', payload)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
+    async getSessionData(context, payload) {
+      try {
+        return await api.get('/payment/checkout-session?id=' + payload)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
+    // #endregion
+    
+    // #region checkout
+    
+    async getUsers() {
+      try {
+        return await api.get('/user/get-all')
       } catch (e) {
         console.error(e)
       }
     }
-
+    
     // #endregion
   },
   modules: {}

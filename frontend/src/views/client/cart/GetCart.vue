@@ -290,7 +290,7 @@ export default {
         cartId: this.cartId,
         productSelected: this.productToDelete.product
       })
-        .then(res => {
+        .then(() => {
           this.productToDelete = {}
           this.deleteProductModal = false
         })
@@ -362,7 +362,10 @@ export default {
 
         const stripe = await stripePromise;
 
-        const response = await this.$store.dispatch('createCheckoutSession', items)
+        const response = await this.$store.dispatch('createCheckoutSession', {
+          items: items,
+          cartId: this.cartId
+        })
 
         const session = await response.data;
 
