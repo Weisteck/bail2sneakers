@@ -86,7 +86,7 @@ const getCartByIdService = async (id) => {
 		.catch(err => console.error(err))
 }
 
-const getCartByUserIdService = async (userId) => {
+const getCartsByUserIdService = async (userId) => {
   try {
     return await getCartByUserIdRepository(userId)
   } catch (e) {
@@ -202,5 +202,5 @@ module.exports = {
   addProductToCartService: addProductToCartService,
   deleteCartService: deleteCartService,
   putCartService: putCartService,
-  getCartByUserIdService: getCartByUserIdService
+  getCartsByUserIdService: getCartsByUserIdService
 }

@@ -10,7 +10,7 @@ const {
   deleteCartService,
   putCartService,
   getCartByStatusService,
-  getCartByUserIdService
+  getCartsByUserIdService
 } = require('../services/cartService');
 
 router.get('/get-all', (req, res) => {
@@ -36,7 +36,7 @@ router.get('/get-by-status', async (req, res) => {
 
 router.get('/get-by-user-id', async (req, res) => {
   try {
-    const cartResponse = await getCartByUserIdService(req.query.userid)
+    const cartResponse = await getCartsByUserIdService(req.query.userid)
     res.send(cartResponse)
   } catch (e) {
     res.status(400)

@@ -119,6 +119,14 @@ export default createStore({
       }
     },
 
+    getCartsByUserId(context, payload) {
+      try {
+        return api.get(`cart/get-by-user-id?userid=${ payload.userId }`)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
     // #endregion
 
     // #region checkout
