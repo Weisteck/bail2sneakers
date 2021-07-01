@@ -22,6 +22,7 @@ const { deleteCartService } = require("../services/cartService");
 module.exports = schedule.scheduleJob('* * 0 * * *', async (jobDate) => {
 	try {
 		const carts = await getAllCartsService()
+		console.log("carts: ", carts)
 		const cartsNotOrdered = carts.map(cart => {
 			if (cart.order.history.orderedAt === null) return cart
 		})

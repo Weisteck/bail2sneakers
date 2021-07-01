@@ -91,7 +91,7 @@ connectDB()
 /**
  * Jobs
  */
-const deleteJob = deleteCartJob
+// const deleteJob = deleteCartJob
 
 /**
  * Express configuration
