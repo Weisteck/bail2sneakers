@@ -165,13 +165,10 @@ export default {
         .then((res) => {
           this.nonFilteredProducts = res.data;
           this.filteredProduct = res.data;
-
-          console.log(res.data)
         })
         .catch((err) => console.error(err));
     },
     productsFiltered() {
-      console.log("selectedCategory", this.selectedCategory)
       this.searchWords.length !== undefined
         ? (
           this.filteredProduct = this.nonFilteredProducts
@@ -203,7 +200,6 @@ export default {
         : this.filteredProduct = this.nonFilteredProducts
           .filter((product) => {
             if (this.selectedCategory.length === 0) return true
-            console.log(product.categories.some(category => this.selectedCategory.includes(category)))
             return product.categories.some(category => this.selectedCategory.includes(category))
           })
           .filter((product) => {
