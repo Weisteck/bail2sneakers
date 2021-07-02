@@ -391,6 +391,13 @@ export default {
       }))
 
       try {
+        await this.$store.dispatch('putCart', {
+          status: null,
+          id: this.cartId,
+          userId: this.user.id,
+          userAddress: this.invoiceAddress
+        })
+
         const stripePromise = loadStripe("pk_test_51J4S4HC2Kud8irFwiMr7d1bEaVMAyivRya7v2DmUK5FdMPnXkquSnSg3uaENJDOB5DBrbXNnB2tQvPwNsqC3EdPm002GE9ZmyY")
 
         const stripe = await stripePromise;
@@ -409,12 +416,6 @@ export default {
         if (result.error)
           console.error((result.error.message))
 
-        await this.$store.dispatch('putCart', {
-          status: null,
-          id: this.cartId,
-          userId: this.user.id,
-          userAddress: this.invoiceAddress
-        })
       } catch (e) {
         console.error(e)
       }

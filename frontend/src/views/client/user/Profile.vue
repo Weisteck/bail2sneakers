@@ -1,43 +1,44 @@
 <template>
-  <div class="card">
-    <h2 class="text-base text-2xl">Inormation du profil</h2>
-    <br>
-    <p>Prenom: <span>{{user.firstName}}</span> </p>
-    <p>Nom de Famille: <span>{{user.lastName}}</span> </p>
-    <p>Role: <span>{{user.role}}</span> </p>
+  <div class="container mx-auto">
+    <div class="card">
+      <h2 class="text-base text-2xl">Inormation du profil</h2>
+      <br>
+      <p>Prenom: <span>{{user.firstName}}</span> </p>
+      <p>Nom de Famille: <span>{{user.lastName}}</span> </p>
+      <p>Role: <span>{{user.role}}</span> </p>
 
-    <p>Email: <span>{{user.mail}}</span> </p>
+      <p>Email: <span>{{user.mail}}</span> </p>
 
-
-
-     <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-<div class="overflow-auto">
+      <div class="overflow-auto mt-10">
         <table class="w-full">
           <thead>
           <tr class="font-bold uppercase border-b border-gray-300">
-            <th>Date de Commande</th>
-            <th>Adresse</th>
-            <th>Produit Selectionné</th>
+            <th>User ID</th>
+            <th>PRIX HTC</th>
+            <th>Progressed at</th>
+            <th>Ordered at at</th>
+            <th>Ordered preparation at</th>
+            <th>Delivered at</th>
+            <th>Ended at</th>
+            <th>canceled at at</th>
           </tr>
           </thead>
-          <tr class="text-left border-b border-gray-200 hover:bg-gray-50 transition cursor-pointer">
-            <td>{{}}</td>
-            <td>{{  }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.phoneNumber }}</td>
-            <td>{{ new Date(user.birthday).toLocaleDateString() }}</td>
-            <td>{{ user.role }}</td>
+          <tr class="text-left border-b border-gray-200 hover:bg-gray-50 transition cursor-pointer"
+              v-for="cart in carts"
+              @click="$router.push(`/cart/${cart._id}`)">
+            <td>{{ cart.userId }}</td>
+            <td>{{ cart.order.priceExclTax }}</td>
+            <td>{{ cart.order.history.progressedAt }}</td>
+            <td>{{ cart.order.history.orderedAt || "null" }}</td>
+            <td>{{ cart.order.history.orderedPreparationAt || "null" }}</td>
+            <td>{{ cart.order.history.deliveredAt || "null" }}</td>
+            <td>{{ cart.order.endedAt || "null" }}</td>
+            <td>{{ cart.order.canceledAt || "null" }}</td>
           </tr>
         </table>
       </div>
+    </div>
   </div>
-
-
-
-
-
-  {{ carts }}
 </template>
 
 <script>
