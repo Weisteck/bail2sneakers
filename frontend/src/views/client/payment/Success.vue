@@ -5,9 +5,7 @@
         Félicitation, votre commmande à bien été passé !
       </h1>
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -27,6 +25,8 @@ export default {
         const response = await this.$store.dispatch('getSessionData', this.$route.query.id)
 
         this.sessionData = response.data
+
+        console.log(response.data)
 
         await this.$store.dispatch('putCart', { id: response.data.metadata.cartId, status: 'orderedAt' })
 

@@ -4,7 +4,8 @@ const {
   getCartByIdRepository,
   getCartsByStatusRepository,
   putCartRepository,
-  deleteCartRepository
+  deleteCartRepository,
+  getCartByUserIdRepository
 } = require('../repositories/cartRepository')
 
 const { removeItemFromStockRepository, getProductByIdRepository } = require('../repositories/productRepository')
@@ -56,11 +57,16 @@ const postCartService = async (selectedProducts) => {
     .catch(err => console.error(err))
 }
 
-const putCartService = async (cartId, status) => {
+const putCartService = async (cartId, data) => {
   try {
     const getCartResponse = await getCartByIdService(cartId)
-    console.log('SERVICE CART PUT RESPONSE: ', getCartResponse)
-    getCartResponse.order.history[status] = new Date()
+
+    if (data.status !== null)
+      getCartResponse.order.history[data.status] = new Date()
+    else {
+      getCartResponse.userId = data.userId
+      getCartResponse.order.address = data.userAddress
+    }
 
     return await putCartRepository(cartId, getCartResponse)
   } catch (e) {
@@ -78,6 +84,14 @@ const getCartByIdService = async (id) => {
 	return await getCartByIdRepository(id)
 		.then(res => res)
 		.catch(err => console.error(err))
+}
+
+const getCartsByUserIdService = async (userId) => {
+  try {
+    return await getCartByUserIdRepository(userId)
+  } catch (e) {
+    return e
+  }
 }
 
 const getCartByStatusService = async (status) => {
@@ -187,5 +201,6 @@ module.exports = {
   removeProductFromCartService: removeProductFromCartService,
   addProductToCartService: addProductToCartService,
   deleteCartService: deleteCartService,
-  putCartService: putCartService
+  putCartService: putCartService,
+  getCartsByUserIdService: getCartsByUserIdService
 }

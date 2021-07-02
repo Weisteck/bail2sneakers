@@ -97,6 +97,13 @@
                       d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
               </svg>
             </router-link>
+            <router-link
+              to="/user/profile"
+              class="ml-4 px-4 py-2 mt-2 text-sm font-semibold text-gray-50 bg-brown-1 rounded md:mt-0 hover:text-gray-50 hover:bg-brown-1 md:mt-0 text-sm font-semibold text-gray-50 bg-brown-1 rounded  hover:text-gray-50 hover:bg-brown-1"
+              v-if="user.role === 'CLIENT'"
+            >
+              Mon compte
+            </router-link>
           </template>
         </nav>
       </div>

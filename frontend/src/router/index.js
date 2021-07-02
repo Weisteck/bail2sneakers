@@ -17,6 +17,7 @@ import Login from "../views/client/authentication/Login.vue"
 import Signup from "../views/client/authentication/Signup.vue"
 import GetAllUsers from "../views/backoffice/user/GetAllUsers.vue"
 import Accueil from "../views/client/Accueil.vue";
+import Profile from "../views/client/user/Profile.vue";
 
 const routes = [
   {
@@ -31,7 +32,7 @@ const routes = [
     component: GetCart
   },
   {
-    path: '/orders',
+    path: '/back-office/orders',
     name: 'GetCarts',
     component: GetCarts,
     meta: { authorize: [ Role.Vendeur, Role.Admin ] }
@@ -107,6 +108,12 @@ const routes = [
     path: '/back-office/user/get-all',
     component: GetAllUsers,
     meta: { authorize: [ Role.Admin ] }
+  },
+  {
+    name: 'profile',
+    path: '/user/profile',
+    component: Profile,
+    meta: { authorize: [ Role.Admin, Role.Vendeur, Role.Client ] }
   },
 ]
 
