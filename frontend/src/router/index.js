@@ -112,8 +112,7 @@ const routes = [
   {
     name: 'profile',
     path: '/user/profile',
-    component: Profile,
-    meta: { authorize: [ Role.Admin, Role.Vendeur, Role.Client ] }
+    component: Profile
   },
 ]
 
