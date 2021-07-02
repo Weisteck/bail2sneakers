@@ -37,7 +37,7 @@
             Parcourir les produits
           </router-link>
 
-          <div v-if="user.role === 'ADMIN'" class="ml-5 mt-1">
+          <div v-if="user.role === 'ADMIN' || user.role === 'VENDEUR'" class="ml-5 mt-1">
             <router-link
               :to="{name: 'createProduct'}"
               class="text-center px-2 py-2 mt-2 md:mt-0 text-sm font-semibold bg-transparent rounded hover:text-gray-500 hover:bg-brown-1"
@@ -50,6 +50,9 @@
             >
               VOIR LES PRODUITS
             </router-link>
+          </div>
+
+          <div v-if="user.role === 'ADMIN'" class="mt-1">
             <router-link
               :to="{name: 'getUsers'}"
               class="text-center px-2 py-2 mt-2 md:mt-0 text-sm font-semibold bg-transparent rounded hover:text-gray-500 hover:bg-brown-1"
@@ -74,7 +77,7 @@
           <template v-else>
             <div class="border-l">
               <span class="px-3 pt-1">
-              Bonjour {{ user.lastName }} {{ user.firstName }}
+              Bonjour {{ user.lastName }} {{ user.firstName }} ({{ user.role }})
               <button @click="logout"
                       class="mr-2 py-2 mt-2 text-sm font-semibold bg-transparent rounded md:mt-0 md:ml-4 hover:text-gray-500 hover:bg-brown-1"
               >
@@ -161,7 +164,12 @@ export default {
     async logout() {
       try {
         await axios.get('/api/authentication/logout')
-        this.user = null
+        this.user = {
+          firstName: "",
+          lastName: "",
+          role: "",
+          mail: ""
+        }
       } catch (e) {
         console.error(e)
       }
