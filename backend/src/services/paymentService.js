@@ -11,8 +11,8 @@ const createCheckoutSessionService = async (items, cartId) => {
         'cartId': cartId
       },
       mode: 'payment',
-      success_url: 'http://localhost:3000/checkout/success?id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:3000/checkout/cancel'
+      success_url: 'https://bail2sneakers.herokuapp.com/checkout/success?id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://bail2sneakers.herokuapp.com/checkout/cancel'
     })
 
     return ({ id: session.id })
