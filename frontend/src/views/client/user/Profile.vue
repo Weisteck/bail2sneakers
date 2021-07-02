@@ -9,7 +9,7 @@
 
       <p>Email: <span>{{user.mail}}</span> </p>
 
-      <div class="overflow-auto mt-10">
+      <div class="overflow-auto mt-10" v-if="carts.length > 0">
         <table class="w-full">
           <thead>
           <tr class="font-bold uppercase border-b border-gray-300">
