@@ -1,0 +1,350 @@
+{
+    "categories": ["shoes", "Hommes"],
+    "brand": {
+        "name":"Jordan",
+        "brandDescription":"Nike Air Jordan est une filiale de la marque Nike, frappées du nom de Michael Jordan, ancien joueur des Bulls de Chicago en NBA. Elle produit des équipements sportifs, principalement chaussures et vêtements.",
+        "logo": "http://assets.stickpng.com/images/584292c4a6515b1e0ad75aca.png"
+    },
+    "model": "baskets Air Jordan 1 Retro High OG SE",
+    "details":{
+        "description": "Baskets Air Jordan 1 Retro High OG SE en satin jordan avec design bicolore, bout rond, fermeture à lacer sur le devant, patch logo sur la languette, virgule Nike et semelle en caoutchouc blanc. ",
+        "materials": ["Satin 100%", "Caoutchouc 100%"],
+        "origin": "Usa"
+    },
+    "rating": 7,
+    "priceExclTax": 11844,
+    "images": ["https://cdn-images.farfetch-contents.com/14/28/62/92/14286292_20466860_1000.jpg","https://cdn-images.farfetch-contents.com/14/28/62/92/14286292_20466862_1000.jpg", "https://cdn-images.farfetch-contents.com/14/28/62/92/14286292_20466863_1000.jpg"],
+    "variants":[
+        {
+            "color":"red , black",
+            "sizes": [
+                {
+                    "size": 42,
+                    "stock": 2
+                }
+            ]
+        }
+    ]
+}
+
+{
+    "categories":["Femmes", "shoes"],
+    "brand": {
+        "name":"Alexander McQUEEN",
+        "brandDescription":"Alexander Mc Queen est un célèbre créateur de mode britannique et le nom de la marque qu’il a fondée en 1992.",
+        "logo": "https://journalduluxe.fr/wp-content/uploads/2017/04/a-mc-queen.jpeg"
+    },
+    "model": "Baskets oversize",
+    "details":{
+        "description": "Baskets Air Jordan 1 Retro High OG SE en satin jordan avec design bicolore, bout rond, fermeture à lacer sur le devant, patch logo sur la languette, virgule Nike et semelle en caoutchouc blanc. ",
+        "materials": ["Cuir 100%", "Caoutchouc 100%"],
+        "origin": "Italie"
+    },
+    "rating": 8,
+    "priceExclTax": 450,
+    "images": ["https://cdn-images.farfetch-contents.com/15/41/01/70/15410170_27722185_1000.jpg","https://cdn-images.farfetch-contents.com/15/41/01/70/15410170_27718673_1000.jpg"],
+    "variants":[
+        {
+            "color":"Grey , white",
+            "sizes": [
+                {
+                    "size": 37.5,
+                    "stock": 6
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Femmes","Hommes" ,"shoes"],
+    "brand": {
+        "name":"Reebok",
+        "brandDescription":"Reebok est un équipementier sportif américain d'origine anglaise fondé en 1895 à Bolton dans le Grand Manchester, filiale du groupe allemand Adidas depuis 2005.",
+        "logo": "https://logos-marques.com/wp-content/uploads/2020/06/Reebok-logo.jpg"
+    },
+    "model": "Instapump Fury x Kung Fu Panda",
+    "details":{
+        "description": "Êtes-vous prêts pour la rencontre entre la Reebok Instapump Fury et Kung Fu Panda ? La nouvelle version de cette basket des années 90 va en séduire plus d’un. Fabriquée avec des couches de mesh, de daim synthétique et des imprimés ton sur ton, la basket porte la signature Pump et une finition volumineuse.  ",
+        "materials": ["Nylon", "Daim synthétique", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 10,
+    "priceExclTax": 209,
+    "images": ["https://www.sneakersnstuff.com/images/282078/product_xlarge.jpg"],
+    "variants":[
+        {
+            "color":"Black , white, Beige",
+            "sizes": [
+                {
+                    "size": 44,
+                    "stock": 8
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes" ,"shoes"],
+    "brand": {
+        "name":"Nike",
+        "brandDescription":"Nike est une marque de chaussures de sport et d'équipements sportifs (vêtements et matériels). Leader sur le marché de l'équipement sportif, Nike concurrence Puma et Adidas. Parmi les modèles de baskets commercialisés par la marque, vous retrouverez les Air Max, Nike Air VaportMax, Air Presto, Nike Performance Air...",
+        "logo": "https://www.au-magasin.fr/storage/fr/img/marques/9/92CC227532D17E56E07902B254DFAD10.jpeg"
+    },
+    "model": "Air Max 270 React ENG Travis",
+    "details":{
+        "description": "La Travis Scott x Nike Air Max 270 React Cactus Trails est un autre des titres les plus convoités du rappeur en collaboration avec la filiale au swoosh. Ayant déjà appliqué sa formule de rodéo texan décalé à l'esthétique hip-hop sur les modèles Air Force 1, Air Jordan 4 et autres, Travis Scott vise la chaussure ultra confortable de Nike pour l'été 2020.  ",
+        "materials": ["Maille", "Nubuck", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 10,
+    "priceExclTax": 500,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-270-react-eng-travis-nike-kikikickz-273473_grande.jpg?v=1604414506","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-270-react-eng-travis-nike-kikikickz-680475_grande.jpg?v=1604413776", "https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-270-react-eng-travis-nike-kikikickz-682521_grande.jpg?v=1604414307", "https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-270-react-eng-travis-nike-kikikickz-964029_grande.jpg?v=1604416302"],
+    "variants":[
+        {
+            "color":"Light Cream , Dark Hazel-Mica Green-Starfish",
+            "sizes": [
+                {
+                    "size": 42.5,
+                    "stock": 3
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":"Converse",
+        "brandDescription":"Converse est une entreprise fondée par Marquis Mills Converse aux États-Unis (Massachusetts) en 1908, et qui fabrique essentiellement des chaussures de sport.",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/1200px-Converse_logo.svg.png"
+    },
+    "model": "Converse 2.0 Off White",
+    "details":{
+        "description": "Avec ce second modèle élaboré sur la mythique Converse Chuck Taylor, Virgil Abloh met l'accent sur l'accessibilité et la facilité d’associer la paire à quelconques tenues. Ainsi, la silhouette emblématique est habillée d'une toile de coton conventionnelle et d'un blanc éclatant.",
+        "materials": ["Toile coton", "Nubuck", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 10,
+    "priceExclTax": 310,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-converse-20-off-white-converse-kikikickz-376042_grande.jpg?v=1604411921", "https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-converse-20-off-white-converse-kikikickz-365048_grande.jpg?v=1604415366", "https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-converse-20-off-white-converse-kikikickz-746024_grande.jpg?v=1604412943","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-converse-20-off-white-converse-kikikickz-661169_grande.jpg?v=1604414737"],
+    "variants":[
+        {
+            "color":"White, Bold Orange-Black",
+            "sizes": [
+                {
+                    "size": 36.5,
+                    "stock": 5
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":"New Balance",
+        "brandDescription":"New Balance est bien entendu connue dans le monde du running, du foot mais également du cricket, du tennis ou encore sur skateboard ! De plus les sneakers de New Balance sont très populaires auprès des jeunes générations avec le design facilement reconnaissable de tous.",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/New_Balance_logo.svg/300px-New_Balance_logo.svg.png"
+    },
+    "model": "327 Casablanca Red Monogram",
+    "details":{
+        "description": "Un nouveau partenariat entre Casablanca et New Balance se poursuit avec une nouvelle 327 baptisée « Red Monogram ».
+
+        Avec une impression de monogramme très détaillée sur ses superpositions, avec des accents verts et rouges, la construction voit une disposition en cuir blanc recouvert de perforations pour une respirabilité optimale.",
+        "materials": ["Cuir rouge ", "Cuir Blanc", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 5,
+    "priceExclTax": 200,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-327-casablanca-red-monogram-new-balance-kikikickz-757847_720x.jpg?v=1622197503","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-327-casablanca-red-monogram-new-balance-kikikickz-498614_720x.jpg?v=1622197516"],
+    "variants":[
+        {
+            "color":"White, Green, Red",
+            "sizes": [
+                {
+                    "size": 43.5,
+                    "stock": 2
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":" Balenciaga",
+        "brandDescription":"Balenciaga est une entreprise française de mode et de luxe fondée en 1917 par l'Espagnol Cristóbal Balenciaga. Couturier de la famille royale espagnole, Balenciaga s’installe à Paris à la fin des années 1930 où il s’impose comme le « couturier des couturiers » de la mode parisienne.",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/BAL_logo.jpg/798px-BAL_logo.jpg"
+    },
+    "model": "Speed Trainer White Black",
+    "details":{
+        "description": "Lancée en 2016, la silhouette Speed de Balenciaga a pris d'assaut l'industrie grâce à son design unique et à son ajustement fonctionnel. La chaussure est immédiatement reconnaissable grâce à sa tige tricotée en forme de chaussette, qui épouse chaque courbe du pied pour un ajustement personnalisé. Dotée d'une semelle résistante avec des détails géométriques, la chaussure est souvent terminée avec le logo incontournable de la marque.",
+        "materials": ["Tricot", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 8,
+    "priceExclTax": 720,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-speed-trainer-white-black-balenciaga-kikikickz-644510_grande.jpg?v=1604414681"],
+    "variants":[
+        {
+            "color":"Black",
+            "sizes": [
+                {
+                    "size": 39,
+                    "stock": 5
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":" New Balance",
+        "brandDescription":"C'est en 1906 que la marque fût créée, à l'origine pour fabriquer des soutiens de voûte plantaire. De nos jours la marque se focalise plus sur les chaussures, les accessoires et vêtements de sport, pour tous sexes et tous âges.
+
+        New Balance est bien entendu connue dans le monde du running, du foot mais également du cricket, du tennis ou encore sur skateboard ! De plus les sneakers de New Balance sont très populaires auprès des jeunes générations avec le design facilement reconnaissable de tous.",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/New_Balance_logo.svg/langfr-280px-New_Balance_logo.svg.png"
+    },
+    "model": "827 Abzorb White Grey",
+    "details":{
+        "description": "Imposant : c’est en effet le mot d'ordre défini par cette silhouette de chez New Balance. La marque poursuit le déploiement de ces modèles inspirées des années 90 pour cette nouvelle itération de la “NB 827” au sein d’un coloris de blanc monochromatique.",
+        "materials": ["Textile", " Synthetic Upper/Synthetic Sole"],
+        "origin": "USA"
+    },
+    "rating": 4.5,
+    "priceExclTax": 115,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-827-abzorb-white-grey-new-balance-kikikickz-116878_1800x1800.jpg?v=1612374583","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-827-abzorb-white-grey-new-balance-kikikickz-520126_1800x1800.jpg?v=1612375134","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-827-abzorb-white-grey-new-balance-kikikickz-171450_1800x1800.jpg?v=1612375043"],
+    "variants":[
+        {
+            "color":"WHITE/GREY",
+            "sizes": [
+                {
+                    "size": 40.5,
+                    "stock": 12
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":" Dior",
+        "brandDescription":"Dior est une marque de haute-couture française qui propose des produits élégants, modernes et luxueux.  On peut retrouver des collections printemps-été et automne-hiver avec des défilés plus prestigieux les uns que les autres. La marque Dior propose des accessoires, des sacs, des bijoux, des produits cosmétiques, du maquillage et du parfum. La marque possède une forte notoriété mondiale auprès du grand public ainsi qu'auprès des plus grandes célébrités du monde de la mode et du cinéma. ",
+        "logo": "https://www.au-magasin.fr/storage/fr/img/marques/0/0771FC6F0F4B1D7D1BB73BBBE14E0E31.jpg"
+    },
+    "model": "Dior B23 High Top Monogram Oblique",
+    "details":{
+        "description": "Les sneakers B23 hautes reprennent les codes de la sneaker intemporelle de l’univers masculin Dior dans une version adaptée aux plus jeunes.
+
+        Le tissu technique Dior Oblique blanc et noir saisonnier est habillé d'une superposition d’empiècements transparents. Leur semelle intérieure et une construction soudée garantissent confort et durabilité. Dotées d'une semelle en gomme blanche ornée d'une étiquette DIOR sur l'extérieur du pied, elles accompagnent avec style les tenues décontractées.",
+        "materials": ["Tissu", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 10,
+    "priceExclTax": 1120,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-dior-b23-high-top-monogram-oblique-dior-kikikickz-579516_grande.jpg?v=1612375237","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-dior-b23-high-top-monogram-oblique-dior-kikikickz-902205_grande.jpg?v=1612371961"],
+    "variants":[
+        {
+            "color":"Oblique",
+            "sizes": [
+                {
+                    "size": 36,
+                    "stock": 5
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":" Adidas",
+        "brandDescription":"
+        Adidas est une marque de sport et prêt-à-porter très connue qui ne cesse d'évoluer dans le monde. En collaboration avec plusieurs célébrités, la marque regroupe des magasins et produits dans le monde entier. ",
+        "logo": "https://www.au-magasin.fr/storage/fr/img/marques/4/49AE49A23F67C759BF4FC791BA842AA2.png"
+    },
+    "model": "Yeezy Boost 700 V2 Static",
+    "details":{
+        "description": "L'Adidas Yeezy Boost 700 V2 Static est le premier coloris de la silhouette de Kanye West. La Yeezy Boost 700 V2 présente la même silhouette et la même semelle que l'original, mais intègre quelques subtiles nuances. La nouvelle version présente un marquage à trois bandes sans couture en forme de vague sur un matériau réfléchissant.",
+        "materials": ["Tissu","mousse", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 8,
+    "priceExclTax": 1040,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-yeezy-boost-700-v2-static-adidas-kikikickz-460068_720x.jpg?v=1612371828","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-yeezy-boost-700-v2-static-adidas-kikikickz-623667_720x.jpg?v=1612371945","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-yeezy-boost-700-v2-static-adidas-kikikickz-361356_720x.jpg?v=1612373872", "https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-yeezy-boost-700-v2-static-adidas-kikikickz-184136_720x.jpg?v=1612372237"],
+    "variants":[
+        {
+            "color":"STATIC/STATIC/STATIC",
+            "sizes": [
+                {
+                    "size": 38,
+                    "stock": 5
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":" Air Jordan",
+        "brandDescription":"Nike Air Jordan est une filiale de la marque Nike, frappées du nom de Michael Jordan, ancien joueur des Bulls de Chicago en NBA. Elle produit des équipements sportifs, principalement chaussures et vêtements.
+
+        La marque est principalement associée à la série des 23 chaussures de basket créées pour le célèbre basketteur jusqu'en 2009. Inspirées par la personnalité du joueur ou par ses passions, ces sneakers se voulaient être les plus avant-gardistes du marché tant au niveau de la technique que du design1. ",
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/3/37/Jumpman_logo.svg/220px-Jumpman_logo.svg.png"
+    },
+    "model": "Air Jordan XXXV Paris",
+    "details":{
+        "description": "Une nouvelle Air Jordan inédite est dévoilée, un modèle très limité avec seulement 102 exemplaires, la Air Jordan XXXV Paris. 
+
+        Une dédicace à la capitale française a récemment vu le jour sous la forme d'une itération limitée à 102 paires de la Air Jordan 35. Une paire très limitée, la nouvelle version de la sneaker de basket-ball performante présente une palette similaire d'ivoire pâle et de rose pastel.",
+        "materials": ["Mousse", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 5,
+    "priceExclTax": 880,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-jordan-xxxv-paris-air-jordan-kikikickz-700443_720x.jpg?v=1616524474","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-jordan-xxxv-paris-air-jordan-kikikickz-379802_720x.jpg?v=1616524479"],
+    "variants":[
+        {
+            "color":"Pale Ivory / Metallic Gold / Black ",
+            "sizes": [
+                {
+                    "size": 46,
+                    "stock": 3
+                }
+            ]
+        }
+    ]
+}
+{
+    "categories":["Hommes","Femmes","shoes"],
+    "brand": {
+        "name":" Nike",
+        "brandDescription":"Nike est une marque de chaussures de sport et d'équipements sportifs (vêtements et matériels). Leader sur le marché de l'équipement sportif, Nike concurrence Puma et Adidas. Parmi les modèles de baskets commercialisés par la marque, vous retrouverez les Air Max, Nike Air VaportMax, Air Presto, Nike Performance Air... ",
+        "logo": "https://www.au-magasin.fr/storage/fr/img/marques/9/92CC227532D17E56E07902B254DFAD10.jpeg"
+    },
+    "model": "Air Max 97/1 Sean Wotherspoon",
+    "details":{
+        "description": "Lancé pour la Journée Air Max en 2018, cet hybride conçu par le designer Sean Wotherspoon a remporté la campagne Vote Forward. Cette nouvelle création combine la tige d'une Air Max 97 avec une semelle Air Max 1.",
+        "materials": ["velcro", "Caoutchouc"],
+        "origin": "USA"
+    },
+    "rating": 10,
+    "priceExclTax": 1540,
+    "images": ["https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-971-sean-wotherspoon-nike-kikikickz-789356_grande.jpg?v=1612372173","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-971-sean-wotherspoon-nike-kikikickz-953145_grande.jpg?v=1612375428","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-971-sean-wotherspoon-nike-kikikickz-801585_grande.jpg?v=1612371564","https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-max-971-sean-wotherspoon-nike-kikikickz-655371_grande.jpg?v=1612375152"],
+    "variants":[
+        {
+            "color":"Light Blue Fury/Lemon Wash",
+            "sizes": [
+                {
+                    "size": 45.5,
+                    "stock": 10
+                }
+            ]
+        }
+    ]
+}
+
+

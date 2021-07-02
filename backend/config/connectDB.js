@@ -8,7 +8,7 @@ const connectDB = () => {
       useNewUrlParser: true,
     })
     .then(() => console.log("mongoose connected"))
-    .catch((err) => console.log("erreur"));
+    .catch((err) => console.log("Le serveur n'est pas parvenu à se connecter à la BDD.", err));
 };
 
 module.exports = connectDB;
