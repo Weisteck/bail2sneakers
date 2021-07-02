@@ -59,7 +59,7 @@ const postCartService = async (selectedProducts) => {
 const putCartService = async (cartId, status) => {
   try {
     const getCartResponse = await getCartByIdService(cartId)
-
+    console.log('SERVICE CART PUT RESPONSE: ', getCartResponse)
     getCartResponse.order.history[status] = new Date()
 
     return await putCartRepository(cartId, getCartResponse)
