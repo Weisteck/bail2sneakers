@@ -112,7 +112,7 @@
                 <div class="col-span-1 flex justify-self-end">
                 <span
                   class="self-center w-16 py-2 col-end-7 text-center block bg-brown-1 rounded-full text-white text-xs font-bold">
-                    {{ product.priceExclTax }} €
+                    {{ fixPriceTtc(product.priceExclTax, 0) }} €
                   </span>
                 </div>
               </div>
@@ -168,6 +168,17 @@ export default {
         })
         .catch((err) => console.error(err));
     },
+
+    fixPriceTtc(priceHt, priceDelivery) {
+      priceHt += priceDelivery
+      return (Number(
+              priceHt.toString().substring(0, priceHt.toString().length - 2)
+              + '.'
+              + priceHt.toString().slice(-2)
+              ) * 1.20
+          ).toFixed(2)
+    },
+
     productsFiltered() {
       this.searchWords.length !== undefined
         ? (
