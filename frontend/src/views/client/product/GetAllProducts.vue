@@ -53,7 +53,7 @@
               Converse
             </label>
             <label class="label">
-              <input type="checkbox" class="input-checkbox" value="Air Jordan" v-model="selectedBrand">
+              <input type="checkbox" class="input-checkbox" value="AirJordan" v-model="selectedBrand">
               Air Jordan
             </label>
             <label class="label">
