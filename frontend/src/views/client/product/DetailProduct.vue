@@ -18,13 +18,6 @@
           </div>
         </div>
         <div class="col-span-12 lg:col-span-5 md:col-span-6 sm:col-span-12 text-center">
-
-
-          <button class="btn-primary" @click="deleteLocalStorage">
-            delete localstorage
-          </button>
-
-
           <img :src="product.brand.logo" alt="brandLogo" class="mx-auto" height="200" width="200">
           <h1 class="title">
             {{ product.brand.name }} - {{ product.model }} fdsdfds
