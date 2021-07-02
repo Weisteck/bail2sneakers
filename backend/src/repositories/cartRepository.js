@@ -19,6 +19,7 @@ const getCartByIdRepository = (id) => {
 }
 
 const getCartByUserIdRepository = (userId) => {
+  console.log("repository : ", userId)
   return Cart.find({ "userId": new ObjectId(userId) })
 }
 

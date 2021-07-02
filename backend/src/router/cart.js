@@ -36,6 +36,7 @@ router.get('/get-by-status', async (req, res) => {
 
 router.get('/get-by-user-id', async (req, res) => {
   try {
+    console.log("userId: ", req.query.userid)
     const cartResponse = await getCartsByUserIdService(req.query.userid)
     res.send(cartResponse)
   } catch (e) {

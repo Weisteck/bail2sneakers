@@ -5,7 +5,7 @@
     <p>Prenom: <span>{{user.firstName}}</span> </p>
     <p>Nom de Famille: <span>{{user.lastName}}</span> </p>
     <p>Role: <span>{{user.role}}</span> </p>
-    
+
     <p>Email: <span>{{user.mail}}</span> </p>
 
 
@@ -32,10 +32,10 @@
         </table>
       </div>
   </div>
- 
 
 
- 
+
+
 
   {{ carts }}
 </template>
@@ -66,6 +66,7 @@ export default {
 
     async getCartsByUserId(userId) {
       try {
+        console.log(userId)
         const response = await this.$store.dispatch('getCartsByUserId', { userId: userId })
         this.carts = response.data
       } catch (e) {
